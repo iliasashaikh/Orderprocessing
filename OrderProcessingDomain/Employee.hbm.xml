@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   schema="dbo"
+                   assembly="OrderProcessingDomain"
+                   namespace="OrderProcessingDomain">
+
+  <class
+    name="Employee"
+    table="Employees"
+  >
+    <id
+      name="EmployeeId" column="EmployeeId">
+      <generator class="identity"/>
+    </id>
+
+    <property name="LastName" />
+    <property name="FirstName" />
+    <property name="Title" />
+    <property name="TitleOfCourtesy" />
+    <property name="BirthDate" />
+    <property name="HireDate" />
+    <property name="Address" />
+    <property name="City" />
+    <property name="Region" />
+    <property name="PostalCode" />
+    <property name="Country" />
+    <property name="HomePhone" />
+    <property name="Extension" />
+    <property name="Notes" />
+    <property name="PhotoPath" />
+    <property name="Photo" />
+
+    <one-to-one name="ReportsTo" class="OrderProcessingDomain.Employee"/>
+    
+    <bag name="Orders">
+      <key column="EmployeeId"/>
+      <one-to-many class="OrderProcessingDomain.Order, OrderProcessingDomain"/>
+    </bag>
+
+  </class>
+
+</hibernate-mapping>

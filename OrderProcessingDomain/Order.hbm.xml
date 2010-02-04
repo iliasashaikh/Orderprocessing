@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   schema="dbo"
+                   assembly="OrderProcessingDomain"
+                   namespace="OrderProcessingDomain">
+
+  <class
+    name="Order"
+    table="Orders"
+  >
+    <id
+      name="OrderId" column="OrderId">
+      <generator class="identity"/>
+    </id>
+
+    <property name="RequiredDate" />
+    <property name="ShippedDate" />
+    <property name="Shipvia" />
+    <property name="Freight" />
+    <property name="ShipName" />
+    <property name="ShipAddress" />
+    <property name="ShipCity" />
+    <property name="ShipRegion" />
+    <property name="ShipPostalCode" />
+    <property name="ShipCountry" />
+
+    <many-to-one name="Customer" column="CustomerId" class="OrderProcessingDomain.Customer"/>
+
+    <many-to-one name="Employee" column="EmployeeId" class="OrderProcessingDomain.Employee"/>
+
+    <dynamic-component name="CustomFields">
+      <property name="OrderDate" type="string"/>
+    </dynamic-component>
+
+  </class>
+
+</hibernate-mapping>

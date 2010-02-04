@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderProcessing", "OrderProcessing\OrderProcessing.csproj", "{C13DD37D-9069-4061-80C5-099775986CB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderProcessingDomain", "OrderProcessingDomain\OrderProcessingDomain.csproj", "{7EA64F01-BD33-47EE-810E-81D6954E117D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderProcessing.Tests", "OrderProcessing.Tests\OrderProcessing.Tests.csproj", "{056B1BF8-BB54-479F-A383-B3AEEAA3F42F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C13DD37D-9069-4061-80C5-099775986CB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C13DD37D-9069-4061-80C5-099775986CB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C13DD37D-9069-4061-80C5-099775986CB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C13DD37D-9069-4061-80C5-099775986CB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EA64F01-BD33-47EE-810E-81D6954E117D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EA64F01-BD33-47EE-810E-81D6954E117D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EA64F01-BD33-47EE-810E-81D6954E117D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EA64F01-BD33-47EE-810E-81D6954E117D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{056B1BF8-BB54-479F-A383-B3AEEAA3F42F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{056B1BF8-BB54-479F-A383-B3AEEAA3F42F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{056B1BF8-BB54-479F-A383-B3AEEAA3F42F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{056B1BF8-BB54-479F-A383-B3AEEAA3F42F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
