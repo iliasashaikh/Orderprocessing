@@ -61,11 +61,11 @@ namespace OrderProcessingDomain
     }
   }
 
-  public interface IOrderData
-  {
-    Order Load(Criteria c);
-    IEnumerable<Order> Load
+  //public interface IOrderData
+  //{
+  //  Order Load(Criteria c);
+  //  IEnumerable<Order> Load
 
-    void 
-  }
+  //  void 
+  //}
 }

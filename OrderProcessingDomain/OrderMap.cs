@@ -74,7 +74,7 @@ namespace OrderProcessingDomain
       Map(x => x.Title);
       Map(x => x.TitleOfCourtesy);
 
-      HasMany(x => x.Orders).KeyColumn("EmployeeId");
+      HasMany(x => x.Orders).KeyColumn("EmployeeId").Not.LazyLoad();
     }
   }
 }
