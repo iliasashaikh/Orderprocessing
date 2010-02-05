@@ -60,6 +60,13 @@ namespace OrderProcessingDomain
     private static ISessionFactory _sessionFactory;
 
     private ISession _session;
+
+    public ISession Session
+    {
+      get { return _session; }
+      set { _session = value; }
+    }
+
     private ITransaction _transaction;
 
     public void OpenSession()
@@ -76,7 +83,8 @@ namespace OrderProcessingDomain
       Configuration cfg = new Configuration().Configure();
       FluentConfiguration fluentCfg = Fluently.Configure(cfg);
       fluentCfg.Mappings(m=>m.FluentMappings.AddFromAssemblyOf<OrderMap>());
-      _session = fluentCfg.BuildSessionFactory().OpenSession();
+      _sessionFactory = fluentCfg.BuildSessionFactory();
+      _session = _sessionFactory.OpenSession();
     }
 
     public void Save(object toSave)

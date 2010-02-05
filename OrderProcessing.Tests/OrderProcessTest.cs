@@ -39,6 +39,46 @@ namespace OrderProcessing.Tests
     }
 
     [Test]
+    public void Test_LoadAllOrdersUsingRepository()
+    {
+      HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
+
+      var orderRepository = new NHRepository<Order>();
+      var orders = orderRepository.GetAll();
+      List<Order> orderList = orders.ToList<Order>();
+      Customer c = orderList[0].Customer;
+      Employee e = orderList[0].Employee;
+      Assert.IsNotNull(c);
+      Assert.IsNotNull(e);
+      Assert.AreEqual("VINET", c.CustomerId);
+      Assert.AreEqual(5, e.EmployeeId);
+    }
+
+    [Test]
+    public void Test_LoadCustomerALFKIAndAllOrdersUsingRepository()
+    {
+      HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
+
+      using (ISession session = NHibernateHelper.OpenSession())
+      {
+        var customers1 = session.Linq<Customer>().Where(x => x.CustomerId == "ALFKI");
+
+        foreach (Customer c in customers1)
+        {
+          Customer cc = c;
+        }
+      }
+      var customerRepository = new NHRepository<Customer>();
+      var customers = customerRepository.GetByCriteria(x => x.CustomerId == "ALFKI");
+      foreach (Customer c in customers)
+      {
+        Customer cc = c;
+      }
+
+    }
+
+
+    [Test]
     public void Test_LoadAllOrdersFluently()
     {
       HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
@@ -85,7 +125,6 @@ namespace OrderProcessing.Tests
       {
         var customers = session.Linq<Customer>().Where(x => x.CustomerId == "ALFKI");
         Customer c = customers.ToList<Customer>()[0];
-       // Assert.AreEqual(6, c.Orders.Count);
       }
     }
 
@@ -95,9 +134,9 @@ namespace OrderProcessing.Tests
       HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
       using (ISession session = NHibernateHelper.OpenSessionFluently())
       {
-        var customers = session.Linq<Customer>().Where(x => x.CustomerId == "ALFKI");
-        Customer c = customers.ToList<Customer>()[0];
-        Assert.AreEqual(6, c.Orders.Count);
+        var customers = session.Linq<Customer>().Where(x => x.CustomerId == "ALFKI").First();
+        //Customer c = customers.ToList<Customer>()[0];
+        //Assert.AreEqual(6, c.Orders.Count);
       }
     }
 

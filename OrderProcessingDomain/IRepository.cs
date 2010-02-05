@@ -11,38 +11,51 @@ public interface IRepository<T> where T : class
   IEnumerable<T> GetAll();
   IEnumerable<T> GetByCriteria(Func<T, bool> f);
   IDataAccessContext DataAccessContext{get;set;}
-  void Save();
+  void Save(object toSave);
+}
+
+public class ObjectRepository<T> : IRepository<T>
+{
+
 }
 
 public class NHRepository<T> : IRepository<T>
   where T: class
 {
-
-  IDataAccessContext dac = new NHDataAccessContext();
+  static NHDataAccessContext dac = new NHDataAccessContext();
 
   public IEnumerable<T> GetAll()
   {
-    using (ISession session = NHibernateHelper.OpenSession())
-    {
-      return session.Linq<T>();
-    }
+    dac.OpenSession();
+    return dac.Session.Linq<T>();
   }
 
   public IEnumerable<T> GetByCriteria(Func<T, bool> exp)
   {
-    using (ISession session = NHibernateHelper.OpenSession())
-    {
-      return session.Linq<T>().Where<T>(exp);
-    }
+    dac.OpenSession();
+    return dac.Session.Linq<T>().Where(exp);
   }
 
-  #region IRepository<T> Members
-
-  public void Save()
+  public void Save(object toSave)
   {
-    throw new NotImplementedException();
+    dac.OpenSession();
+    dac.Save(toSave);
   }
 
+  public void BeginTransaction()
+  {
+    dac.BeginTransaction();
+  }
+
+  public void Commit()
+  {
+    dac.Commit();
+  }
+
+  public void Rollback()
+  {
+    dac.Rollback();
+  }
 
   public IDataAccessContext DataAccessContext
   {
@@ -52,9 +65,7 @@ public class NHRepository<T> : IRepository<T>
     }
     set
     {
-      dac = value;
+      dac = (NHDataAccessContext)value;
     }
   }
-
-  #endregion
 }
