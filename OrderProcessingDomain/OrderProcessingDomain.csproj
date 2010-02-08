@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DACManager.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="NHibernateHelper.cs" />
     <Compile Include="Order.cs" />

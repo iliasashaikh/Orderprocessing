@@ -12,7 +12,7 @@ namespace OrderProcessingDomain
     public OrderMap()
     {
       Table("Orders");
-      Id(x => x.OrderId);
+      Id(x => x.OrderId).GeneratedBy.Identity();
       //Map(x => x.OrderDate);
       Map(x => x.RequiredDate);
       Map(x => x.ShipAddress);
@@ -23,8 +23,8 @@ namespace OrderProcessingDomain
       Map(x => x.ShipPostalCode);
       Map(x => x.ShipRegion);
       Map(x => x.Shipvia);
-      References(x => x.Customer).Column("CustomerId");
-      References(x => x.Employee).Column("EmployeeId");
+      References(x => x.Customer).Column("CustomerId").Cascade.SaveUpdate();
+      References(x => x.Employee).Column("EmployeeId").Cascade.SaveUpdate();
     }
   }
 
@@ -33,7 +33,7 @@ namespace OrderProcessingDomain
     public CustomerMap()
     {
       Table("Customers");
-      Id(x => x.CustomerId).Column("CustomerId");
+      Id(x => x.CustomerId).Column("CustomerId").GeneratedBy.Assigned();
       Map(x => x.Address);
       Map(x => x.City);
       Map(x => x.CompanyName);
@@ -54,7 +54,7 @@ namespace OrderProcessingDomain
     public EmployeeMap()
     {
       Table("Employees");
-      Id(x => x.EmployeeId).Column("EmployeeId");
+      Id(x => x.EmployeeId).GeneratedBy.Identity();
       Map(x => x.Address);
       Map(x => x.BirthDate);
       Map(x => x.City);
@@ -70,11 +70,11 @@ namespace OrderProcessingDomain
       Map(x => x.PostalCode);
       Map(x => x.Region);
 
-      References(x => x.ReportsTo).Column("EmployeeId");
+      //References(x => x.ReportsTo).Column("EmployeeId");
       Map(x => x.Title);
       Map(x => x.TitleOfCourtesy);
 
-      HasMany(x => x.Orders).KeyColumn("EmployeeId").Not.LazyLoad();
+      HasMany(x => x.Orders).KeyColumn("EmployeeId");
     }
   }
 }
