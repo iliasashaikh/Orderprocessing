@@ -51,6 +51,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SharedLibs\NHibernate.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="NHibernate.Validator, Version=1.2.0.3001, Culture=neutral, PublicKeyToken=70154e18752585bd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharedLibs\NHibernate.Validator.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -65,13 +69,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DACManager.cs" />
-    <Compile Include="IRepository.cs" />
+    <Compile Include="DataAccessContext\DACManager.cs" />
+    <Compile Include="DataAccessContext\NHDataAccessContext.cs" />
+    <Compile Include="DataAccessContext\ObjectDataAccessContext.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="NHibernateHelper.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IDataAccessContext.cs" />
+    <Compile Include="DataAccessContext\IDataAccessContext.cs" />
+    <Compile Include="Repositories\NHRepository.cs" />
+    <Compile Include="Repositories\ObjectRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Order.hbm.xml" />
@@ -80,6 +89,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Employee.hbm.xml" />
     <Content Include="hibernate.cfg.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="nhvalidator.cfg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -45,7 +45,7 @@ namespace OrderProcessingDomain
       Map(x => x.PostalCode);
       Map(x => x.Region);
 
-      HasMany(x => x.Orders).KeyColumn("CustomerId");
+      HasMany(x => x.Orders).KeyColumn("CustomerId").Cascade.SaveUpdate();
     }
   }
 

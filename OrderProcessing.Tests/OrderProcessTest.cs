@@ -22,6 +22,7 @@ namespace OrderProcessing.Tests
     }
 
     [Test]
+    [Category("NhibernateDirectly")]
     public void Test_LoadAllOrders()
     {
       HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
@@ -41,6 +42,7 @@ namespace OrderProcessing.Tests
     }
 
     [Test]
+    [Category("NhibernateDirectly")]
     public void Test_LoadAllOrdersUsingRepository()
     {
       HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
@@ -57,6 +59,7 @@ namespace OrderProcessing.Tests
     }
 
     [Test]
+    [Category("NhibernateDirectly")]
     public void Test_LoadCustomerALFKIAndAllOrdersUsingRepository()
     {
       HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
@@ -81,6 +84,7 @@ namespace OrderProcessing.Tests
 
 
     [Test]
+    [Category("NhibernateDirectly")]
     public void Test_LoadAllOrdersFluently()
     {
       HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
@@ -100,6 +104,7 @@ namespace OrderProcessing.Tests
     }
 
     [Test]
+    [Category("NhibernateDirectly")]
     public void Test_LoadAllOrdersFluentAndHbm()
     {
       HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
@@ -119,6 +124,7 @@ namespace OrderProcessing.Tests
     }
 
     [Test]
+    [Category("NhibernateDirectly")]
     public void Test_LoadCustomerALFKIAndAllOrders()
     {
       HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
@@ -131,6 +137,7 @@ namespace OrderProcessing.Tests
     }
 
     [Test]
+    [Category("NhibernateDirectly")]
     public void Test_LoadCustomerALFKIAndAllOrdersFluently()
     {
       HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
@@ -143,6 +150,7 @@ namespace OrderProcessing.Tests
     }
 
     [Test]
+    [Category("NhibernateDirectly")]
     public void Test_LoadEmployee1AndAllOrders()
     {
       using (ISession session = NHibernateHelper.OpenSession())
@@ -154,6 +162,7 @@ namespace OrderProcessing.Tests
     }
 
     [Test]
+    [Category("NhibernateDirectly")]
     public void Test_LoadEmployee1AndAllOrdersFluently()
     {
       using (ISession session = NHibernateHelper.OpenSessionFluently())
@@ -165,6 +174,7 @@ namespace OrderProcessing.Tests
     }
 
     [Test]
+    [Category("NhibernateDirectly")]
     public void Test_CanOpenNhibernateSession()
     {
       ISession session = NHibernateHelper.OpenSession();
@@ -172,6 +182,7 @@ namespace OrderProcessing.Tests
     }
 
     [Test]
+    [Category("NhibernateDirectly")]
     public void Test_SaveOrderAndCommit()
     {
       Order order = new Order();
@@ -192,6 +203,7 @@ namespace OrderProcessing.Tests
     }
 
     [Test]
+    [Category("NhibernateDirectly")]
     public void Test_SaveOrderAndCommitUsingRepository()
     {
       Order order = new Order();
@@ -203,7 +215,7 @@ namespace OrderProcessing.Tests
       var orders = orderRepo.All();
       int countBefore = orders.Count();
 
-      orderRepo.Add(order);
+      orderRepo.Save(order);
 
       int countAfter = orders.Count();
 
@@ -211,6 +223,7 @@ namespace OrderProcessing.Tests
     }
 
     [Test]
+    [Category("NhibernateDirectly")]
     public void Test_SaveOrderAndRollback()
     {
       Order order = new Order();
@@ -231,6 +244,7 @@ namespace OrderProcessing.Tests
     }
 
     [Test]
+    [Category("NhibernateDirectly")]
     public void Test_SaveOrderAndCustomerAndEmployeeUsingRepositoryUsingCascadedSaves()
     {
       Order o = new Order();
@@ -254,7 +268,7 @@ namespace OrderProcessing.Tests
       int countEmployeesBefore = empRepo.All().Count();
       int countCustomerBefore = custRepo.All().Count();
 
-      orderRepo.Add(o);
+      orderRepo.Save(o);
 
       int countOrdersAfter = orderRepo.All().Count();
       int countEmployeesAfter = empRepo.All().Count();
@@ -268,6 +282,7 @@ namespace OrderProcessing.Tests
     }
 
     [Test]
+    [Category("NhibernateDirectly")]
     public void Test_RollbackOrderAndCustomerAndEmployeeUsingRepositoryUsingCascadedSaves()
     {
       Order o = new Order();
@@ -295,7 +310,7 @@ namespace OrderProcessing.Tests
       int countEmployeesBefore = empRepo.All().Count();
       int countCustomerBefore = custRepo.All().Count();
 
-      orderRepo.Add(o);
+      orderRepo.Save(o);
 
       Debug.Write(o.OrderId);
       dac.Rollback();
@@ -324,23 +339,110 @@ namespace OrderProcessing.Tests
     }
 
     [Test]
+    [Category("NhibernateDirectly")]
     public void Test_DeleteOrder()
     {
     }
 
     [Test]
+    [Category("NhibernateDirectly")]
     public void Test_UpdateOrder()
     {
     }
 
     [Test]
+    [Category("NhibernateDirectly")]
     public void Test_DeleteCustomerAndCheckAssociatedOrders()
     {
     }
 
     [Test]
+    [Category("NhibernateDirectly")]
     public void Test_DeleteEmployeeAndCheckAssociatedOrders()
     {
+    }
+
+    [Test]
+    public void Test_GetAllOrdersUsingDAC()
+    {
+      var orders = Repository<Order>.All(this);
+      Assert.Greater(orders.Count(),0);
+    }
+
+    [Test]
+    public void Test_GetAllCustomersUsingDAC()
+    {
+      var customers = Repository<Customer>.All(this);
+      Assert.Greater(customers.Count(), 0);
+    }
+
+    public void Test_GetCustomerALFKIUsingDACAndAddAnOrderForIt()
+    {
+      Customer customer = Repository<Customer>.Where(x => x.CustomerId == "ALFKI",this).First();
+      int ordersBefore = customer.Orders.Count();
+      Assert.That(ordersBefore, Is.GreaterThan(0));
+      DACManager.BeginTransaction(this);
+      customer.Orders.Add(new Order());
+      Repository<Customer>.Save(customer, this);
+      DACManager.Commit(this);
+      Assert.That(ordersBefore + 1, Is.EqualTo(customer.Orders.Count()));
+    }
+
+    /// <summary>
+    /// Test_s the add order in A transaction using DAC.
+    /// </summary>
+    [Test]
+    [Ignore]
+    public void Test_AddOrderInATransactionUsingDAC()
+    {
+
+      Assert.Throws<NHibernate.Validator.Exceptions.InvalidStateException>(() =>
+        {
+
+          var orders = Repository<Order>.All(this);
+          int countBefore = orders.Count();
+          DACManager.BeginTransaction(this);
+          Repository<Order>.Save(new Order() { }, this);
+          DACManager.Commit(this);
+          Assert.That(countBefore + 1, Is.EqualTo(orders.Count()));
+        });
+    }
+
+    /// <summary>
+    /// Test_s the add order in A transaction using DAC.
+    /// </summary>
+    [Test]
+    public void Test_AddOrderInATransactionUsingDAC1()
+    {
+
+      Assert.Throws<NHibernate.Validator.Exceptions.InvalidStateException>(() =>
+      {
+        try
+        {
+          var orders = Repository<Order>.All(this);
+          int countBefore = orders.Count();
+          DACManager.BeginTransaction(this);
+          Repository<Order>.Save(new Order() { }, this);
+          DACManager.Commit(this);
+          Assert.That(countBefore + 1, Is.EqualTo(orders.Count()));
+        }
+        catch (Exception ex)
+        {
+          DACManager.Rollback(this);
+          throw;
+        }
+      });
+    }
+
+    [Test]
+    public void Test_RollbackTransactionUsingDAC()
+    {
+      var orders = Repository<Order>.All(this);
+      int countBefore = orders.Count();
+      DACManager.BeginTransaction(this);
+      Repository<Order>.Save(new Order() { }, this);
+      DACManager.Rollback(this);
+      Assert.That(countBefore, Is.EqualTo(orders.Count()));
     }
   }
 }

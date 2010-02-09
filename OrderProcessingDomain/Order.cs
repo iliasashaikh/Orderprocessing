@@ -3,14 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
+using NHibernate.Validator.Constraints;
 
 namespace OrderProcessingDomain
 {
   public class Order
   {
     public virtual int? OrderId{get;set;}
+    
+    [NotNull]
     public virtual Customer Customer {get;set;}
+
+    [NotNull]
     public virtual Employee Employee {get;set;}
+
     public virtual DateTime? RequiredDate { get; set; }
     public virtual DateTime? ShippedDate { get; set; }
     public virtual int? Shipvia { get; set; }
