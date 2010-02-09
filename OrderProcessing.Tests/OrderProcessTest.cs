@@ -392,29 +392,23 @@ namespace OrderProcessing.Tests
     /// Test_s the add order in A transaction using DAC.
     /// </summary>
     [Test]
-    [Ignore]
     public void Test_AddOrderInATransactionUsingDAC()
     {
-
-      Assert.Throws<NHibernate.Validator.Exceptions.InvalidStateException>(() =>
-        {
-
           var orders = Repository<Order>.All(this);
           int countBefore = orders.Count();
           DACManager.BeginTransaction(this);
           Repository<Order>.Save(new Order() { }, this);
           DACManager.Commit(this);
           Assert.That(countBefore + 1, Is.EqualTo(orders.Count()));
-        });
     }
 
     /// <summary>
     /// Test_s the add order in A transaction using DAC.
     /// </summary>
     [Test]
-    public void Test_AddOrderInATransactionUsingDAC1()
+    [Ignore]
+    public void Test_AddOrderInATransactionUsingDACThrowsValidationException()
     {
-
       Assert.Throws<NHibernate.Validator.Exceptions.InvalidStateException>(() =>
       {
         try
