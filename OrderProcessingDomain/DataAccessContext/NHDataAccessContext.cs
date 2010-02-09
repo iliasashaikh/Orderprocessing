@@ -43,8 +43,6 @@ namespace OrderProcessingDomain
       set { _session = value; }
     }
 
-    private ITransaction _transaction;
-
     public void OpenSession()
     {
       if (_session != null && _session.Connection.State == System.Data.ConnectionState.Open)
@@ -69,22 +67,18 @@ namespace OrderProcessingDomain
 
     public void BeginTransaction()
     {
-      if (_transaction != null)
-        return;
-
       OpenSession();
-
-      _transaction = _session.BeginTransaction();
+      _session.BeginTransaction();
     }
 
     public void Commit()
     {
-      _transaction.Commit();
+      _session.Transaction.Commit();
     }
 
     public void Rollback()
     {
-      _transaction.Rollback();
+      _session.Transaction.Rollback();
     }
 
     public void CloseSession()
