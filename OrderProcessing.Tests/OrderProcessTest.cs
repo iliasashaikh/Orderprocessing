@@ -15,7 +15,7 @@ namespace OrderProcessing.Tests
   public class OrderProcessTest
   {
 
-    [TestFixtureSetUp]
+    [SetUp]
     public void SetupNHProf()
     {
       HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
