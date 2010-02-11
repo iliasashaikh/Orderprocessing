@@ -10,72 +10,82 @@ namespace OrderProcessingDomain
   public class NHRepository<T> : IRepository<T>
   where T : class
   {
-    static NHDataAccessContext dac = new NHDataAccessContext();
+    static NHDataAccessContext _dac = new NHDataAccessContext();
+
+    public NHRepository(NHDataAccessContext dac)
+    {
+      _dac = dac;
+    }
+
+    public NHRepository()
+    {
+    }
 
     public IEnumerable<T> All()
     {
-      dac.OpenSession();
-      return dac.Session.Linq<T>();
+      _dac.OpenSession();
+      return _dac.Session.Linq<T>();
     }
 
     public IEnumerable<T> Where(Func<T, bool> exp)
     {
-      dac.OpenSession();
-      return dac.Session.Linq<T>().Where(exp);
+      _dac.OpenSession();
+      IQueryable<T> result = _dac.Session.Linq<T>();
+      return result.Where(exp);
     }
 
     public void Remove(object toRemove)
     {
-      dac.OpenSession();
-      dac.Session.Delete(toRemove);
+      _dac.OpenSession();
+      _dac.Session.Delete(toRemove);
     }
 
     public void BeginTransaction()
     {
-      dac.BeginTransaction();
+      _dac.BeginTransaction();
     }
 
     public void Commit()
     {
-      dac.Commit();
+      _dac.Commit();
     }
 
     public void Rollback()
     {
-      dac.Rollback();
+      _dac.Rollback();
     }
 
     public IDataAccessContext DataAccessContext
     {
       get
       {
-        return dac;
+        return _dac;
       }
       set
       {
-        dac = (NHDataAccessContext)value;
+        _dac = (NHDataAccessContext)value;
       }
     }
 
     public void Save(object toSave)
     {
-      dac.OpenSession();
-      dac.Session.Save(toSave);
+      _dac.OpenSession();
+      _dac.Session.Save(toSave);
     }
 
     public void Update(object toUpdate)
     {
-      dac.OpenSession();
-      dac.Session.Update(toUpdate);
+      _dac.OpenSession();
+      _dac.Session.Update(toUpdate);
     }
 
     public void RemoveWhere(Func<T, bool> exp)
     {
-      dac.OpenSession();
-      var recordsToDelete = dac.Session.Linq<T>().Where(exp);
+      _dac.OpenSession();
+      var recordsToDelete = _dac.Session.Linq<T>().Where(exp);
       foreach (T o in recordsToDelete)
       {
-        dac.Session.Delete(o);
+        _dac.Session.Delete(o);
       }
     }
 

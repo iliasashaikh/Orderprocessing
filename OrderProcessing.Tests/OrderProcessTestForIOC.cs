@@ -4,19 +4,28 @@ using System.Linq;
 using System.Text;
 using NHibernate.Linq;
 using NUnit.Framework;
+
 using Spring.Core;
 using Spring.Context;
 using Spring.Context.Support;
+
 using OrderProcessingDomain;
 using System.Diagnostics;
+
+using Castle.Core;
+using Castle.MicroKernel;
+using Castle.Windsor;
+using Castle.DynamicProxy;
+using Castle.MicroKernel.Registration;
+
 
 namespace OrderProcessing.Tests
 {
   [TestFixture]
   class OrderProcessTestForIOC
   {
-    [TestFixtureSetUp]
-    public void SetupContainer()
+    [Test]
+    public void SetupContainerUsingSpring()
     {
       try
       {
@@ -33,7 +42,33 @@ namespace OrderProcessing.Tests
       catch (Exception ex)
       {
         ShowError(ex);
+        throw;
       }
+    }
+
+    [Test]
+    public void SetupContainerUsingWindsor()
+    {
+      try
+      {
+        IWindsorContainer container = new WindsorContainer();
+
+        container.Register(
+          Component.For<IDataAccessContext>().ImplementedBy<NHDataAccessContext>().Named("NHDAC").LifeStyle.Transient,
+          Component.For<IDataAccessContext>().ImplementedBy<ObjectDataAccessContext>().Named("ObjectDAC").LifeStyle.Transient
+          );
+
+        var nhdac = container.Resolve<IDataAccessContext>("NHDAC");
+        Assert.That(nhdac, Is.InstanceOf<NHDataAccessContext>());
+
+        var objdac = container.Resolve<IDataAccessContext>("NHDAC");
+        Assert.That(objdac, Is.InstanceOf<ObjectDataAccessContext>());
+      }
+      catch (Exception ex)
+      {
+        ShowError(ex);
+      }
+
     }
 
     void ShowError(Exception ex)

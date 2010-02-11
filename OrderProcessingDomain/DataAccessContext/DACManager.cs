@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Castle.MicroKernel.Registration;
+
 namespace OrderProcessingDomain
 {
   public enum DACType
@@ -24,16 +26,18 @@ namespace OrderProcessingDomain
     {
     }
 
+    private static IDataAccessContext GetNewDACFromIOC()
+    {
+      return IOC.Resolve<IDataAccessContext>();  
+    }
+
     public static void OpenSession(object owner)
     {
       IDataAccessContext dac;
 
-      if (DacType == DACType.NH)
-      {
-        dac = new NHDataAccessContext();
-        dac.OpenSession();
-        _dacMap.Add(owner, dac);
-      }
+      dac = GetNewDACFromIOC();
+      dac.OpenSession();
+      _dacMap.Add(owner, dac);
     }
 
     public static void CloseSession(object owner)

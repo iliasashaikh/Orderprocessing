@@ -12,15 +12,15 @@ namespace OrderProcessingDomain
 
     #region IRepository<T> Members
 
-    private static IRepository<T> GetRepository()
+    private static IRepository<T> GetRepositoryFromContainer()
     {
-      return new NHRepository<T>();
+      return IOC.Resolve<IRepository<T>>();
     }
 
     public static IEnumerable<T> All(object owner)
     {
       IDataAccessContext dac = DACManager.GetCurrentSession(owner);
-      IRepository<T> repo = GetRepository();
+      IRepository<T> repo = GetRepositoryFromContainer();
       repo.DataAccessContext = dac;
       return repo.All();
     }
@@ -28,7 +28,7 @@ namespace OrderProcessingDomain
     public static IEnumerable<T> Where(Func<T, bool> exp, object owner)
     {
       IDataAccessContext dac = DACManager.GetCurrentSession(owner);
-      IRepository<T> repo = GetRepository();
+      IRepository<T> repo = GetRepositoryFromContainer();
       repo.DataAccessContext = dac;
       return repo.Where(exp);
     }
@@ -36,7 +36,7 @@ namespace OrderProcessingDomain
     public static void Remove(object toRemove, object owner)
     {
       IDataAccessContext dac = DACManager.GetCurrentSession(owner);
-      IRepository<T> repo = GetRepository();
+      IRepository<T> repo = GetRepositoryFromContainer();
       repo.DataAccessContext = dac;
       repo.Remove(toRemove);
     }
@@ -44,7 +44,7 @@ namespace OrderProcessingDomain
     public static void Save(object toSave, object owner)
     {
       IDataAccessContext dac = DACManager.GetCurrentSession(owner);
-      IRepository<T> repo = GetRepository();
+      IRepository<T> repo = GetRepositoryFromContainer();
       repo.DataAccessContext = dac;
       repo.Save(toSave);
     }
@@ -52,7 +52,7 @@ namespace OrderProcessingDomain
     public static void Update(object toUpdate, object owner)
     {
       IDataAccessContext dac = DACManager.GetCurrentSession(owner);
-      IRepository<T> repo = GetRepository();
+      IRepository<T> repo = GetRepositoryFromContainer();
       repo.DataAccessContext = dac;
       repo.Update(toUpdate);
     }
@@ -60,7 +60,7 @@ namespace OrderProcessingDomain
     public static void RemoveWhere(Func<T, bool> exp, object owner)
     {
       IDataAccessContext dac = DACManager.GetCurrentSession(owner);
-      IRepository<T> repo = GetRepository();
+      IRepository<T> repo = GetRepositoryFromContainer();
       repo.DataAccessContext = dac;
       repo.RemoveWhere(exp);
     }
