@@ -64,7 +64,7 @@ namespace OrderProcessingDomain
       Map(x => x.HireDate);
       Map(x => x.HomePhone);
       Map(x => x.LastName);
-      Map(x => x.Notes);
+      //Map(x => x.Notes);
       Map(x => x.Photo);
       Map(x => x.PhotoPath);
       Map(x => x.PostalCode);

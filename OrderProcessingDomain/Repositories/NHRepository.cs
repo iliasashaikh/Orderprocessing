@@ -10,11 +10,12 @@ namespace OrderProcessingDomain
   public class NHRepository<T> : IRepository<T>
   where T : class
   {
-    static NHDataAccessContext _dac = new NHDataAccessContext();
+    static NHDataAccessContext _dac;
 
     public NHRepository(NHDataAccessContext dac)
     {
-      _dac = dac;
+      if (_dac == null)
+        _dac = dac;
     }
 
     public NHRepository()
@@ -89,5 +90,10 @@ namespace OrderProcessingDomain
       }
     }
 
+    public int Count()
+    {
+      _dac.OpenSession();
+      return _dac.Session.Linq<T>().Count();
+    }
   }
 }

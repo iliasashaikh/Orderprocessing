@@ -115,6 +115,11 @@ namespace OrderProcessingDomain
         _list.Add((T)toUpdate);
 
     }
+
+    public int Count()
+    {
+      return _list.Count;
+    }
   }
 
 }

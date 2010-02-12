@@ -11,7 +11,7 @@ using Castle.MicroKernel.Registration;
 
 namespace OrderProcessingDomain
 {
-  static class IOC
+  public static class IOC
   {
 
     const string NHDAC = "nhdac";
@@ -21,16 +21,18 @@ namespace OrderProcessingDomain
 
     private static IWindsorContainer _container = new WindsorContainer();
 
-    static void RegisterComponents()
+    public static void RegisterComponents()
     {
       _container.Register(
-        Component.For<DACManager>().Named(DAC_MANAGER).LifeStyle.Singleton,
-        Component.For<IDataAccessContext>().ImplementedBy<NHDataAccessContext>().Named(NHDAC).LifeStyle.Transient,
-        Component.For<IDataAccessContext>().ImplementedBy<ObjectDataAccessContext>().Named(OBJECT_DAC).LifeStyle.Transient,
-        Component.For(typeof(IRepository<>)).ImplementedBy(typeof(NHRepository<>)).DependsOn(new {xx=""}).LifeStyle.Transient,
-        Component.For(typeof(IRepository<>)).ImplementedBy(typeof(ObjectRepository<>)).LifeStyle.Transient,
-        Component.For(typeof(Repository<>)).Named(REPOSITORY_FACTORY).LifeStyle.Singleton
-        );
+            Component.For<DACManager>().Named(DAC_MANAGER).LifeStyle.Singleton,
+            Component.For<NHDataAccessContext>(),
+            Component.For<IDataAccessContext>().ImplementedBy<NHDataAccessContext>().Named(NHDAC).LifeStyle.Singleton,
+            Component.For<IDataAccessContext>().ImplementedBy<ObjectDataAccessContext>().Named(OBJECT_DAC).LifeStyle.Transient,
+            Component.For(typeof(IRepository<>)).ImplementedBy(typeof(NHRepository<>)).ServiceOverrides(ServiceOverride.ForKey("dac").Eq(NHDAC)).LifeStyle.Transient.Named("nhrep1"),
+            Component.For(typeof(IRepository<>)).ImplementedBy(typeof(NHRepository<>)).LifeStyle.Transient.Named("nhrep").LifeStyle.Transient,
+            Component.For(typeof(IRepository<>)).ImplementedBy(typeof(ObjectRepository<>)).LifeStyle.Transient,
+            Component.For(typeof(Repository<>)).Named(REPOSITORY_FACTORY).LifeStyle.Singleton
+            );
     }
 
     public static T Resolve<T>()

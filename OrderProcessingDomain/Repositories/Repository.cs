@@ -25,6 +25,14 @@ namespace OrderProcessingDomain
       return repo.All();
     }
 
+    public static int Count(object owner)
+    {
+      IDataAccessContext dac = DACManager.GetCurrentSession(owner);
+      IRepository<T> repo = GetRepositoryFromContainer();
+      return repo.Count();
+
+    }
+
     public static IEnumerable<T> Where(Func<T, bool> exp, object owner)
     {
       IDataAccessContext dac = DACManager.GetCurrentSession(owner);

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="84b5b53d-dedb-4620-9ae9-719a3807ec7d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8731/Design_Time_Addresses/OrderService/Order/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="306e074b-2323-4f2f-850c-0638e1dec528" SourceId="1" SourceUrl="http://localhost:8731/Design_Time_Addresses/OrderService/Order/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="29713a18-1f37-4acf-b1ce-f1c0ed58d39b" SourceId="1" SourceUrl="http://localhost:8731/Design_Time_Addresses/OrderService/Order/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="46974455-3bb0-4bde-aee6-156133d7a367" SourceId="1" SourceUrl="http://localhost:8731/Design_Time_Addresses/OrderService/Order/mex" />
+    <MetadataFile FileName="OrderProcessingDomain.xsd" MetadataType="Schema" ID="58871c38-7ee0-410f-ac0a-097da7badfab" SourceId="1" SourceUrl="http://localhost:8731/Design_Time_Addresses/OrderService/Order/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="7899a9bc-f6db-4e7b-997d-5ae8daed90b2" SourceId="1" SourceUrl="http://localhost:8731/Design_Time_Addresses/OrderService/Order/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

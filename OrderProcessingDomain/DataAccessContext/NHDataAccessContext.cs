@@ -45,7 +45,7 @@ namespace OrderProcessingDomain
 
     public void OpenSession()
     {
-      if (_session != null && _session.Connection.State == System.Data.ConnectionState.Open)
+      if (_session != null && _session.IsConnected == true)
         return;
 
       if (_sessionFactory != null)

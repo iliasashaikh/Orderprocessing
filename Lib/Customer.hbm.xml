@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   schema="dbo"
+                   assembly="OrderProcessingDomain"
+                   namespace="OrderProcessingDomain">
+
+  <class
+    name="Customer"
+    table="Customers"
+  >
+    <id name="CustomerId" type="String" length="5">
+      <generator class="assigned" />
+    </id>
+    <property name="CompanyName" />
+    <property name="ContactName" />
+    <property name="ContactTitle" />
+    <property name="Address" />
+    <property name="City" />
+    <property name="Region" />
+    <property name="PostalCode" />
+    <property name="Country" />
+    <property name="Phone" />
+    <property name="Fax" />
+
+    <bag name="Orders">
+      <key column="CustomerId"/>
+      <one-to-many class="OrderProcessingDomain.Order,OrderProcessingDomain"/>
+    </bag>
+    
+  </class>
+
+</hibernate-mapping>

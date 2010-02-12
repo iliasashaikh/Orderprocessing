@@ -16,4 +16,5 @@ public interface IRepository<T> where T : class
   void Save(object toSave);
   void Update(object toUpdate);
   void RemoveWhere(Func<T, bool> exp);
+  int Count();
 }
