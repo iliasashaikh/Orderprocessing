@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using FluentNHibernate.Cfg;
 using NHibernate;
 using NHibernate.Cfg;
-using FluentNHibernate.Cfg;
-using NHibernate.Validator;
-
-using System.Threading;
-using System.Collections;
-
 using NHibernate.Validator.Cfg;
 using NHibernate.Validator.Engine;
-using NHibernate.Validator.Exceptions;
 
 namespace OrderProcessingDomain
 {

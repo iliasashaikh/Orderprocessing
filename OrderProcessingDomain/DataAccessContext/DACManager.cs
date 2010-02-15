@@ -2,21 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Castle.MicroKernel.Registration;
 
 namespace OrderProcessingDomain
 {
-  public enum DACType
-  {
-    NH,
-    Objects
-  }
-
   public class DACManager
   {
-    public static Dictionary<object,IDataAccessContext> _dacMap = new Dictionary<object,IDataAccessContext>() ;
-    public static DACType DacType { get; set; }
+    public static Dictionary<object,IDataAccessContext> _dacMap = new Dictionary<object,IDataAccessContext>();
 
     public DACManager()
     {

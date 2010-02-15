@@ -20,9 +20,15 @@ namespace OrderProcessing
 
     private void button1_Click(object sender, EventArgs e)
     {
-      OrderProcessing.ServiceReference1.OrdersClient ord = new OrderProcessing.ServiceReference1.OrdersClient();
-      OrderProcessing.ServiceReference1.Order[] orders = ord.GetAllOrders();
-      dataGridView1.DataSource = orders;
+      try
+      {
+        OrderProcessing.ServiceReference1.OrdersClient ord = new OrderProcessing.ServiceReference1.OrdersClient("orderTcpBinding");
+        OrderProcessing.ServiceReference1.Order[] orders = ord.GetAllOrders();
+        dataGridView1.DataSource = orders;
+      }
+      catch (Exception ex)
+      {
+      }
     }
   }
 }

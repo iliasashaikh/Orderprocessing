@@ -200,6 +200,7 @@
     <None Include="Service References\ServiceReference1\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Service References\ServiceReference1\OrderProcessing.ServiceReference1.Order.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

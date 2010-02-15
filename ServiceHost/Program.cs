@@ -11,10 +11,27 @@ namespace ConsoleServiceHost
   {
     static void Main(string[] args)
     {
-      ServiceHost host = new ServiceHost(typeof(OrderService.Orders));
-      host.Open();
-      Console.WriteLine("Any key to stop");
-      Console.ReadKey();
+      try
+      {
+        ServiceHost host = new ServiceHost(typeof(OrderService.Orders));
+        host.Open();
+        Console.WriteLine("Any key to stop");
+        Console.ReadKey();
+      }
+      catch (Exception ex)
+      {
+        ShowError(ex);
+        Console.ReadKey();
+      }
     }
+
+    static void ShowError(Exception ex)
+    {
+      Console.WriteLine(ex.Message);
+      Console.WriteLine(ex.StackTrace);
+      if (ex.InnerException != null)
+        ShowError(ex.InnerException);
+    }
+
   }
 }
