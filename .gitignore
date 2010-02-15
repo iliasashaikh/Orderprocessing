@@ -5,3 +5,5 @@ obj
 *.cache
 *~
 *.swp
+*.zip
+*.svclog
