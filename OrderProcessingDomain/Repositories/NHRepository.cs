@@ -39,6 +39,7 @@ namespace OrderProcessingDomain
     {
       _dac.OpenSession();
       _dac.Session.Delete(toRemove);
+      _dac.Session.Flush();
     }
 
     public void BeginTransaction()
@@ -95,5 +96,16 @@ namespace OrderProcessingDomain
       _dac.OpenSession();
       return _dac.Session.Linq<T>().Count();
     }
+
+    #region IRepository<T> Members
+
+
+    public T Get<T>(object key)
+    {
+      _dac.OpenSession();
+      return _dac.Session.Get<T>(key);
+    }
+
+    #endregion
   }
 }

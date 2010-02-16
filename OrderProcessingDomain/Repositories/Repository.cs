@@ -73,6 +73,13 @@ namespace OrderProcessingDomain
       repo.RemoveWhere(exp);
     }
 
+    public static T Get(object key, object owner)
+    {
+      IDataAccessContext dac = DACManager.GetCurrentSession(owner);
+      IRepository<T> repo = GetRepositoryFromContainer();
+      return repo.Get<T>(key);
+    }
+
     #endregion
   }
 }

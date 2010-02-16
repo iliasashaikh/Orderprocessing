@@ -32,6 +32,5 @@ namespace ConsoleServiceHost
       if (ex.InnerException != null)
         ShowError(ex.InnerException);
     }
-
   }
 }

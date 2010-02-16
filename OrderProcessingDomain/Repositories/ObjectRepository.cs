@@ -120,6 +120,16 @@ namespace OrderProcessingDomain
     {
       return _list.Count;
     }
+
+    #region IRepository<T> Members
+
+
+    public T Get<T>(object key)
+    {
+      throw new NotImplementedException();
+    }
+
+    #endregion
   }
 
 }

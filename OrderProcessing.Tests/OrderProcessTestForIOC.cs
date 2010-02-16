@@ -22,6 +22,7 @@ namespace OrderProcessing.Tests
   public class OrderProcessTestForIOC
   {
     [Test]
+    [Ignore]
     public void SetupContainerUsingSpring()
     {
       try
@@ -96,6 +97,7 @@ namespace OrderProcessing.Tests
       DACManager.Commit(this);
       Assert.That(countBefore + 1, Is.EqualTo(orders.Count()));
     }
+
 
     void ShowError(Exception ex)
     {

@@ -201,9 +201,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
-    <None Include="Service References\ServiceReference1\OrderProcessing.ServiceReference1.Order.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
+    <None Include="Properties\DataSources\OrderProcessingDomain.Order.datasource" />
     <None Include="Service References\ServiceReference1\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

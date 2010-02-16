@@ -7,12 +7,30 @@ using NHibernate;
 
 namespace OrderProcessingDomain
 {
+
+  public class OrderDetailsMap : ClassMap<OrderDetails>
+  {
+    public OrderDetailsMap()
+    {
+      Table("[Order Details]");
+      //CompositeId().KeyProperty(x => x.OrderId).KeyProperty(x => x.ProductId);
+      Id(x => x.OrderId).GeneratedBy.Assigned();
+      Map(x => x.Discount);
+      Map(x => x.ProductId);
+      Map(x => x.Quantity);
+      Map(x => x.UnitPrice);
+    }
+  }
+
   public class OrderMap : ClassMap<Order>
   {
     public OrderMap()
     {
       Table("Orders");
       Id(x => x.OrderId).GeneratedBy.Identity();
+      HasMany<OrderDetails>(x => x.Details).KeyColumn("OrderId").Cascade.All().Inverse();
+      HasMany<OrderDetails>(x => x.Details).KeyColumn("OrderId").Cascade.AllDeleteOrphan().Inverse();
+      //References(x => x.Details).Cascade.All().Column("OrderId").NotFound.Ignore();
       //Map(x => x.OrderDate);
       Map(x => x.RequiredDate);
       Map(x => x.ShipAddress);

@@ -56,6 +56,18 @@ namespace OrderProcessingDomain
     [DataMember]
     public virtual Hashtable CustomFields { get; set; }
 
+    public override bool Equals(object obj)
+    {
+      if ((obj as Order) != null)
+      {
+        return (((Order)obj).OrderId == this.OrderId);
+      }
+
+      return false;
+    }
+
+    public virtual IList<OrderDetails> Details { get; set; }
+
   }
 
   [DataContract]
@@ -114,6 +126,16 @@ namespace OrderProcessingDomain
 
     [DataMember]
     public virtual IList<Order> Orders { get; set; }
+
+    public override bool Equals(object obj)
+    {
+      if ((obj as Employee) != null)
+      {
+        return (((Employee)obj).EmployeeId == this.EmployeeId);
+      }
+
+      return false;
+    }
   }
 
   [DataContract]
@@ -154,5 +176,40 @@ namespace OrderProcessingDomain
 
     [DataMember]
     public virtual IList<Order> Orders { get; set; }
+
+    public override bool Equals(object obj)
+    {
+      if ((obj as Customer) != null)
+      {
+        return String.Compare(((Customer)obj).CustomerId,this.CustomerId,true) == 0;
+      }
+
+      return false;
+    }
+
+  }
+
+  public class OrderDetails
+  {
+    public virtual int OrderId { get; set; }
+    public virtual int ProductId { get; set; }
+    public virtual decimal UnitPrice { get; set; }
+    public virtual int Quantity { get; set; }
+    public virtual decimal Discount { get; set; }
+
+    public override bool Equals(object obj)
+    {
+      OrderDetails other = obj as OrderDetails;
+      if (other != null)
+      {
+        return (this.OrderId == other.OrderId && this.ProductId == other.ProductId);
+      }
+      return false;
+    }
+
+    public override int GetHashCode()
+    {
+      return OrderId.GetHashCode() + ProductId.GetHashCode();
+    }
   }
 }
