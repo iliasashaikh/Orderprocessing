@@ -29,7 +29,7 @@ namespace OrderProcessingDomain
       Table("Orders");
       Id(x => x.OrderId).GeneratedBy.Identity();
       HasMany<OrderDetails>(x => x.Details).KeyColumn("OrderId").Cascade.All().Inverse();
-      HasMany<OrderDetails>(x => x.Details).KeyColumn("OrderId").Cascade.AllDeleteOrphan().Inverse();
+      //HasMany<OrderDetails>(x => x.Details).KeyColumn("OrderId").Cascade.AllDeleteOrphan().Inverse();
       //References(x => x.Details).Cascade.All().Column("OrderId").NotFound.Ignore();
       //Map(x => x.OrderDate);
       Map(x => x.RequiredDate);
