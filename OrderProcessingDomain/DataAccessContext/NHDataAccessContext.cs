@@ -18,9 +18,8 @@ namespace OrderProcessingDomain
         _cfg = new Configuration().Configure();
 
       FluentConfiguration fluentCfg = Fluently.Configure(_cfg);
-      fluentCfg.Mappings(m => m.FluentMappings.AddFromAssemblyOf<OrderMap>());
+      fluentCfg.Mappings(m => m.FluentMappings.AddFromAssemblyOf<OrderMap>().ExportTo(@"c:\temp"));
       _sessionFactory = fluentCfg.BuildSessionFactory();
-
       ValidatorEngine engine = new ValidatorEngine();
       engine.Configure();
 

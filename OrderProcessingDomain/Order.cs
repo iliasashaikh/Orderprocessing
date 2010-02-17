@@ -192,6 +192,7 @@ namespace OrderProcessingDomain
   public class OrderDetails
   {
     public virtual int OrderId { get; set; }
+    public virtual Order ParentOrder { get; set; }
     public virtual int ProductId { get; set; }
     public virtual decimal UnitPrice { get; set; }
     public virtual int Quantity { get; set; }
@@ -202,14 +203,14 @@ namespace OrderProcessingDomain
       OrderDetails other = obj as OrderDetails;
       if (other != null)
       {
-        return (this.OrderId == other.OrderId && this.ProductId == other.ProductId);
+        return (this.ParentOrder.OrderId == other.ParentOrder.OrderId && this.ProductId == other.ProductId);
       }
       return false;
     }
 
     public override int GetHashCode()
     {
-      return OrderId.GetHashCode() + ProductId.GetHashCode();
+      return ParentOrder.OrderId.GetHashCode() + ProductId.GetHashCode();
     }
   }
 }

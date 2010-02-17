@@ -77,8 +77,9 @@ namespace OrderProcessing.Tests
     {
       IOC.RegisterComponents();
       var orders = Repository<Order>.All(this);
-      var order = Repository<Order>.Get(10252, this);
-      var details = Repository<OrderDetails>.Get(10252, this);
+      var orderDetails = Repository<OrderDetails>.Where(x => x.OrderId == 10252,this);
+      OrderDetails det = orderDetails.First();
+      var det1 = Repository<OrderDetails>.Get(new OrderDetails() {OrderId=10252, ProductId=det.ProductId}, this);
       Assert.Greater(orders.Count(), 0);
       DACManager.CloseSession(this);
       var orderCount = Repository<Order>.Count(this);

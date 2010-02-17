@@ -22,9 +22,31 @@ namespace OrderService
 
     public void DeleteOrder(Order order)
     {
-      //Order localOrder = Repository<Order>.Where(o => (o.OrderId == order.OrderId),Thread.CurrentContext.ContextID).First();
-      Order localOrder = Repository<Order>.Get(order.OrderId, Thread.CurrentContext.ContextID);
-      Repository<Order>.Remove(localOrder, Thread.CurrentContext.ContextID);
+      try
+      {
+        IOC.RegisterComponents();
+        Order localOrder = Repository<Order>.Get(order.OrderId, Thread.CurrentContext.ContextID);
+        if (localOrder == null)
+        {
+          localOrder = Repository<Order>.Where(x => x.OrderId == order.OrderId,Thread.CurrentContext.ContextID).FirstOrDefault();
+        }
+
+        if (localOrder != null)
+        {
+          var orderDetails = Repository<OrderDetails>.Where(x => x.OrderId == order.OrderId, Thread.CurrentContext.ContextID);
+          foreach (OrderDetails det in orderDetails)
+          {
+            Repository<OrderDetails>.Remove(det, Thread.CurrentContext.ContextID);
+          }
+        }
+
+        Repository<Order>.Remove(localOrder, Thread.CurrentContext.ContextID);
+
+      }
+      catch (Exception ex)
+      {
+        throw new FaultException(ex.Message);
+      }
     }
 
     public IEnumerable<Order> GetAllOrders()

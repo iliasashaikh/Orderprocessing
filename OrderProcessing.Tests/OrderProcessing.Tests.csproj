@@ -119,12 +119,17 @@
   <ItemGroup>
     <Compile Include="OrderProcessTest.cs" />
     <Compile Include="OrderProcessTestForIOC.cs" />
+    <Compile Include="OrderServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OrderProcessingDomain\OrderProcessingDomain.csproj">
       <Project>{7EA64F01-BD33-47EE-810E-81D6954E117D}</Project>
       <Name>OrderProcessingDomain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrderService\OrderService.csproj">
+      <Project>{114BC48B-EACC-4E0A-8D2D-A08CC7F4C5BB}</Project>
+      <Name>OrderService</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -48,10 +48,17 @@ namespace OrderProcessing
 
     private void btnDelete_Click(object sender, EventArgs e)
     {
-      Order order = dataGridView1.SelectedRows[0].DataBoundItem as Order;
-      if (order != null)
-        _ordRef.DeleteOrder(order);
-      dataGridView1.DataSource = _ordRef.GetAllOrders();
+      try
+      {
+        Order order = dataGridView1.SelectedRows[0].DataBoundItem as Order;
+        if (order != null)
+          _ordRef.DeleteOrder(order);
+        dataGridView1.DataSource = _ordRef.GetAllOrders();
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message);
+      }
     }
   }
 }
