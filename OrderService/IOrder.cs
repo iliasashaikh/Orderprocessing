@@ -12,7 +12,7 @@ using OrderProcessingDomain;
 namespace OrderService
 {
   // NOTE: If you change the interface name "IOrder" here, you must also update the reference to "IOrder" in App.config.
-  [ServiceContract]
+  [ServiceContract(CallbackContract=typeof(IOrderServiceCallback))]
   public interface IOrders
   {
     [OperationContract]
@@ -22,9 +22,30 @@ namespace OrderService
     void DeleteOrder(Order order);
 
     [OperationContract]
+    void UpdateOrder(Order order);
+
+    [OperationContract]
     IEnumerable<Order> GetAllOrders();
 
     [OperationContract]
     int GetOrderCount();
+
+    [OperationContract]
+    void Subscribe();
+
+    [OperationContract]
+    void UnSubscribe();
+  }
+
+  public interface IOrderServiceCallback
+  {
+    [OperationContract(IsOneWay=true)]
+    void OrderAdded(Order order);
+
+    [OperationContract(IsOneWay = true)]
+    void OrderUpdated(Order order);
+
+    [OperationContract(IsOneWay = true)]
+    void OrderRemoved(Order order);
   }
 }

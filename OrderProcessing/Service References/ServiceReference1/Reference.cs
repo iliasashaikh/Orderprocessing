@@ -12,20 +12,92 @@ namespace OrderProcessing.ServiceReference1 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IOrders")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IOrders", CallbackContract=typeof(OrderProcessing.ServiceReference1.IOrdersCallback))]
     public interface IOrders {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrders/AddOrder", ReplyAction="http://tempuri.org/IOrders/AddOrderResponse")]
         void AddOrder(OrderProcessingDomain.Order order);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IOrders/AddOrder", ReplyAction="http://tempuri.org/IOrders/AddOrderResponse")]
+        System.IAsyncResult BeginAddOrder(OrderProcessingDomain.Order order, System.AsyncCallback callback, object asyncState);
+        
+        void EndAddOrder(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrders/DeleteOrder", ReplyAction="http://tempuri.org/IOrders/DeleteOrderResponse")]
         void DeleteOrder(OrderProcessingDomain.Order order);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IOrders/DeleteOrder", ReplyAction="http://tempuri.org/IOrders/DeleteOrderResponse")]
+        System.IAsyncResult BeginDeleteOrder(OrderProcessingDomain.Order order, System.AsyncCallback callback, object asyncState);
+        
+        void EndDeleteOrder(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrders/UpdateOrder", ReplyAction="http://tempuri.org/IOrders/UpdateOrderResponse")]
+        void UpdateOrder(OrderProcessingDomain.Order order);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IOrders/UpdateOrder", ReplyAction="http://tempuri.org/IOrders/UpdateOrderResponse")]
+        System.IAsyncResult BeginUpdateOrder(OrderProcessingDomain.Order order, System.AsyncCallback callback, object asyncState);
+        
+        void EndUpdateOrder(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrders/GetAllOrders", ReplyAction="http://tempuri.org/IOrders/GetAllOrdersResponse")]
         OrderProcessingDomain.Order[] GetAllOrders();
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IOrders/GetAllOrders", ReplyAction="http://tempuri.org/IOrders/GetAllOrdersResponse")]
+        System.IAsyncResult BeginGetAllOrders(System.AsyncCallback callback, object asyncState);
+        
+        OrderProcessingDomain.Order[] EndGetAllOrders(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrders/GetOrderCount", ReplyAction="http://tempuri.org/IOrders/GetOrderCountResponse")]
         int GetOrderCount();
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IOrders/GetOrderCount", ReplyAction="http://tempuri.org/IOrders/GetOrderCountResponse")]
+        System.IAsyncResult BeginGetOrderCount(System.AsyncCallback callback, object asyncState);
+        
+        int EndGetOrderCount(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrders/Subscribe", ReplyAction="http://tempuri.org/IOrders/SubscribeResponse")]
+        void Subscribe();
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IOrders/Subscribe", ReplyAction="http://tempuri.org/IOrders/SubscribeResponse")]
+        System.IAsyncResult BeginSubscribe(System.AsyncCallback callback, object asyncState);
+        
+        void EndSubscribe(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrders/UnSubscribe", ReplyAction="http://tempuri.org/IOrders/UnSubscribeResponse")]
+        void UnSubscribe();
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IOrders/UnSubscribe", ReplyAction="http://tempuri.org/IOrders/UnSubscribeResponse")]
+        System.IAsyncResult BeginUnSubscribe(System.AsyncCallback callback, object asyncState);
+        
+        void EndUnSubscribe(System.IAsyncResult result);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+    public interface IOrdersCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IOrders/OrderAdded")]
+        void OrderAdded(OrderProcessingDomain.Order order);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, AsyncPattern=true, Action="http://tempuri.org/IOrders/OrderAdded")]
+        System.IAsyncResult BeginOrderAdded(OrderProcessingDomain.Order order, System.AsyncCallback callback, object asyncState);
+        
+        void EndOrderAdded(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IOrders/OrderUpdated")]
+        void OrderUpdated(OrderProcessingDomain.Order order);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, AsyncPattern=true, Action="http://tempuri.org/IOrders/OrderUpdated")]
+        System.IAsyncResult BeginOrderUpdated(OrderProcessingDomain.Order order, System.AsyncCallback callback, object asyncState);
+        
+        void EndOrderUpdated(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IOrders/OrderRemoved")]
+        void OrderRemoved(OrderProcessingDomain.Order order);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, AsyncPattern=true, Action="http://tempuri.org/IOrders/OrderRemoved")]
+        System.IAsyncResult BeginOrderRemoved(OrderProcessingDomain.Order order, System.AsyncCallback callback, object asyncState);
+        
+        void EndOrderRemoved(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -34,41 +106,457 @@ namespace OrderProcessing.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public partial class OrdersClient : System.ServiceModel.ClientBase<OrderProcessing.ServiceReference1.IOrders>, OrderProcessing.ServiceReference1.IOrders {
+    public partial class GetAllOrdersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
-        public OrdersClient() {
+        private object[] results;
+        
+        public GetAllOrdersCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
         }
         
-        public OrdersClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
+        public OrderProcessingDomain.Order[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((OrderProcessingDomain.Order[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+    public partial class GetOrderCountCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetOrderCountCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
         }
         
-        public OrdersClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public int Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+    public partial class OrdersClient : System.ServiceModel.DuplexClientBase<OrderProcessing.ServiceReference1.IOrders>, OrderProcessing.ServiceReference1.IOrders {
+        
+        private BeginOperationDelegate onBeginAddOrderDelegate;
+        
+        private EndOperationDelegate onEndAddOrderDelegate;
+        
+        private System.Threading.SendOrPostCallback onAddOrderCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginDeleteOrderDelegate;
+        
+        private EndOperationDelegate onEndDeleteOrderDelegate;
+        
+        private System.Threading.SendOrPostCallback onDeleteOrderCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginUpdateOrderDelegate;
+        
+        private EndOperationDelegate onEndUpdateOrderDelegate;
+        
+        private System.Threading.SendOrPostCallback onUpdateOrderCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetAllOrdersDelegate;
+        
+        private EndOperationDelegate onEndGetAllOrdersDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetAllOrdersCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetOrderCountDelegate;
+        
+        private EndOperationDelegate onEndGetOrderCountDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetOrderCountCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginSubscribeDelegate;
+        
+        private EndOperationDelegate onEndSubscribeDelegate;
+        
+        private System.Threading.SendOrPostCallback onSubscribeCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginUnSubscribeDelegate;
+        
+        private EndOperationDelegate onEndUnSubscribeDelegate;
+        
+        private System.Threading.SendOrPostCallback onUnSubscribeCompletedDelegate;
+        
+        public OrdersClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
         }
         
-        public OrdersClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public OrdersClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
         }
         
-        public OrdersClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
+        public OrdersClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
+        
+        public OrdersClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public OrdersClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> AddOrderCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> DeleteOrderCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> UpdateOrderCompleted;
+        
+        public event System.EventHandler<GetAllOrdersCompletedEventArgs> GetAllOrdersCompleted;
+        
+        public event System.EventHandler<GetOrderCountCompletedEventArgs> GetOrderCountCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SubscribeCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> UnSubscribeCompleted;
         
         public void AddOrder(OrderProcessingDomain.Order order) {
             base.Channel.AddOrder(order);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginAddOrder(OrderProcessingDomain.Order order, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginAddOrder(order, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndAddOrder(System.IAsyncResult result) {
+            base.Channel.EndAddOrder(result);
+        }
+        
+        private System.IAsyncResult OnBeginAddOrder(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            OrderProcessingDomain.Order order = ((OrderProcessingDomain.Order)(inValues[0]));
+            return this.BeginAddOrder(order, callback, asyncState);
+        }
+        
+        private object[] OnEndAddOrder(System.IAsyncResult result) {
+            this.EndAddOrder(result);
+            return null;
+        }
+        
+        private void OnAddOrderCompleted(object state) {
+            if ((this.AddOrderCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.AddOrderCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void AddOrderAsync(OrderProcessingDomain.Order order) {
+            this.AddOrderAsync(order, null);
+        }
+        
+        public void AddOrderAsync(OrderProcessingDomain.Order order, object userState) {
+            if ((this.onBeginAddOrderDelegate == null)) {
+                this.onBeginAddOrderDelegate = new BeginOperationDelegate(this.OnBeginAddOrder);
+            }
+            if ((this.onEndAddOrderDelegate == null)) {
+                this.onEndAddOrderDelegate = new EndOperationDelegate(this.OnEndAddOrder);
+            }
+            if ((this.onAddOrderCompletedDelegate == null)) {
+                this.onAddOrderCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnAddOrderCompleted);
+            }
+            base.InvokeAsync(this.onBeginAddOrderDelegate, new object[] {
+                        order}, this.onEndAddOrderDelegate, this.onAddOrderCompletedDelegate, userState);
         }
         
         public void DeleteOrder(OrderProcessingDomain.Order order) {
             base.Channel.DeleteOrder(order);
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginDeleteOrder(OrderProcessingDomain.Order order, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginDeleteOrder(order, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndDeleteOrder(System.IAsyncResult result) {
+            base.Channel.EndDeleteOrder(result);
+        }
+        
+        private System.IAsyncResult OnBeginDeleteOrder(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            OrderProcessingDomain.Order order = ((OrderProcessingDomain.Order)(inValues[0]));
+            return this.BeginDeleteOrder(order, callback, asyncState);
+        }
+        
+        private object[] OnEndDeleteOrder(System.IAsyncResult result) {
+            this.EndDeleteOrder(result);
+            return null;
+        }
+        
+        private void OnDeleteOrderCompleted(object state) {
+            if ((this.DeleteOrderCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.DeleteOrderCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void DeleteOrderAsync(OrderProcessingDomain.Order order) {
+            this.DeleteOrderAsync(order, null);
+        }
+        
+        public void DeleteOrderAsync(OrderProcessingDomain.Order order, object userState) {
+            if ((this.onBeginDeleteOrderDelegate == null)) {
+                this.onBeginDeleteOrderDelegate = new BeginOperationDelegate(this.OnBeginDeleteOrder);
+            }
+            if ((this.onEndDeleteOrderDelegate == null)) {
+                this.onEndDeleteOrderDelegate = new EndOperationDelegate(this.OnEndDeleteOrder);
+            }
+            if ((this.onDeleteOrderCompletedDelegate == null)) {
+                this.onDeleteOrderCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnDeleteOrderCompleted);
+            }
+            base.InvokeAsync(this.onBeginDeleteOrderDelegate, new object[] {
+                        order}, this.onEndDeleteOrderDelegate, this.onDeleteOrderCompletedDelegate, userState);
+        }
+        
+        public void UpdateOrder(OrderProcessingDomain.Order order) {
+            base.Channel.UpdateOrder(order);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginUpdateOrder(OrderProcessingDomain.Order order, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginUpdateOrder(order, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndUpdateOrder(System.IAsyncResult result) {
+            base.Channel.EndUpdateOrder(result);
+        }
+        
+        private System.IAsyncResult OnBeginUpdateOrder(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            OrderProcessingDomain.Order order = ((OrderProcessingDomain.Order)(inValues[0]));
+            return this.BeginUpdateOrder(order, callback, asyncState);
+        }
+        
+        private object[] OnEndUpdateOrder(System.IAsyncResult result) {
+            this.EndUpdateOrder(result);
+            return null;
+        }
+        
+        private void OnUpdateOrderCompleted(object state) {
+            if ((this.UpdateOrderCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.UpdateOrderCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void UpdateOrderAsync(OrderProcessingDomain.Order order) {
+            this.UpdateOrderAsync(order, null);
+        }
+        
+        public void UpdateOrderAsync(OrderProcessingDomain.Order order, object userState) {
+            if ((this.onBeginUpdateOrderDelegate == null)) {
+                this.onBeginUpdateOrderDelegate = new BeginOperationDelegate(this.OnBeginUpdateOrder);
+            }
+            if ((this.onEndUpdateOrderDelegate == null)) {
+                this.onEndUpdateOrderDelegate = new EndOperationDelegate(this.OnEndUpdateOrder);
+            }
+            if ((this.onUpdateOrderCompletedDelegate == null)) {
+                this.onUpdateOrderCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnUpdateOrderCompleted);
+            }
+            base.InvokeAsync(this.onBeginUpdateOrderDelegate, new object[] {
+                        order}, this.onEndUpdateOrderDelegate, this.onUpdateOrderCompletedDelegate, userState);
+        }
+        
         public OrderProcessingDomain.Order[] GetAllOrders() {
             return base.Channel.GetAllOrders();
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetAllOrders(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetAllOrders(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public OrderProcessingDomain.Order[] EndGetAllOrders(System.IAsyncResult result) {
+            return base.Channel.EndGetAllOrders(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetAllOrders(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginGetAllOrders(callback, asyncState);
+        }
+        
+        private object[] OnEndGetAllOrders(System.IAsyncResult result) {
+            OrderProcessingDomain.Order[] retVal = this.EndGetAllOrders(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetAllOrdersCompleted(object state) {
+            if ((this.GetAllOrdersCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetAllOrdersCompleted(this, new GetAllOrdersCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetAllOrdersAsync() {
+            this.GetAllOrdersAsync(null);
+        }
+        
+        public void GetAllOrdersAsync(object userState) {
+            if ((this.onBeginGetAllOrdersDelegate == null)) {
+                this.onBeginGetAllOrdersDelegate = new BeginOperationDelegate(this.OnBeginGetAllOrders);
+            }
+            if ((this.onEndGetAllOrdersDelegate == null)) {
+                this.onEndGetAllOrdersDelegate = new EndOperationDelegate(this.OnEndGetAllOrders);
+            }
+            if ((this.onGetAllOrdersCompletedDelegate == null)) {
+                this.onGetAllOrdersCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetAllOrdersCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetAllOrdersDelegate, null, this.onEndGetAllOrdersDelegate, this.onGetAllOrdersCompletedDelegate, userState);
+        }
+        
         public int GetOrderCount() {
             return base.Channel.GetOrderCount();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetOrderCount(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetOrderCount(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public int EndGetOrderCount(System.IAsyncResult result) {
+            return base.Channel.EndGetOrderCount(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetOrderCount(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginGetOrderCount(callback, asyncState);
+        }
+        
+        private object[] OnEndGetOrderCount(System.IAsyncResult result) {
+            int retVal = this.EndGetOrderCount(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetOrderCountCompleted(object state) {
+            if ((this.GetOrderCountCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetOrderCountCompleted(this, new GetOrderCountCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetOrderCountAsync() {
+            this.GetOrderCountAsync(null);
+        }
+        
+        public void GetOrderCountAsync(object userState) {
+            if ((this.onBeginGetOrderCountDelegate == null)) {
+                this.onBeginGetOrderCountDelegate = new BeginOperationDelegate(this.OnBeginGetOrderCount);
+            }
+            if ((this.onEndGetOrderCountDelegate == null)) {
+                this.onEndGetOrderCountDelegate = new EndOperationDelegate(this.OnEndGetOrderCount);
+            }
+            if ((this.onGetOrderCountCompletedDelegate == null)) {
+                this.onGetOrderCountCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetOrderCountCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetOrderCountDelegate, null, this.onEndGetOrderCountDelegate, this.onGetOrderCountCompletedDelegate, userState);
+        }
+        
+        public void Subscribe() {
+            base.Channel.Subscribe();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginSubscribe(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginSubscribe(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndSubscribe(System.IAsyncResult result) {
+            base.Channel.EndSubscribe(result);
+        }
+        
+        private System.IAsyncResult OnBeginSubscribe(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginSubscribe(callback, asyncState);
+        }
+        
+        private object[] OnEndSubscribe(System.IAsyncResult result) {
+            this.EndSubscribe(result);
+            return null;
+        }
+        
+        private void OnSubscribeCompleted(object state) {
+            if ((this.SubscribeCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.SubscribeCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void SubscribeAsync() {
+            this.SubscribeAsync(null);
+        }
+        
+        public void SubscribeAsync(object userState) {
+            if ((this.onBeginSubscribeDelegate == null)) {
+                this.onBeginSubscribeDelegate = new BeginOperationDelegate(this.OnBeginSubscribe);
+            }
+            if ((this.onEndSubscribeDelegate == null)) {
+                this.onEndSubscribeDelegate = new EndOperationDelegate(this.OnEndSubscribe);
+            }
+            if ((this.onSubscribeCompletedDelegate == null)) {
+                this.onSubscribeCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnSubscribeCompleted);
+            }
+            base.InvokeAsync(this.onBeginSubscribeDelegate, null, this.onEndSubscribeDelegate, this.onSubscribeCompletedDelegate, userState);
+        }
+        
+        public void UnSubscribe() {
+            base.Channel.UnSubscribe();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginUnSubscribe(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginUnSubscribe(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndUnSubscribe(System.IAsyncResult result) {
+            base.Channel.EndUnSubscribe(result);
+        }
+        
+        private System.IAsyncResult OnBeginUnSubscribe(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginUnSubscribe(callback, asyncState);
+        }
+        
+        private object[] OnEndUnSubscribe(System.IAsyncResult result) {
+            this.EndUnSubscribe(result);
+            return null;
+        }
+        
+        private void OnUnSubscribeCompleted(object state) {
+            if ((this.UnSubscribeCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.UnSubscribeCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void UnSubscribeAsync() {
+            this.UnSubscribeAsync(null);
+        }
+        
+        public void UnSubscribeAsync(object userState) {
+            if ((this.onBeginUnSubscribeDelegate == null)) {
+                this.onBeginUnSubscribeDelegate = new BeginOperationDelegate(this.OnBeginUnSubscribe);
+            }
+            if ((this.onEndUnSubscribeDelegate == null)) {
+                this.onEndUnSubscribeDelegate = new EndOperationDelegate(this.OnEndUnSubscribe);
+            }
+            if ((this.onUnSubscribeCompletedDelegate == null)) {
+                this.onUnSubscribeCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnUnSubscribeCompleted);
+            }
+            base.InvokeAsync(this.onBeginUnSubscribeDelegate, null, this.onEndUnSubscribeDelegate, this.onUnSubscribeCompletedDelegate, userState);
         }
     }
 }

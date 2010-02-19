@@ -49,6 +49,12 @@
   <wsdl:message name="IOrders_DeleteOrder_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteOrderResponse" />
   </wsdl:message>
+  <wsdl:message name="IOrders_UpdateOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrder" />
+  </wsdl:message>
+  <wsdl:message name="IOrders_UpdateOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrderResponse" />
+  </wsdl:message>
   <wsdl:message name="IOrders_GetAllOrders_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllOrders" />
   </wsdl:message>
@@ -61,6 +67,27 @@
   <wsdl:message name="IOrders_GetOrderCount_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetOrderCountResponse" />
   </wsdl:message>
+  <wsdl:message name="IOrders_Subscribe_InputMessage">
+    <wsdl:part name="parameters" element="tns:Subscribe" />
+  </wsdl:message>
+  <wsdl:message name="IOrders_Subscribe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubscribeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOrders_UnSubscribe_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnSubscribe" />
+  </wsdl:message>
+  <wsdl:message name="IOrders_UnSubscribe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnSubscribeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOrders_OrderAdded_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OrderAdded" />
+  </wsdl:message>
+  <wsdl:message name="IOrders_OrderUpdated_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OrderUpdated" />
+  </wsdl:message>
+  <wsdl:message name="IOrders_OrderRemoved_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OrderRemoved" />
+  </wsdl:message>
   <wsdl:portType name="IOrders">
     <wsdl:operation name="AddOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrders/AddOrder" message="tns:IOrders_AddOrder_InputMessage" />
@@ -70,6 +97,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IOrders/DeleteOrder" message="tns:IOrders_DeleteOrder_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrders/DeleteOrderResponse" message="tns:IOrders_DeleteOrder_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="UpdateOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrders/UpdateOrder" message="tns:IOrders_UpdateOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrders/UpdateOrderResponse" message="tns:IOrders_UpdateOrder_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetAllOrders">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrders/GetAllOrders" message="tns:IOrders_GetAllOrders_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrders/GetAllOrdersResponse" message="tns:IOrders_GetAllOrders_OutputMessage" />
@@ -77,6 +108,23 @@
     <wsdl:operation name="GetOrderCount">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrders/GetOrderCount" message="tns:IOrders_GetOrderCount_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrders/GetOrderCountResponse" message="tns:IOrders_GetOrderCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Subscribe">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrders/Subscribe" message="tns:IOrders_Subscribe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrders/SubscribeResponse" message="tns:IOrders_Subscribe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UnSubscribe">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrders/UnSubscribe" message="tns:IOrders_UnSubscribe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrders/UnSubscribeResponse" message="tns:IOrders_UnSubscribe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderAdded">
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrders/OrderAdded" message="tns:IOrders_OrderAdded_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderUpdated">
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrders/OrderUpdated" message="tns:IOrders_OrderUpdated_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderRemoved">
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrders/OrderRemoved" message="tns:IOrders_OrderRemoved_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="aaaa" type="tns:IOrders">
@@ -100,6 +148,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="UpdateOrder">
+      <soap12:operation soapAction="http://tempuri.org/IOrders/UpdateOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetAllOrders">
       <soap12:operation soapAction="http://tempuri.org/IOrders/GetAllOrders" style="document" />
       <wsdl:input>
@@ -114,6 +171,42 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Subscribe">
+      <soap12:operation soapAction="http://tempuri.org/IOrders/Subscribe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnSubscribe">
+      <soap12:operation soapAction="http://tempuri.org/IOrders/UnSubscribe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderAdded">
+      <soap12:operation soapAction="http://tempuri.org/IOrders/OrderAdded" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderUpdated">
+      <soap12:operation soapAction="http://tempuri.org/IOrders/OrderUpdated" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderRemoved">
+      <soap12:operation soapAction="http://tempuri.org/IOrders/OrderRemoved" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

@@ -13,10 +13,12 @@ namespace ConsoleServiceHost
     {
       try
       {
-        ServiceHost host = new ServiceHost(typeof(OrderService.Orders));
-        host.Open();
+        ServiceHost hostOrders = new ServiceHost(typeof(OrderService.Orders));
+        ServiceHost hostStatus = new ServiceHost(typeof(OrderService.Status));
+        hostOrders.Open();
+        hostStatus.Open();
         Console.WriteLine("Any key to stop");
-        Console.ReadKey();
+        Console.ReadLine();
       }
       catch (Exception ex)
       {
