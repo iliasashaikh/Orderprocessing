@@ -81,24 +81,36 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="OrderAdded">
+  <xs:element name="GetAllCustomers">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllCustomersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/OrderProcessingDomain" minOccurs="0" name="order" nillable="true" type="q5:Order" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/OrderProcessingDomain" minOccurs="0" name="GetAllCustomersResult" nillable="true" type="q5:ArrayOfCustomer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="OrderUpdated">
+  <xs:element name="OrderAdded">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/OrderProcessingDomain" minOccurs="0" name="order" nillable="true" type="q6:Order" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="OrderRemoved">
+  <xs:element name="OrderUpdated">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/OrderProcessingDomain" minOccurs="0" name="order" nillable="true" type="q7:Order" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OrderRemoved">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/OrderProcessingDomain" minOccurs="0" name="order" nillable="true" type="q8:Order" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

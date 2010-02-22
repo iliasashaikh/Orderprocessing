@@ -10,8 +10,7 @@ using System.Runtime.Serialization;
 namespace OrderProcessingDomain
 {
   [DataContract]
-  [KnownType(typeof(Customer))]
-  [KnownType(typeof(Employee))]
+  [ServiceKnownType(typeof(Customer))]
   public class Order
   {
     [DataMember]
@@ -126,7 +125,7 @@ namespace OrderProcessingDomain
     [DataMember]
     public virtual byte[] Photo { get; set; }
 
-    [DataMember]
+    //[DataMember]
     public virtual IList<Order> Orders { get; set; }
 
     public override bool Equals(object obj)
@@ -176,7 +175,7 @@ namespace OrderProcessingDomain
     [DataMember]
     public virtual string Fax { get; set; }
 
-    [DataMember]
+    //[DataMember]
     public virtual IList<Order> Orders { get; set; }
 
     public override bool Equals(object obj)

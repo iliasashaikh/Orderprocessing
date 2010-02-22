@@ -159,7 +159,8 @@ namespace OrderService
 
     public IEnumerable<Customer> GetAllCustomers()
     {
-      return Repository<Customer>.All(OperationContext.Current.SessionId);
+      IOC.RegisterComponents();
+      return Repository<Customer>.All(Thread.CurrentContext.ContextID);
     }
 
     #endregion

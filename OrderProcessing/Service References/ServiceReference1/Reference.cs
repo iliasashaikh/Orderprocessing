@@ -70,6 +70,14 @@ namespace OrderProcessing.ServiceReference1 {
         System.IAsyncResult BeginUnSubscribe(System.AsyncCallback callback, object asyncState);
         
         void EndUnSubscribe(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrders/GetAllCustomers", ReplyAction="http://tempuri.org/IOrders/GetAllCustomersResponse")]
+        OrderProcessingDomain.Customer[] GetAllCustomers();
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IOrders/GetAllCustomers", ReplyAction="http://tempuri.org/IOrders/GetAllCustomersResponse")]
+        System.IAsyncResult BeginGetAllCustomers(System.AsyncCallback callback, object asyncState);
+        
+        OrderProcessingDomain.Customer[] EndGetAllCustomers(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -144,6 +152,25 @@ namespace OrderProcessing.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+    public partial class GetAllCustomersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetAllCustomersCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public OrderProcessingDomain.Customer[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((OrderProcessingDomain.Customer[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
     public partial class OrdersClient : System.ServiceModel.DuplexClientBase<OrderProcessing.ServiceReference1.IOrders>, OrderProcessing.ServiceReference1.IOrders {
         
         private BeginOperationDelegate onBeginAddOrderDelegate;
@@ -188,6 +215,12 @@ namespace OrderProcessing.ServiceReference1 {
         
         private System.Threading.SendOrPostCallback onUnSubscribeCompletedDelegate;
         
+        private BeginOperationDelegate onBeginGetAllCustomersDelegate;
+        
+        private EndOperationDelegate onEndGetAllCustomersDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetAllCustomersCompletedDelegate;
+        
         public OrdersClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {
         }
@@ -221,6 +254,8 @@ namespace OrderProcessing.ServiceReference1 {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SubscribeCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> UnSubscribeCompleted;
+        
+        public event System.EventHandler<GetAllCustomersCompletedEventArgs> GetAllCustomersCompleted;
         
         public void AddOrder(OrderProcessingDomain.Order order) {
             base.Channel.AddOrder(order);
@@ -557,6 +592,54 @@ namespace OrderProcessing.ServiceReference1 {
                 this.onUnSubscribeCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnUnSubscribeCompleted);
             }
             base.InvokeAsync(this.onBeginUnSubscribeDelegate, null, this.onEndUnSubscribeDelegate, this.onUnSubscribeCompletedDelegate, userState);
+        }
+        
+        public OrderProcessingDomain.Customer[] GetAllCustomers() {
+            return base.Channel.GetAllCustomers();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetAllCustomers(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetAllCustomers(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public OrderProcessingDomain.Customer[] EndGetAllCustomers(System.IAsyncResult result) {
+            return base.Channel.EndGetAllCustomers(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetAllCustomers(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginGetAllCustomers(callback, asyncState);
+        }
+        
+        private object[] OnEndGetAllCustomers(System.IAsyncResult result) {
+            OrderProcessingDomain.Customer[] retVal = this.EndGetAllCustomers(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetAllCustomersCompleted(object state) {
+            if ((this.GetAllCustomersCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetAllCustomersCompleted(this, new GetAllCustomersCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetAllCustomersAsync() {
+            this.GetAllCustomersAsync(null);
+        }
+        
+        public void GetAllCustomersAsync(object userState) {
+            if ((this.onBeginGetAllCustomersDelegate == null)) {
+                this.onBeginGetAllCustomersDelegate = new BeginOperationDelegate(this.OnBeginGetAllCustomers);
+            }
+            if ((this.onEndGetAllCustomersDelegate == null)) {
+                this.onEndGetAllCustomersDelegate = new EndOperationDelegate(this.OnEndGetAllCustomers);
+            }
+            if ((this.onGetAllCustomersCompletedDelegate == null)) {
+                this.onGetAllCustomersCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetAllCustomersCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetAllCustomersDelegate, null, this.onEndGetAllCustomersDelegate, this.onGetAllCustomersCompletedDelegate, userState);
         }
     }
 }

@@ -105,6 +105,11 @@ namespace OrderProcessing
     {
      
     }
+
+    private void btnGetAllCustomers_Click(object sender, EventArgs e)
+    {
+      Customer[] customers = _ordRef.GetAllCustomers();
+    }
   }
 
   [CallbackBehavior(ConcurrencyMode=ConcurrencyMode.Multiple)]
@@ -181,5 +186,7 @@ namespace OrderProcessing
     }
 
     #endregion
+
+   
   }
 }

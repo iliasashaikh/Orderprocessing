@@ -42,8 +42,8 @@ namespace OrderProcessingDomain
       Map(x => x.ShipPostalCode);
       Map(x => x.ShipRegion);
       Map(x => x.Shipvia);
-      References(x => x.Customer).Column("CustomerId").Cascade.SaveUpdate();
-      References(x => x.Employee).Column("EmployeeId").Cascade.SaveUpdate();
+      References(x => x.Customer).Column("CustomerId").Cascade.SaveUpdate().Not.LazyLoad();
+      References(x => x.Employee).Column("EmployeeId").Cascade.SaveUpdate().Not.LazyLoad();
     }
   }
 

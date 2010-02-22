@@ -5,7 +5,6 @@
     <xs:sequence>
       <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CustomFields" nillable="true" type="q1:ArrayOfKeyValueOfanyTypeanyType" />
       <xs:element minOccurs="0" name="Customer" nillable="true" type="tns:Customer" />
-      <xs:element minOccurs="0" name="Employee" nillable="true" type="tns:Employee" />
       <xs:element minOccurs="0" name="Freight" type="xs:decimal" />
       <xs:element minOccurs="0" name="OrderId" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="RequiredDate" nillable="true" type="xs:dateTime" />
@@ -30,7 +29,6 @@
       <xs:element minOccurs="0" name="Country" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CustomerId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Fax" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Orders" nillable="true" type="tns:ArrayOfOrder" />
       <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PostalCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Region" nillable="true" type="xs:string" />
@@ -43,27 +41,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfOrder" nillable="true" type="tns:ArrayOfOrder" />
-  <xs:complexType name="Employee">
+  <xs:complexType name="ArrayOfCustomer">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="BirthDate" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Country" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="EmployeeId" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="Extension" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="HireDate" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="HomePhone" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Orders" nillable="true" type="tns:ArrayOfOrder" />
-      <xs:element minOccurs="0" name="Photo" nillable="true" type="xs:base64Binary" />
-      <xs:element minOccurs="0" name="PhotoPath" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PostalCode" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Region" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ReportsTo" nillable="true" type="tns:Employee" />
-      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="TitleOfCourtesy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Customer" nillable="true" type="tns:Customer" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="Employee" nillable="true" type="tns:Employee" />
+  <xs:element name="ArrayOfCustomer" nillable="true" type="tns:ArrayOfCustomer" />
 </xs:schema>

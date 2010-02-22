@@ -83,6 +83,12 @@
   <wsdl:message name="IOrders_UnSubscribe_OutputMessage">
     <wsdl:part name="parameters" element="tns:UnSubscribeResponse" />
   </wsdl:message>
+  <wsdl:message name="IOrders_GetAllCustomers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCustomers" />
+  </wsdl:message>
+  <wsdl:message name="IOrders_GetAllCustomers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCustomersResponse" />
+  </wsdl:message>
   <wsdl:message name="IOrders_OrderAdded_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:OrderAdded" />
   </wsdl:message>
@@ -120,6 +126,10 @@
     <wsdl:operation name="UnSubscribe">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrders/UnSubscribe" message="tns:IOrders_UnSubscribe_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrders/UnSubscribeResponse" message="tns:IOrders_UnSubscribe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCustomers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrders/GetAllCustomers" message="tns:IOrders_GetAllCustomers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrders/GetAllCustomersResponse" message="tns:IOrders_GetAllCustomers_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="OrderAdded">
       <wsdl:output wsaw:Action="http://tempuri.org/IOrders/OrderAdded" message="tns:IOrders_OrderAdded_OutputCallbackMessage" />
@@ -191,6 +201,15 @@
     </wsdl:operation>
     <wsdl:operation name="UnSubscribe">
       <soap12:operation soapAction="http://tempuri.org/IOrders/UnSubscribe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCustomers">
+      <soap12:operation soapAction="http://tempuri.org/IOrders/GetAllCustomers" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
