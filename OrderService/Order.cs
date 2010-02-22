@@ -153,5 +153,15 @@ namespace OrderService
     }
 
     #endregion
+
+    #region IOrders Members
+
+
+    public IEnumerable<Customer> GetAllCustomers()
+    {
+      return Repository<Customer>.All(OperationContext.Current.SessionId);
+    }
+
+    #endregion
   }
 }

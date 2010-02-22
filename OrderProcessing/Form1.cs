@@ -23,10 +23,17 @@ namespace OrderProcessing
     public Form1()
     {
       InitializeComponent();
-      _orderCallbackHandler = new OrderCallbackHandler(this);
-      _ordRef = new OrderProcessing.ServiceReference1.OrdersClient(new System.ServiceModel.InstanceContext(_orderCallbackHandler), "orderTcpBinding");
-      _statusRef = new OrderProcessing.OrderStatusService.StatusClient();
-      _ordRef.Subscribe();
+      try
+      {
+        _orderCallbackHandler = new OrderCallbackHandler(this);
+        _ordRef = new OrderProcessing.ServiceReference1.OrdersClient(new System.ServiceModel.InstanceContext(_orderCallbackHandler));
+        _statusRef = new OrderProcessing.OrderStatusService.StatusClient();
+        _ordRef.Subscribe();
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
+      }
     }
 
     internal void GetAllOrders()
@@ -43,7 +50,7 @@ namespace OrderProcessing
           }
           catch (Exception ex)
           {
-            Console.WriteLine(ex.Message);
+            MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
           }
         }
       );

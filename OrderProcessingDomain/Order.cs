@@ -10,17 +10,19 @@ using System.Runtime.Serialization;
 namespace OrderProcessingDomain
 {
   [DataContract]
+  [KnownType(typeof(Customer))]
+  [KnownType(typeof(Employee))]
   public class Order
   {
     [DataMember]
     public virtual int? OrderId{get;set;}
     
     [NotNull]
-    //[DataMember]
+    [DataMember]
     public virtual Customer Customer { get; set; }
 
     [NotNull]
-    //[DataMember]
+    [DataMember]
     public virtual Employee Employee { get; set; }
 
     [DataMember]

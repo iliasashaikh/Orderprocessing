@@ -34,18 +34,17 @@
       this.btnSubscribe = new System.Windows.Forms.Button();
       this.statusStrip1 = new System.Windows.Forms.StatusStrip();
       this.toolStripStatusLabel_OrderStatus = new System.Windows.Forms.ToolStripStatusLabel();
-      this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+      this.panel1 = new System.Windows.Forms.Panel();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
       this.statusStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
       // button1
       // 
-      this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
-      this.button1.Location = new System.Drawing.Point(12, 330);
+      this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.button1.Location = new System.Drawing.Point(0, 541);
       this.button1.Name = "button1";
-      this.button1.Size = new System.Drawing.Size(75, 23);
+      this.button1.Size = new System.Drawing.Size(79, 23);
       this.button1.TabIndex = 0;
       this.button1.Text = "Show All";
       this.button1.UseVisualStyleBackColor = true;
@@ -60,17 +59,16 @@
       this.dataGridView1.Location = new System.Drawing.Point(0, 12);
       this.dataGridView1.Name = "dataGridView1";
       this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.dataGridView1.Size = new System.Drawing.Size(529, 303);
+      this.dataGridView1.Size = new System.Drawing.Size(740, 294);
       this.dataGridView1.TabIndex = 1;
       this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
       // 
       // btnDelete
       // 
-      this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
-      this.btnDelete.Location = new System.Drawing.Point(116, 330);
+      this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.btnDelete.Location = new System.Drawing.Point(104, 541);
       this.btnDelete.Name = "btnDelete";
-      this.btnDelete.Size = new System.Drawing.Size(119, 23);
+      this.btnDelete.Size = new System.Drawing.Size(123, 23);
       this.btnDelete.TabIndex = 2;
       this.btnDelete.Text = "Delete Selected";
       this.btnDelete.UseVisualStyleBackColor = true;
@@ -78,24 +76,23 @@
       // 
       // btnSubscribe
       // 
-      this.btnSubscribe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
-      this.btnSubscribe.Location = new System.Drawing.Point(262, 330);
+      this.btnSubscribe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.btnSubscribe.Location = new System.Drawing.Point(250, 541);
       this.btnSubscribe.Name = "btnSubscribe";
-      this.btnSubscribe.Size = new System.Drawing.Size(77, 23);
+      this.btnSubscribe.Size = new System.Drawing.Size(81, 23);
       this.btnSubscribe.TabIndex = 3;
       this.btnSubscribe.Text = "Subscribe";
       this.btnSubscribe.UseVisualStyleBackColor = true;
+      this.btnSubscribe.Visible = false;
       this.btnSubscribe.Click += new System.EventHandler(this.btnSubscribe_Click);
       // 
       // statusStrip1
       // 
       this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel_OrderStatus,
-            this.toolStripStatusLabel1});
-      this.statusStrip1.Location = new System.Drawing.Point(0, 382);
+            this.toolStripStatusLabel_OrderStatus});
+      this.statusStrip1.Location = new System.Drawing.Point(0, 567);
       this.statusStrip1.Name = "statusStrip1";
-      this.statusStrip1.Size = new System.Drawing.Size(528, 22);
+      this.statusStrip1.Size = new System.Drawing.Size(739, 22);
       this.statusStrip1.TabIndex = 4;
       this.statusStrip1.Text = "statusStrip1";
       // 
@@ -104,17 +101,19 @@
       this.toolStripStatusLabel_OrderStatus.Name = "toolStripStatusLabel_OrderStatus";
       this.toolStripStatusLabel_OrderStatus.Size = new System.Drawing.Size(0, 17);
       // 
-      // toolStripStatusLabel1
+      // panel1
       // 
-      this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-      this.toolStripStatusLabel1.Size = new System.Drawing.Size(109, 17);
-      this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+      this.panel1.Location = new System.Drawing.Point(0, 312);
+      this.panel1.Name = "panel1";
+      this.panel1.Size = new System.Drawing.Size(739, 213);
+      this.panel1.TabIndex = 5;
       // 
       // Form1
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(528, 404);
+      this.ClientSize = new System.Drawing.Size(739, 589);
+      this.Controls.Add(this.panel1);
       this.Controls.Add(this.statusStrip1);
       this.Controls.Add(this.btnSubscribe);
       this.Controls.Add(this.btnDelete);
@@ -138,7 +137,7 @@
     private System.Windows.Forms.Button btnSubscribe;
     private System.Windows.Forms.StatusStrip statusStrip1;
     protected internal System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_OrderStatus;
-    private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+    private System.Windows.Forms.Panel panel1;
   }
 }
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="T8zkOhUNMWozI/pKmuU+/SmYpXU=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="QT7bdII0y77G+gDfxl1aDXCvAb8=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="netTcpBinding" name="aaaa">
+    <bindingConfiguration bindingType="netTcpBinding" name="OrderService">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>aaaa</serializedValue>
+          <serializedValue>OrderService</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>00:01:00</serializedValue>
@@ -118,7 +118,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="aaaa" contract="ServiceReference1.IOrders" bindingType="netTcpBinding" address="net.tcp://localhost:8732/Design_Time_Addresses/OrderService/Order/" bindingConfiguration="aaaa">
+    <endpoint name="OrderService" contract="ServiceReference1.IOrders" bindingType="netTcpBinding" address="net.tcp://localhost:8732/Design_Time_Addresses/OrderService/Order/" bindingConfiguration="OrderService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>net.tcp://localhost:8732/Design_Time_Addresses/OrderService/Order/</serializedValue>
@@ -130,7 +130,7 @@
           <serializedValue>netTcpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>aaaa</serializedValue>
+          <serializedValue>OrderService</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>ServiceReference1.IOrders</serializedValue>
@@ -193,7 +193,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>aaaa</serializedValue>
+          <serializedValue>OrderService</serializedValue>
         </property>
       </properties>
     </endpoint>

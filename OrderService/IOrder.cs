@@ -35,6 +35,9 @@ namespace OrderService
 
     [OperationContract]
     void UnSubscribe();
+
+    [OperationContract]
+    IEnumerable<Customer> GetAllCustomers();
   }
 
   public interface IOrderServiceCallback
