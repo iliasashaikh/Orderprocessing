@@ -50,6 +50,7 @@ namespace OrderProcessing.Tests
     const string REPOSITORY_FACTORY = "repfactory";
 
     [Test]
+    [Ignore]
     public void SetupContainerUsingWindsor()
     {
       IWindsorContainer _container = new WindsorContainer();
@@ -77,12 +78,8 @@ namespace OrderProcessing.Tests
     {
       IOC.RegisterComponents();
       var orders = Repository<Order>.All(this);
-      var orderDetails = Repository<OrderDetails>.Where(x => x.OrderId == 10252,this);
-      OrderDetails det = orderDetails.First();
-      var det1 = Repository<OrderDetails>.Get(new OrderDetails() {OrderId=10252, ProductId=det.ProductId}, this);
       Assert.Greater(orders.Count(), 0);
-      DACManager.CloseSession(this);
-      var orderCount = Repository<Order>.Count(this);
+      //DACManager.CloseSession(this);
     }
 
 
@@ -101,6 +98,14 @@ namespace OrderProcessing.Tests
       Assert.That(countBefore + 1, Is.EqualTo(orders.Count()));
     }
 
+    [Test]
+    public void Test_AddOrderDetails()
+    {
+      IOC.RegisterComponents();
+      Order order = Repository<Order>.All(this).First();
+      OrderDetails ordDetail = new OrderDetails() { Discount = 0, ParentOrder = order, OrderId = order.OrderId.Value, ProductId = 1, Quantity = 1 };
+      Repository<OrderDetails>.Save(ordDetail, this);
+    }
 
     void ShowError(Exception ex)
     {

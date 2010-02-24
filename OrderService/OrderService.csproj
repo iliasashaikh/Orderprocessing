@@ -140,13 +140,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandService\AddOrderCommand.cs" />
     <Compile Include="CommandService\CommandService.cs" />
-    <Compile Include="CommandService\ICommand.cs" />
     <Compile Include="CommandService\ICommandService.cs" />
-    <Compile Include="CommandService\CommandController.cs" />
-    <Compile Include="CommandService\RemoveOrderCommand.cs" />
-    <Compile Include="CommandService\UpdateOrderCommand.cs" />
     <Compile Include="IOrder.cs" />
     <Compile Include="IService1.cs" />
     <Compile Include="IStatus.cs" />
@@ -156,7 +151,7 @@
     <Compile Include="Status.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App3.config" />
     <None Include="App2.config" />
     <None Include="App1.config" />
   </ItemGroup>

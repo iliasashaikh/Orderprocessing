@@ -143,6 +143,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AddOrderCommand.cs" />
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\RemoveOrderCommand.cs" />
+    <Compile Include="Commands\UpdateOrderCommand.cs" />
     <Compile Include="DataAccessContext\DACManager.cs" />
     <Compile Include="DataAccessContext\NHDataAccessContext.cs" />
     <Compile Include="DataAccessContext\ObjectDataAccessContext.cs" />

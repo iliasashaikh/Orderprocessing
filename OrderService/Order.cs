@@ -14,7 +14,7 @@ namespace OrderService
 {
   // NOTE: If you change the class name "Order" here, you must also update the reference to "Order" in App.config.
   [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple,InstanceContextMode=InstanceContextMode.PerCall)]
-  public class Orders : IOrders
+  public class OrderService : IOrders
   {
     static List<IOrderServiceCallback> _subscriberList = new List<IOrderServiceCallback>();
   
@@ -77,6 +77,7 @@ namespace OrderService
 
     public int GetOrderCount()
     {
+      IOC.RegisterComponents();
       return Repository<Order>.Count(Thread.CurrentContext.ContextID);
     }
 
