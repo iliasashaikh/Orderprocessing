@@ -25,7 +25,7 @@ namespace OrderProcessingDomain
       return repo.All();
     }
 
-    public static int Count(object owner)
+    public static long Count(object owner)
     {
       IDataAccessContext dac = DACManager.GetCurrentSession(owner);
       IRepository<T> repo = GetRepositoryFromContainer();
@@ -81,5 +81,10 @@ namespace OrderProcessingDomain
     }
 
     #endregion
+
+    public static T First(object owner)
+    {
+      throw new NotImplementedException();
+    }
   }
 }

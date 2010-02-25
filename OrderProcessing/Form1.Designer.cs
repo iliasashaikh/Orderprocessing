@@ -56,10 +56,10 @@
                   | System.Windows.Forms.AnchorStyles.Left)
                   | System.Windows.Forms.AnchorStyles.Right)));
       this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.dataGridView1.Location = new System.Drawing.Point(0, 12);
+      this.dataGridView1.Location = new System.Drawing.Point(3, 12);
       this.dataGridView1.Name = "dataGridView1";
       this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.dataGridView1.Size = new System.Drawing.Size(740, 321);
+      this.dataGridView1.Size = new System.Drawing.Size(504, 321);
       this.dataGridView1.TabIndex = 1;
       this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
       // 
@@ -92,7 +92,7 @@
             this.toolStripStatusLabel_OrderStatus});
       this.statusStrip1.Location = new System.Drawing.Point(0, 365);
       this.statusStrip1.Name = "statusStrip1";
-      this.statusStrip1.Size = new System.Drawing.Size(739, 22);
+      this.statusStrip1.Size = new System.Drawing.Size(507, 22);
       this.statusStrip1.TabIndex = 4;
       this.statusStrip1.Text = "statusStrip1";
       // 
@@ -115,7 +115,7 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(739, 387);
+      this.ClientSize = new System.Drawing.Size(507, 387);
       this.Controls.Add(this.btnGetAllCustomers);
       this.Controls.Add(this.statusStrip1);
       this.Controls.Add(this.btnSubscribe);

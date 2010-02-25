@@ -1,27 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using NHibernate.Linq;
+
+using Castle.MicroKernel.Registration;
+using Castle.Windsor;
+
 using NUnit.Framework;
-using Spring.Core;
+
+using OrderProcessingDomain;
+
 using Spring.Context;
 using Spring.Context.Support;
-using OrderProcessingDomain;
-using System.Diagnostics;
-using Castle.Core;
-using Castle.MicroKernel;
-using Castle.Windsor;
-using Castle.DynamicProxy;
-using Castle.MicroKernel.Registration;
-using OrderProcessingDomain;
 
 namespace OrderProcessing.Tests
 {
   [TestFixture]
   public class OrderProcessTestForIOC
   {
-    [Test]
+		#region Static fields (4)
+		const string DAC_MANAGER = "dacmanager";
+		const string NHDAC = "nhdac";
+		const string OBJECT_DAC = "objectdac";
+		const string REPOSITORY_FACTORY = "repfactory";
+		#endregion
+
+		#region Methods (6)
+		[Test]
     [Ignore]
     public void SetupContainerUsingSpring()
     {
@@ -43,13 +47,8 @@ namespace OrderProcessing.Tests
         throw;
       }
     }
-    
-    const string NHDAC = "nhdac";
-    const string OBJECT_DAC = "objectdac";
-    const string DAC_MANAGER = "dacmanager";
-    const string REPOSITORY_FACTORY = "repfactory";
 
-    [Test]
+		[Test]
     [Ignore]
     public void SetupContainerUsingWindsor()
     {
@@ -73,17 +72,27 @@ namespace OrderProcessing.Tests
       var objNHRepo1 = _container.Resolve<IRepository<Order>>("nhrep1");
     }
 
-    [Test]
-    public void Test_GetAllOrdersUsingDAC()
+		void ShowError(Exception ex)
     {
-      IOC.RegisterComponents();
-      var orders = Repository<Order>.All(this);
-      Assert.Greater(orders.Count(), 0);
-      //DACManager.CloseSession(this);
+      Debug.WriteLine(ex.Message);
+      Debug.WriteLine(ex.StackTrace);
+      if (ex.InnerException != null)
+      {
+        Debug.WriteLine("---------------------");
+        ShowError(ex.InnerException);
+      }
     }
 
+		[Test]
+    public void Test_AddOrderDetails()
+    {
+      IOC.RegisterComponents();
+      Order order = Repository<Order>.All(this).First();
+      OrderDetails ordDetail = new OrderDetails() { Discount = 0, ParentOrder = order, OrderId = order.OrderId.Value, ProductId = 1, Quantity = 1 };
+      Repository<OrderDetails>.Save(ordDetail, this);
+    }
 
-    /// <summary>
+		/// <summary>
     /// Test_s the add order in A transaction using DAC.
     /// </summary>
     [Test]
@@ -98,24 +107,14 @@ namespace OrderProcessing.Tests
       Assert.That(countBefore + 1, Is.EqualTo(orders.Count()));
     }
 
-    [Test]
-    public void Test_AddOrderDetails()
+		[Test]
+    public void Test_GetAllOrdersUsingDAC()
     {
       IOC.RegisterComponents();
-      Order order = Repository<Order>.All(this).First();
-      OrderDetails ordDetail = new OrderDetails() { Discount = 0, ParentOrder = order, OrderId = order.OrderId.Value, ProductId = 1, Quantity = 1 };
-      Repository<OrderDetails>.Save(ordDetail, this);
+      var orders = Repository<Order>.All(this);
+      Assert.Greater(orders.Count(), 0);
+      //DACManager.CloseSession(this);
     }
-
-    void ShowError(Exception ex)
-    {
-      Debug.WriteLine(ex.Message);
-      Debug.WriteLine(ex.StackTrace);
-      if (ex.InnerException != null)
-      {
-        Debug.WriteLine("---------------------");
-        ShowError(ex.InnerException);
-      }
-    }
+		#endregion
   }
 }

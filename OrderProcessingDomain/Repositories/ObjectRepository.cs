@@ -130,6 +130,16 @@ namespace OrderProcessingDomain
     }
 
     #endregion
+
+    #region IRepository<T> Members
+
+
+    long IRepository<T>.Count()
+    {
+      throw new NotImplementedException();
+    }
+
+    #endregion
   }
 
 }

@@ -28,7 +28,7 @@ namespace OrderService
     IEnumerable<Order> GetAllOrders();
 
     [OperationContract]
-    int GetOrderCount();
+    long GetOrderCount();
 
     [OperationContract]
     void Subscribe();

@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.Text;
 using OrderProcessingDomain;
 using System.Threading;
+using OrderService;
 
 namespace OrderProcessingDomain
 {

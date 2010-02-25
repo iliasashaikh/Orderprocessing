@@ -37,16 +37,16 @@ namespace OrderProcessing.Tests
     void TestDeleteOrderAndUndo()
     {
       OrderService.OrderService service = new OrderService.OrderService();
-      int numOrders = service.GetOrderCount();
+      long numOrders = service.GetOrderCount();
       var allOrders = service.GetAllOrders();
-      Order order = allOrders.ElementAt(new Random().Next(0, numOrders - 1));
+      Order order = allOrders.ElementAt(new Random().Next(0, (int)numOrders - 1));
       //Order order = allOrders.Where(x => x.OrderId == 10680).First();
 
       RemoveOrderCommand remCommand = new RemoveOrderCommand(order);
       CommandService commandService = new CommandService();
       commandService.ExecuteCommand(remCommand);
       commandService.Undo();
-      int numOrdersAfter = service.GetOrderCount();
+      long numOrdersAfter = service.GetOrderCount();
       Assert.That(numOrdersAfter, Is.EqualTo(numOrders));
     }
 

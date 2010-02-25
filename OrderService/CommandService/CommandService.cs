@@ -38,7 +38,7 @@ namespace OrderService
 
     Stack<ICommand> GetCommandStack()
     {
-      string sessionId = GetContextId();
+      string sessionId = Utils.GetContextId();
 
       if (!_clientCommands.Keys.Contains(sessionId))
         _clientCommands.Add(sessionId, new Stack<ICommand>());
@@ -48,13 +48,7 @@ namespace OrderService
       return commandStack;
     }
 
-    string GetContextId()
-    {
-      if (OperationContext.Current == null)
-        return Thread.CurrentContext.ContextID.ToString();
-      else
-        return OperationContext.Current.SessionId;
-    }
+   
 
 
     #endregion

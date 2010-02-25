@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ServiceModel;
-
+using OrderProcessingDomain;
 
 namespace ConsoleServiceHost
 {
@@ -14,7 +14,7 @@ namespace ConsoleServiceHost
       try
       {
         ServiceHost hostOrders = new ServiceHost(typeof(OrderService.OrderService));
-        ServiceHost hostStatus = new ServiceHost(typeof(OrderService.Status));
+        ServiceHost hostStatus = new ServiceHost(typeof(OrderProcessingDomain.Status));
         ServiceHost hostCommand = new ServiceHost(typeof(OrderService.CommandService));
         hostCommand.Open();
         hostOrders.Open();

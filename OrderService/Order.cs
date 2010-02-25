@@ -75,7 +75,7 @@ namespace OrderService
       return null;
     }
 
-    public int GetOrderCount()
+    public long GetOrderCount()
     {
       IOC.RegisterComponents();
       return Repository<Order>.Count(Thread.CurrentContext.ContextID);

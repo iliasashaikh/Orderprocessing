@@ -91,7 +91,7 @@ namespace OrderProcessingDomain
       }
     }
 
-    public int Count()
+    public long Count()
     {
       _dac.OpenSession();
       return _dac.Session.Linq<T>().Count();
@@ -107,5 +107,7 @@ namespace OrderProcessingDomain
     }
 
     #endregion
+
+    
   }
 }
