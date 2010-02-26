@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3769d501-6d43-4670-8ec3-29845c513740" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.tcp://localhost:8732/OrderService/CommandService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="c872360c-9be3-48c0-a2b1-8fc67d63cef1" SourceId="1" SourceUrl="net.tcp://localhost:8732/OrderService/CommandService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="937ae0bd-92f1-4921-8a31-50fbe9adc487" SourceId="1" SourceUrl="net.tcp://localhost:8732/OrderService/CommandService/mex" />
+    <MetadataFile FileName="OrderProcessingDomain.Command.xsd" MetadataType="Schema" ID="45b99cfd-3ec0-455b-8432-9ae7c664c481" SourceId="1" SourceUrl="net.tcp://localhost:8732/OrderService/CommandService/mex" />
+    <MetadataFile FileName="OrderProcessingDomain.xsd" MetadataType="Schema" ID="c1e358c8-c5aa-42b0-9cae-773e766b9f21" SourceId="1" SourceUrl="net.tcp://localhost:8732/OrderService/CommandService/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="cce06f8f-f421-4676-be11-2a9d544ac9a0" SourceId="1" SourceUrl="net.tcp://localhost:8732/OrderService/CommandService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="6dc359a9-35b9-48f3-a411-b99932bd4331" SourceId="1" SourceUrl="net.tcp://localhost:8732/OrderService/CommandService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

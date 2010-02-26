@@ -148,7 +148,23 @@
     <Compile Include="OrderProcessTestForIOC.cs" />
     <Compile Include="OrderServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryServiceTests.cs" />
     <Compile Include="Service References\CommanndServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\CustomerQueryServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\EmployeeQueryServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\OrderQueryServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -182,6 +198,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\CommanndServiceReference\" />
+    <WCFMetadataStorage Include="Service References\CustomerQueryServiceReference\" />
+    <WCFMetadataStorage Include="Service References\EmployeeQueryServiceReference\" />
+    <WCFMetadataStorage Include="Service References\OrderQueryServiceReference\" />
     <WCFMetadataStorage Include="Service References\ServiceReference1\" />
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +230,57 @@
     <None Include="Service References\CommanndServiceReference\OrderProcessingDomain.Command.xsd" />
     <None Include="Service References\CommanndServiceReference\OrderProcessingDomain.xsd" />
     <None Include="Service References\CommanndServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\CustomerQueryServiceReference\OrderProcessingDomain.xsd" />
+    <None Include="Service References\CustomerQueryServiceReference\service.wsdl" />
+    <None Include="Service References\CustomerQueryServiceReference\service.xsd" />
+    <None Include="Service References\CustomerQueryServiceReference\service1.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CustomerQueryServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CustomerQueryServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\OrderProcessingDomain.Customer.datasource" />
+    <None Include="Service References\CustomerQueryServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\EmployeeQueryServiceReference\OrderProcessingDomain.xsd" />
+    <None Include="Service References\EmployeeQueryServiceReference\service.wsdl" />
+    <None Include="Service References\EmployeeQueryServiceReference\service.xsd" />
+    <None Include="Service References\EmployeeQueryServiceReference\service1.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EmployeeQueryServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EmployeeQueryServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\OrderProcessingDomain.Employee.datasource" />
+    <None Include="Service References\EmployeeQueryServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\OrderQueryServiceReference\Arrays.xsd" />
+    <None Include="Service References\OrderQueryServiceReference\OrderProcessingDomain.xsd" />
+    <None Include="Service References\OrderQueryServiceReference\service.wsdl" />
+    <None Include="Service References\OrderQueryServiceReference\service.xsd" />
+    <None Include="Service References\OrderQueryServiceReference\service1.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\OrderQueryServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\OrderQueryServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\OrderQueryServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

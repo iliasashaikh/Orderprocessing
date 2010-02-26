@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ServiceModel;
+
 using OrderProcessingDomain;
 
 namespace OrderService.QueryService
 {
-  class CustomerQueryService : QueryServiceBase<Customer>
+  [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single, InstanceContextMode = InstanceContextMode.PerSession)]
+  public class CustomerQueryService : QueryServiceBase<Customer>, ICustomerQueryService
   {
   }
 }

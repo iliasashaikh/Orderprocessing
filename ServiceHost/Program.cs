@@ -16,9 +16,18 @@ namespace ConsoleServiceHost
         ServiceHost hostOrders = new ServiceHost(typeof(OrderService.OrderService));
         ServiceHost hostStatus = new ServiceHost(typeof(OrderProcessingDomain.Status));
         ServiceHost hostCommand = new ServiceHost(typeof(OrderService.CommandService));
+
+        ServiceHost hostQueryCustomer = new ServiceHost(typeof(OrderService.QueryService.CustomerQueryService));
+        ServiceHost hostQueryEmployee = new ServiceHost(typeof(OrderService.QueryService.EmployeeQueryService));
+        ServiceHost hostQueryOrder = new ServiceHost(typeof(OrderService.QueryService.OrderQueryService));
+
         hostCommand.Open();
-        hostOrders.Open();
-        hostStatus.Open();
+        //hostOrders.Open();
+        //hostStatus.Open();
+
+        hostQueryCustomer.Open();
+        hostQueryEmployee.Open();
+        hostQueryOrder.Open();
 
         Console.WriteLine("Any key to stop");
         Console.ReadLine();

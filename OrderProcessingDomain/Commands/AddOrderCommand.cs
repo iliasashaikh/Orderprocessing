@@ -10,12 +10,12 @@ using System.Runtime.Serialization;
 namespace OrderProcessingDomain.Command
 {
   [DataContract]
-  public class AddOrderCommand : ICommand
+  public class AddCustomerCommand : ICommand
   {
     [DataMember]
     Order _order;
 
-    public AddOrderCommand(Order order)
+    public AddCustomerCommand(Order order)
     {
       _order = order;
     }

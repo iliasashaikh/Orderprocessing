@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="df7dc3d6-5c4f-4c72-9688-3533aeb4bf02" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.tcp://localhost:8732/OrderService/OrderQueryService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="ad299763-b90f-4069-9cc8-053b3f6d001c" SourceId="1" SourceUrl="net.tcp://localhost:8732/OrderService/OrderQueryService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="e4470b22-777f-4485-9c90-7736bd1cdd64" SourceId="1" SourceUrl="net.tcp://localhost:8732/OrderService/OrderQueryService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="ae49f918-ed7f-451a-a563-2fc1a5f6a8fb" SourceId="1" SourceUrl="net.tcp://localhost:8732/OrderService/OrderQueryService/mex" />
+    <MetadataFile FileName="OrderProcessingDomain.xsd" MetadataType="Schema" ID="acae5d5a-0632-40fe-a6f3-ef79de712e2a" SourceId="1" SourceUrl="net.tcp://localhost:8732/OrderService/OrderQueryService/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="a259ec0e-ee35-4054-a801-ee9d4cb94668" SourceId="1" SourceUrl="net.tcp://localhost:8732/OrderService/OrderQueryService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

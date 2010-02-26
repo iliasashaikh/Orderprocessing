@@ -5,10 +5,15 @@ using System.Text;
 using System.ServiceModel;
 using System.Threading;
 
+using System.ServiceModel;
+using System.Runtime.Serialization;
+
 namespace OrderProcessingDomain.Command
 {
+  [DataContract]
   public class RemoveOrderCommand : ICommand
   {
+    [DataMember]
     Order _order;
     List<OrderDetails> _orderDetailsList;
 

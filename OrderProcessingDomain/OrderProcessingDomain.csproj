@@ -144,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\AddOrderCommand.cs" />
+    <Compile Include="Commands\AddCustomerCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\RemoveOrderCommand.cs" />
     <Compile Include="Commands\UpdateOrderCommand.cs" />

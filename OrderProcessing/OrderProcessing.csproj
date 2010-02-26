@@ -146,6 +146,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Command.cs" />
+    <Compile Include="Classes\Query.cs" />
+    <Compile Include="Classes\ServiceClient.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,6 +174,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucOrder.resx">
+      <DependentUpon>ucOrder.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -185,6 +191,26 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Service References\CommandServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\CustomerQueryServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\EmployeeQueryServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\OrderQueryServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\OrderStatusService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -195,11 +221,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ucCustomer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucCustomer.Designer.cs">
+      <DependentUpon>ucCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucOrder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucOrder.Designer.cs">
+      <DependentUpon>ucOrder.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\CommandServiceReference\" />
+    <WCFMetadataStorage Include="Service References\CustomerQueryServiceReference\" />
+    <WCFMetadataStorage Include="Service References\EmployeeQueryServiceReference\" />
+    <WCFMetadataStorage Include="Service References\OrderQueryServiceReference\" />
     <WCFMetadataStorage Include="Service References\OrderStatusService\" />
     <WCFMetadataStorage Include="Service References\ServiceReference1\" />
   </ItemGroup>
@@ -236,6 +278,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\DataSources\OrderProcessingDomain.Customer.datasource" />
+    <None Include="Service References\CustomerQueryServiceReference\OrderProcessingDomain.xsd" />
+    <None Include="Service References\CustomerQueryServiceReference\service.wsdl" />
+    <None Include="Service References\CustomerQueryServiceReference\service.xsd" />
+    <None Include="Service References\CustomerQueryServiceReference\service1.xsd" />
     <None Include="Service References\OrderStatusService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -245,6 +291,70 @@
     <None Include="Service References\ServiceReference1\service1.wsdl" />
     <None Include="Service References\ServiceReference1\service2.xsd" />
     <None Include="Service References\ServiceReference1\service21.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CustomerQueryServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CustomerQueryServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CustomerQueryServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\EmployeeQueryServiceReference\OrderProcessingDomain.xsd" />
+    <None Include="Service References\EmployeeQueryServiceReference\service.wsdl" />
+    <None Include="Service References\EmployeeQueryServiceReference\service.xsd" />
+    <None Include="Service References\EmployeeQueryServiceReference\service1.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EmployeeQueryServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EmployeeQueryServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\OrderProcessingDomain.Employee.datasource" />
+    <None Include="Service References\EmployeeQueryServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\OrderQueryServiceReference\Arrays.xsd" />
+    <None Include="Service References\OrderQueryServiceReference\OrderProcessingDomain.xsd" />
+    <None Include="Service References\OrderQueryServiceReference\service.wsdl" />
+    <None Include="Service References\OrderQueryServiceReference\service.xsd" />
+    <None Include="Service References\OrderQueryServiceReference\service1.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\OrderQueryServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\OrderQueryServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CommandServiceReference\Arrays.xsd" />
+    <None Include="Service References\CommandServiceReference\OrderProcessingDomain.Command.xsd" />
+    <None Include="Service References\CommandServiceReference\OrderProcessingDomain.xsd" />
+    <None Include="Service References\CommandServiceReference\service.wsdl" />
+    <None Include="Service References\CommandServiceReference\service.xsd" />
+    <None Include="Service References\CommandServiceReference\service1.xsd" />
+    <None Include="Service References\OrderQueryServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CommandServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CommandServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CommandServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
