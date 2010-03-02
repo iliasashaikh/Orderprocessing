@@ -37,4 +37,44 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="Where">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="serializedExpression" nillable="true">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:any minOccurs="0" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WhereResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/OrderProcessingDomain" minOccurs="0" name="WhereResult" nillable="true" type="q3:Customer" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WhereAll">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="serializedExpression" nillable="true">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:any minOccurs="0" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WhereAllResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/OrderProcessingDomain" minOccurs="0" name="WhereAllResult" nillable="true" type="q4:ArrayOfCustomer" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

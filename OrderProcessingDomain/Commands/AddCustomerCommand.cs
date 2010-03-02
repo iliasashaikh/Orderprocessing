@@ -10,12 +10,12 @@ using System.Runtime.Serialization;
 namespace OrderProcessingDomain.Command
 {
   [DataContract]
-  public class AddOrderCommand : ICommand
+  public class AddCustomerCommand : ICommand
   {
     [DataMember]
     Order _order;
 
-    public AddOrderCommand(Order order)
+    public AddCustomerCommand(Order order)
     {
       _order = order;
     }
@@ -37,10 +37,10 @@ namespace OrderProcessingDomain.Command
 
       if (localOrder != null)
       {
-        var orderDetails = Repository<OrderDetails>.Where(x => x.OrderId == _order.OrderId, Thread.CurrentContext.ContextID);
-        foreach (OrderDetails det in orderDetails)
+        var orderDetails = Repository<OrderDetail>.Where(x => x.ParentOrder.OrderId == _order.OrderId, Thread.CurrentContext.ContextID);
+        foreach (OrderDetail det in orderDetails)
         {
-          Repository<OrderDetails>.Remove(det, Thread.CurrentContext.ContextID);
+          Repository<OrderDetail>.Remove(det, Thread.CurrentContext.ContextID);
         }
       }
 

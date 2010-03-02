@@ -143,24 +143,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\AddOrderCommand.cs" />
+    <Compile Include="ClientQuery.cs" />
     <Compile Include="Commands\AddCustomerCommand.cs" />
+    <Compile Include="Commands\AddOrderCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\RemoveCustomerCommand.cs" />
     <Compile Include="Commands\RemoveOrderCommand.cs" />
     <Compile Include="Commands\UpdateOrderCommand.cs" />
+    <Compile Include="Domain\Customer.cs" />
     <Compile Include="DataAccessContext\DACManager.cs" />
     <Compile Include="DataAccessContext\NHDataAccessContext.cs" />
     <Compile Include="DataAccessContext\ObjectDataAccessContext.cs" />
+    <Compile Include="Domain\Employee.cs" />
+    <Compile Include="Domain\OrderDetails.cs" />
     <Compile Include="IOC.cs" />
+    <Compile Include="Domain\Products.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="NHibernateHelper.cs" />
-    <Compile Include="Order.cs" />
-    <Compile Include="OrderMap.cs" />
+    <Compile Include="Domain\Order.cs" />
+    <Compile Include="Domain\OrderMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataAccessContext\IDataAccessContext.cs" />
     <Compile Include="Repositories\NHRepository.cs" />
     <Compile Include="Repositories\ObjectRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Order.hbm.xml" />

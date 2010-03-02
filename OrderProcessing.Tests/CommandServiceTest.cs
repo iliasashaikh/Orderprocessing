@@ -10,10 +10,10 @@ using OrderService;
 namespace OrderProcessing.Tests
 {
   [TestFixture]
-  class CommandServiceTest
+  public class CommandServiceTest
   {
     [Test]
-    void TestAddOrder()
+    public void TestAddOrder()
     {
       Order order1 = new Order();
       Order order2 = new Order();
@@ -34,26 +34,79 @@ namespace OrderProcessing.Tests
       Assert.That(order3.OrderId,Is.EqualTo(deletedOrder.OrderId));
     }
 
-    void TestDeleteOrderAndUndo()
+    [Test]
+    public void TestDeleteOrderAndUndo()
     {
       OrderService.OrderService service = new OrderService.OrderService();
       long numOrders = service.GetOrderCount();
       var allOrders = service.GetAllOrders();
       Order order = allOrders.ElementAt(new Random().Next(0, (int)numOrders - 1));
-      //Order order = allOrders.Where(x => x.OrderId == 10680).First();
-
       RemoveOrderCommand remCommand = new RemoveOrderCommand(order);
       CommandService commandService = new CommandService();
       commandService.ExecuteCommand(remCommand);
-      commandService.Undo();
+      commandService.UndoCommand(remCommand);
       long numOrdersAfter = service.GetOrderCount();
       Assert.That(numOrdersAfter, Is.EqualTo(numOrders));
+    }
+
+    [Test]
+    [Category("WCFTest")]
+    public void TestDeleteOrderAndUndoUsingWCF()
+    {
+      CommanndServiceReference.CommandServiceClient commandClient = new OrderProcessing.Tests.CommanndServiceReference.CommandServiceClient();
+      OrderQueryServiceReference.OrderQueryServiceClient service = new OrderProcessing.Tests.OrderQueryServiceReference.OrderQueryServiceClient();
+      long numOrders = service.Count();
+      var allOrders = service.All();
+      Order order = allOrders.ElementAt(new Random().Next(0, (int)numOrders - 1));
+      RemoveOrderCommand remCommand = new RemoveOrderCommand(order);
+      commandClient.ExecuteCommand(remCommand);
+      commandClient.UndoCommand(remCommand);
+      long numOrdersAfter = service.Count();
+      Assert.That(numOrdersAfter, Is.EqualTo(numOrders));
+    }
+
+    [Test]
+    public void TestDeleteCustomerAndUndo()
+    {
+      OrderService.QueryService.CustomerQueryService service = new OrderService.QueryService.CustomerQueryService();
+      var customers = service.All();
+      long count = service.Count();
+
+      Customer customer = customers.ElementAt(new Random().Next(0, (int)count - 1));
+
+      RemoveCustomerCommand command = new RemoveCustomerCommand(customer);
+      CommandService commandService = new CommandService();
+      commandService.ExecuteCommand(command);
+      commandService.Undo();
+
+      long countAfter = service.Count();
+      Assert.That(count, Is.EqualTo(countAfter));
     }
 
 
     [Test]
     [Category("WCFTest")]
-    void TestAddOrderUsingService()
+    public void TestDeleteCustomerAndUndoUsingWCF()
+    {
+      CommanndServiceReference.CommandServiceClient cmdClient = new OrderProcessing.Tests.CommanndServiceReference.CommandServiceClient();
+
+      CustomerQueryServiceReference.CustomerQueryServiceClient custQueryClient = new OrderProcessing.Tests.CustomerQueryServiceReference.CustomerQueryServiceClient();
+
+      var customers = custQueryClient.All();
+      long count = custQueryClient.Count();
+      Customer customer = customers.Where(x => x.CustomerId == "YLHWC").First();
+
+      RemoveCustomerCommand command = new RemoveCustomerCommand(customer);
+      cmdClient.ExecuteCommand(command);
+      cmdClient.Undo();
+
+      long countAfter = custQueryClient.Count();
+      Assert.That(count, Is.EqualTo(countAfter));
+    }
+
+    [Test]
+    [Category("WCFTest")]
+    public void TestAddOrderUsingService()
     {
       Order order1 = new Order();
       Order order2 = new Order();

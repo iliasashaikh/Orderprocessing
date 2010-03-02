@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ServiceModel;
+using System.Xml.Linq;
 
 namespace OrderService.QueryService
 {
@@ -15,6 +16,12 @@ namespace OrderService.QueryService
     
     [OperationContract]
     T First();
+
+    [OperationContract]
+    T Where(XElement serializedExpression);
+
+    [OperationContract]
+    System.Collections.Generic.IEnumerable<T> WhereAll(XElement serializedExpression);
   }
 }
 

@@ -88,8 +88,9 @@ namespace OrderProcessing.Tests
     {
       IOC.RegisterComponents();
       Order order = Repository<Order>.All(this).First();
-      OrderDetails ordDetail = new OrderDetails() { Discount = 0, ParentOrder = order, OrderId = order.OrderId.Value, ProductId = 1, Quantity = 1 };
-      Repository<OrderDetails>.Save(ordDetail, this);
+      Product product = Repository<Product>.All(this).First();
+      OrderDetail ordDetail = new OrderDetail() { Discount = 0, Quantity = 1, ParentOrder = order, ParentProduct = product };
+      Repository<OrderDetail>.Save(ordDetail, this);
     }
 
 		/// <summary>
@@ -109,6 +110,23 @@ namespace OrderProcessing.Tests
 
 		[Test]
     public void Test_GetAllOrdersUsingDAC()
+    {
+      IOC.RegisterComponents();
+      var orders = Repository<Order>.All(this);
+      Assert.Greater(orders.Count(), 0);
+      //DACManager.CloseSession(this);
+    }
+
+    [Test]
+    public void Test_GetCustomerALFKI()
+    {
+      IOC.RegisterComponents();
+      var orders = Repository<Customer>.Where(x=>x.CustomerId == "ALFKI",this);
+      Assert.Greater(orders.Count(), 0);
+    }
+
+    [Test]
+    public void Test_GetOrdersUsingDAC()
     {
       IOC.RegisterComponents();
       var orders = Repository<Order>.All(this);

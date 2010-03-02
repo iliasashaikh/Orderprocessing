@@ -36,6 +36,18 @@ namespace OrderService
       return null;
     }
 
+    public ICommand UndoCommand(ICommand command)
+    {
+      Stack<ICommand> commandStack = GetCommandStack();
+      if (commandStack.Count > 0 && commandStack.Contains(command))
+      {
+        ICommand localCommand = commandStack.Where(x => x.Equals(command)).First();
+        localCommand.Undo();
+        return localCommand;
+      }
+      return null;
+    }
+
     Stack<ICommand> GetCommandStack()
     {
       string sessionId = Utils.GetContextId();

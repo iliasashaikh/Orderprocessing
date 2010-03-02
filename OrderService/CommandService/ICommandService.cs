@@ -14,6 +14,7 @@ namespace OrderService
   [ServiceKnownType(typeof(AddOrderCommand))]
   [ServiceKnownType(typeof(RemoveOrderCommand))]
   [ServiceKnownType(typeof(UpdateOrderCommand))]
+  [ServiceKnownType(typeof(RemoveCustomerCommand))]
   public interface ICommandService
   {
     [OperationContract]
@@ -21,5 +22,8 @@ namespace OrderService
 
     [OperationContract]
     ICommand Undo();
+
+    [OperationContract]
+    ICommand UndoCommand(ICommand command);
   }
 }

@@ -23,5 +23,10 @@ namespace OrderProcessing.Classes
       return client.EmployeeQueryClient.All();
     }
 
+    public Product[] GetAllProducts(ServiceClient client)
+    {
+      return client.ProductQueryClient.All();
+    }
+
   }
 }

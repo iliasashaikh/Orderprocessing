@@ -38,6 +38,22 @@ namespace OrderProcessing.Tests.CustomerQueryServiceReference {
         System.IAsyncResult BeginFirst(System.AsyncCallback callback, object asyncState);
         
         OrderProcessingDomain.Customer EndFirst(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IQueryServiceBaseOf_Customer/Where", ReplyAction="http://tempuri.org/IQueryServiceBaseOf_Customer/WhereResponse")]
+        OrderProcessingDomain.Customer Where(System.Xml.Linq.XElement serializedExpression);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IQueryServiceBaseOf_Customer/Where", ReplyAction="http://tempuri.org/IQueryServiceBaseOf_Customer/WhereResponse")]
+        System.IAsyncResult BeginWhere(System.Xml.Linq.XElement serializedExpression, System.AsyncCallback callback, object asyncState);
+        
+        OrderProcessingDomain.Customer EndWhere(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IQueryServiceBaseOf_Customer/WhereAll", ReplyAction="http://tempuri.org/IQueryServiceBaseOf_Customer/WhereAllResponse")]
+        OrderProcessingDomain.Customer[] WhereAll(System.Xml.Linq.XElement serializedExpression);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IQueryServiceBaseOf_Customer/WhereAll", ReplyAction="http://tempuri.org/IQueryServiceBaseOf_Customer/WhereAllResponse")]
+        System.IAsyncResult BeginWhereAll(System.Xml.Linq.XElement serializedExpression, System.AsyncCallback callback, object asyncState);
+        
+        OrderProcessingDomain.Customer[] EndWhereAll(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -103,6 +119,44 @@ namespace OrderProcessing.Tests.CustomerQueryServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+    public partial class WhereCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public WhereCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public OrderProcessingDomain.Customer Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((OrderProcessingDomain.Customer)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+    public partial class WhereAllCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public WhereAllCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public OrderProcessingDomain.Customer[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((OrderProcessingDomain.Customer[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
     public partial class CustomerQueryServiceClient : System.ServiceModel.ClientBase<OrderProcessing.Tests.CustomerQueryServiceReference.ICustomerQueryService>, OrderProcessing.Tests.CustomerQueryServiceReference.ICustomerQueryService {
         
         private BeginOperationDelegate onBeginAllDelegate;
@@ -122,6 +176,18 @@ namespace OrderProcessing.Tests.CustomerQueryServiceReference {
         private EndOperationDelegate onEndFirstDelegate;
         
         private System.Threading.SendOrPostCallback onFirstCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginWhereDelegate;
+        
+        private EndOperationDelegate onEndWhereDelegate;
+        
+        private System.Threading.SendOrPostCallback onWhereCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginWhereAllDelegate;
+        
+        private EndOperationDelegate onEndWhereAllDelegate;
+        
+        private System.Threading.SendOrPostCallback onWhereAllCompletedDelegate;
         
         public CustomerQueryServiceClient() {
         }
@@ -147,6 +213,10 @@ namespace OrderProcessing.Tests.CustomerQueryServiceReference {
         public event System.EventHandler<CountCompletedEventArgs> CountCompleted;
         
         public event System.EventHandler<FirstCompletedEventArgs> FirstCompleted;
+        
+        public event System.EventHandler<WhereCompletedEventArgs> WhereCompleted;
+        
+        public event System.EventHandler<WhereAllCompletedEventArgs> WhereAllCompleted;
         
         public OrderProcessingDomain.Customer[] All() {
             return base.Channel.All();
@@ -290,6 +360,106 @@ namespace OrderProcessing.Tests.CustomerQueryServiceReference {
                 this.onFirstCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnFirstCompleted);
             }
             base.InvokeAsync(this.onBeginFirstDelegate, null, this.onEndFirstDelegate, this.onFirstCompletedDelegate, userState);
+        }
+        
+        public OrderProcessingDomain.Customer Where(System.Xml.Linq.XElement serializedExpression) {
+            return base.Channel.Where(serializedExpression);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginWhere(System.Xml.Linq.XElement serializedExpression, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginWhere(serializedExpression, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public OrderProcessingDomain.Customer EndWhere(System.IAsyncResult result) {
+            return base.Channel.EndWhere(result);
+        }
+        
+        private System.IAsyncResult OnBeginWhere(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            System.Xml.Linq.XElement serializedExpression = ((System.Xml.Linq.XElement)(inValues[0]));
+            return this.BeginWhere(serializedExpression, callback, asyncState);
+        }
+        
+        private object[] OnEndWhere(System.IAsyncResult result) {
+            OrderProcessingDomain.Customer retVal = this.EndWhere(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnWhereCompleted(object state) {
+            if ((this.WhereCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.WhereCompleted(this, new WhereCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void WhereAsync(System.Xml.Linq.XElement serializedExpression) {
+            this.WhereAsync(serializedExpression, null);
+        }
+        
+        public void WhereAsync(System.Xml.Linq.XElement serializedExpression, object userState) {
+            if ((this.onBeginWhereDelegate == null)) {
+                this.onBeginWhereDelegate = new BeginOperationDelegate(this.OnBeginWhere);
+            }
+            if ((this.onEndWhereDelegate == null)) {
+                this.onEndWhereDelegate = new EndOperationDelegate(this.OnEndWhere);
+            }
+            if ((this.onWhereCompletedDelegate == null)) {
+                this.onWhereCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnWhereCompleted);
+            }
+            base.InvokeAsync(this.onBeginWhereDelegate, new object[] {
+                        serializedExpression}, this.onEndWhereDelegate, this.onWhereCompletedDelegate, userState);
+        }
+        
+        public OrderProcessingDomain.Customer[] WhereAll(System.Xml.Linq.XElement serializedExpression) {
+            return base.Channel.WhereAll(serializedExpression);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginWhereAll(System.Xml.Linq.XElement serializedExpression, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginWhereAll(serializedExpression, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public OrderProcessingDomain.Customer[] EndWhereAll(System.IAsyncResult result) {
+            return base.Channel.EndWhereAll(result);
+        }
+        
+        private System.IAsyncResult OnBeginWhereAll(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            System.Xml.Linq.XElement serializedExpression = ((System.Xml.Linq.XElement)(inValues[0]));
+            return this.BeginWhereAll(serializedExpression, callback, asyncState);
+        }
+        
+        private object[] OnEndWhereAll(System.IAsyncResult result) {
+            OrderProcessingDomain.Customer[] retVal = this.EndWhereAll(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnWhereAllCompleted(object state) {
+            if ((this.WhereAllCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.WhereAllCompleted(this, new WhereAllCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void WhereAllAsync(System.Xml.Linq.XElement serializedExpression) {
+            this.WhereAllAsync(serializedExpression, null);
+        }
+        
+        public void WhereAllAsync(System.Xml.Linq.XElement serializedExpression, object userState) {
+            if ((this.onBeginWhereAllDelegate == null)) {
+                this.onBeginWhereAllDelegate = new BeginOperationDelegate(this.OnBeginWhereAll);
+            }
+            if ((this.onEndWhereAllDelegate == null)) {
+                this.onEndWhereAllDelegate = new EndOperationDelegate(this.OnEndWhereAll);
+            }
+            if ((this.onWhereAllCompletedDelegate == null)) {
+                this.onWhereAllCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnWhereAllCompleted);
+            }
+            base.InvokeAsync(this.onBeginWhereAllDelegate, new object[] {
+                        serializedExpression}, this.onEndWhereAllDelegate, this.onWhereAllCompletedDelegate, userState);
         }
     }
 }

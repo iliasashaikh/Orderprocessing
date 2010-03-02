@@ -16,8 +16,9 @@ namespace OrderProcessing.CommandServiceReference {
     public interface ICommandService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommandService/ExecuteCommand", ReplyAction="http://tempuri.org/ICommandService/ExecuteCommandResponse")]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.AddOrderCommand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.UpdateOrderCommand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.AddOrderCommand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.RemoveCustomerCommand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.RemoveOrderCommand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Order))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Customer))]
@@ -26,8 +27,9 @@ namespace OrderProcessing.CommandServiceReference {
         object ExecuteCommand(object command);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommandService/Undo", ReplyAction="http://tempuri.org/ICommandService/UndoResponse")]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.AddOrderCommand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.UpdateOrderCommand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.AddOrderCommand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.RemoveCustomerCommand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.RemoveOrderCommand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Order))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Customer))]

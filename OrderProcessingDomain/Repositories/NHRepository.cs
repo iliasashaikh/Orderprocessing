@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using NHibernate;
 using NHibernate.Linq;
+using System.Linq.Expressions;
 
 namespace OrderProcessingDomain
 {
@@ -24,14 +25,21 @@ namespace OrderProcessingDomain
 
     public IEnumerable<T> All()
     {
-      _dac.OpenSession();
-      return _dac.Session.Linq<T>();
+      try
+      {
+        _dac.OpenSession();
+        return _dac.Session.Linq<T>();
+      }
+      catch (Exception ex)
+      {
+      }
+      return null;
     }
 
-    public IEnumerable<T> Where(Func<T, bool> exp)
+    public IEnumerable<T> Where(Expression<Func<T, bool>> exp)
     {
       _dac.OpenSession();
-      IQueryable<T> result = _dac.Session.Linq<T>();
+      IQueryable<T> result = _dac.Session.Linq<T>().Where(exp);
       return result.Where(exp);
     }
 
@@ -73,6 +81,7 @@ namespace OrderProcessingDomain
     {
       _dac.OpenSession();
       _dac.Session.Save(toSave);
+      _dac.Session.Flush();
     }
 
     public void Update(object toUpdate)

@@ -37,10 +37,10 @@ namespace OrderService
 
         if (localOrder != null)
         {
-          var orderDetails = Repository<OrderDetails>.Where(x => x.OrderId == order.OrderId, Thread.CurrentContext.ContextID);
-          foreach (OrderDetails det in orderDetails)
+          var orderDetails = Repository<OrderDetail>.Where(x => x.ParentOrder.OrderId == order.OrderId, Thread.CurrentContext.ContextID);
+          foreach (OrderDetail det in orderDetails)
           {
-            Repository<OrderDetails>.Remove(det, Thread.CurrentContext.ContextID);
+            Repository<OrderDetail>.Remove(det, Thread.CurrentContext.ContextID);
           }
         }
 

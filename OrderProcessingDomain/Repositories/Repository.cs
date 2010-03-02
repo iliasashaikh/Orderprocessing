@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace OrderProcessingDomain
@@ -33,7 +34,7 @@ namespace OrderProcessingDomain
 
     }
 
-    public static IEnumerable<T> Where(Func<T, bool> exp, object owner)
+    public static IEnumerable<T> Where( Expression<Func<T, bool>> exp, object owner)
     {
       IDataAccessContext dac = DACManager.GetCurrentSession(owner);
       IRepository<T> repo = GetRepositoryFromContainer();

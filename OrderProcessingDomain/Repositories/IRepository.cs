@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Linq.Expressions;
 using System;
 using NHibernate;
 using NHibernate.Linq;
@@ -10,7 +11,7 @@ using System.Collections;
 public interface IRepository<T> where T : class
 {
   IEnumerable<T> All();
-  IEnumerable<T> Where(Func<T, bool> exp);
+  IEnumerable<T> Where(Expression< Func<T, bool>> exp);
   IDataAccessContext DataAccessContext{get;set;}
   void Remove(object toRemove);
   void Save(object toSave);

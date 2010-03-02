@@ -140,6 +140,16 @@ namespace OrderProcessingDomain
     }
 
     #endregion
+
+    #region IRepository<T> Members
+
+
+    public IEnumerable<T> Where(System.Linq.Expressions.Expression<Func<T, bool>> exp)
+    {
+      throw new NotImplementedException();
+    }
+
+    #endregion
   }
 
 }

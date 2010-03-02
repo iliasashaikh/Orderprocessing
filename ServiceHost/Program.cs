@@ -20,6 +20,7 @@ namespace ConsoleServiceHost
         ServiceHost hostQueryCustomer = new ServiceHost(typeof(OrderService.QueryService.CustomerQueryService));
         ServiceHost hostQueryEmployee = new ServiceHost(typeof(OrderService.QueryService.EmployeeQueryService));
         ServiceHost hostQueryOrder = new ServiceHost(typeof(OrderService.QueryService.OrderQueryService));
+        ServiceHost hostQueryProduct = new ServiceHost(typeof(OrderService.QueryService.ProductQueryService));
 
         hostCommand.Open();
         //hostOrders.Open();
@@ -28,6 +29,7 @@ namespace ConsoleServiceHost
         hostQueryCustomer.Open();
         hostQueryEmployee.Open();
         hostQueryOrder.Open();
+        hostQueryProduct.Open();
 
         Console.WriteLine("Any key to stop");
         Console.ReadLine();

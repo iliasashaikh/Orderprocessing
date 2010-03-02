@@ -216,6 +216,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\ProductQueryServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\ServiceReference1\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -243,6 +248,7 @@
     <WCFMetadataStorage Include="Service References\EmployeeQueryServiceReference\" />
     <WCFMetadataStorage Include="Service References\OrderQueryServiceReference\" />
     <WCFMetadataStorage Include="Service References\OrderStatusService\" />
+    <WCFMetadataStorage Include="Service References\ProductQueryServiceReference\" />
     <WCFMetadataStorage Include="Service References\ServiceReference1\" />
   </ItemGroup>
   <ItemGroup>
@@ -352,6 +358,25 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\CommandServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\OrderProcessingDomain.Product.datasource" />
+    <None Include="Service References\ProductQueryServiceReference\OrderProcessingDomain.xsd" />
+    <None Include="Service References\ProductQueryServiceReference\service.wsdl" />
+    <None Include="Service References\ProductQueryServiceReference\service.xsd" />
+    <None Include="Service References\ProductQueryServiceReference\service1.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ProductQueryServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ProductQueryServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ProductQueryServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

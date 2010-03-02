@@ -5,6 +5,9 @@ using System.Text;
 
 using NUnit.Framework;
 using OrderProcessing.Classes;
+using ExpressionSerialization;
+
+using OrderProcessingDomain;
 
 namespace OrderProcessingClient.Tests
 {
@@ -12,7 +15,7 @@ namespace OrderProcessingClient.Tests
   public class Test_ServiceClient
   {
     [Test]
-    void Test_Initialise()
+    public void Test_Initialise()
     {
       ServiceClient client = new ServiceClient().Initialise();
     }
@@ -36,6 +39,18 @@ namespace OrderProcessingClient.Tests
       ServiceClient client = new ServiceClient().Initialise();
       var results = new Query().GetAllEmployees(client);
       Assert.That(results, Is.Not.Null);
+    }
+
+    void Test_GetASingleCustomer()
+    {
+      ServiceClient client = new ServiceClient().Initialise();
+      ClientQuery<Customer> c = new ClientQuery<Customer>();
+      var xx = c.Where(cust => cust.CustomerId == "");
+      
+      
+
+      //var results = new Query().GetEmployee().Where();
+      //new Query().
     }
   }
 }

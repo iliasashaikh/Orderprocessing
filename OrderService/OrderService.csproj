@@ -71,6 +71,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Common.Logging.Log4Net.dll</HintPath>
     </Reference>
+    <Reference Include="ExpressionSerialization, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\ExpressionSerialization.dll</HintPath>
+    </Reference>
     <Reference Include="FluentNHibernate, Version=1.0.0.614, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\FluentNHibernate.dll</HintPath>
@@ -152,8 +156,10 @@
     <Compile Include="QueryService\ICustomerQueryService.cs" />
     <Compile Include="QueryService\IEmployeeQueryService.cs" />
     <Compile Include="QueryService\IOrderQueryService.cs" />
+    <Compile Include="QueryService\IProductQueryService.cs" />
     <Compile Include="QueryService\IQueryServiceBase.cs" />
     <Compile Include="QueryService\OrderQueryService.cs" />
+    <Compile Include="QueryService\ProductQueryService.cs" />
     <Compile Include="QueryService\QueryServiceBase.cs" />
     <Compile Include="Service1.cs" />
     <Compile Include="Status.cs" />

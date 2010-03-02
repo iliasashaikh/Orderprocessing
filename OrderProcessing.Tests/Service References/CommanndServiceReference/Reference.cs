@@ -16,9 +16,10 @@ namespace OrderProcessing.Tests.CommanndServiceReference {
     public interface ICommandService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommandService/ExecuteCommand", ReplyAction="http://tempuri.org/ICommandService/ExecuteCommandResponse")]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.RemoveOrderCommand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.UpdateOrderCommand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.AddOrderCommand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.RemoveCustomerCommand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.RemoveOrderCommand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Order))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Customer))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Employee))]
@@ -26,14 +27,26 @@ namespace OrderProcessing.Tests.CommanndServiceReference {
         object ExecuteCommand(object command);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommandService/Undo", ReplyAction="http://tempuri.org/ICommandService/UndoResponse")]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.RemoveOrderCommand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.UpdateOrderCommand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.AddOrderCommand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.RemoveCustomerCommand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.RemoveOrderCommand))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Order))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Customer))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Employee))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<object, object>))]
         object Undo();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommandService/UndoCommand", ReplyAction="http://tempuri.org/ICommandService/UndoCommandResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.UpdateOrderCommand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.AddOrderCommand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.RemoveCustomerCommand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Command.RemoveOrderCommand))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Order))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Customer))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(OrderProcessingDomain.Employee))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<object, object>))]
+        object UndoCommand(object command);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -69,6 +82,10 @@ namespace OrderProcessing.Tests.CommanndServiceReference {
         
         public object Undo() {
             return base.Channel.Undo();
+        }
+        
+        public object UndoCommand(object command) {
+            return base.Channel.UndoCommand(command);
         }
     }
 }

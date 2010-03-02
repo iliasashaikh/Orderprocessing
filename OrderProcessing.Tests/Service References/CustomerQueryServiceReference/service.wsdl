@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:tns="http://tempuri.org/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" name="CustomerQueryService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:tns="http://tempuri.org/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" name="CustomerQueryService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsp:Policy wsu:Id="CustomerQueryServiceEndPoint_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -58,6 +58,18 @@
   <wsdl:message name="ICustomerQueryService_First_OutputMessage">
     <wsdl:part name="parameters" element="tns:FirstResponse" />
   </wsdl:message>
+  <wsdl:message name="ICustomerQueryService_Where_InputMessage">
+    <wsdl:part name="parameters" element="tns:Where" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerQueryService_Where_OutputMessage">
+    <wsdl:part name="parameters" element="tns:WhereResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerQueryService_WhereAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:WhereAll" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerQueryService_WhereAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:WhereAllResponse" />
+  </wsdl:message>
   <wsdl:portType name="ICustomerQueryService">
     <wsdl:operation name="All">
       <wsdl:input wsaw:Action="http://tempuri.org/IQueryServiceBaseOf_Customer/All" message="tns:ICustomerQueryService_All_InputMessage" />
@@ -70,6 +82,14 @@
     <wsdl:operation name="First">
       <wsdl:input wsaw:Action="http://tempuri.org/IQueryServiceBaseOf_Customer/First" message="tns:ICustomerQueryService_First_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IQueryServiceBaseOf_Customer/FirstResponse" message="tns:ICustomerQueryService_First_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Where">
+      <wsdl:input wsaw:Action="http://tempuri.org/IQueryServiceBaseOf_Customer/Where" message="tns:ICustomerQueryService_Where_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IQueryServiceBaseOf_Customer/WhereResponse" message="tns:ICustomerQueryService_Where_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="WhereAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IQueryServiceBaseOf_Customer/WhereAll" message="tns:ICustomerQueryService_WhereAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IQueryServiceBaseOf_Customer/WhereAllResponse" message="tns:ICustomerQueryService_WhereAll_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="CustomerQueryServiceEndPoint" type="tns:ICustomerQueryService">
@@ -103,6 +123,24 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="Where">
+      <soap12:operation soapAction="http://tempuri.org/IQueryServiceBaseOf_Customer/Where" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WhereAll">
+      <soap12:operation soapAction="http://tempuri.org/IQueryServiceBaseOf_Customer/WhereAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="CustomerQueryService">
     <wsdl:port name="CustomerQueryServiceEndPoint" binding="tns:CustomerQueryServiceEndPoint">
@@ -110,7 +148,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8732/OrderService/CustomerQueryService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>ilias.shaikh@tradar.com</Upn>
+          <Upn>Isaak2009\Ilias</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
