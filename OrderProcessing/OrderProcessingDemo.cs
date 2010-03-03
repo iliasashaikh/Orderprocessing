@@ -14,35 +14,37 @@ namespace OrderProcessing
 {
   public partial class OrderProcessingDemo : Form
   {
-    Classes.ServiceClient serviceClient;
-    Classes.Query query;
+    Classes.ServiceClient _serviceClient;
+    Classes.Query _query;
     TreeNode _selectedNode;
-    bool connected;
+    bool _connected;
 
     public OrderProcessingDemo()
     {
       InitializeComponent();
       ConnectToServer();
-      query = new OrderProcessing.Classes.Query();
+      _query = new OrderProcessing.Classes.Query();
     }
 
     private void ConnectToServer()
     {
       try
       {
-        serviceClient = new OrderProcessing.Classes.ServiceClient().Initialise();
-        connected = true;
+        _serviceClient = new OrderProcessing.Classes.ServiceClient().Initialise();
+        _serviceClient.ServiceNotificationHandler.NotifyClient += (message) => toolStripStatusLabel_Messages.Text = message;
+
+        _connected = true;
       }
       catch (Exception ex)
       {
-        connected = false;
+        _connected = false;
       }
       DisplayConnectionStatus();
     }
 
     void DisplayConnectionStatus()
     {
-      if (connected)
+      if (_connected)
       {
         label_Connect.Text = "Connected";
         button_Connect.Visible = false;
@@ -110,7 +112,7 @@ namespace OrderProcessing
 
     void RunCommand(ICommand command)
     {
-      serviceClient.CommandClient.ExecuteCommand(command);
+      _serviceClient.CommandClient.ExecuteCommand(command);
       _commandStack.Push(command);
       ToolStripMenuItem undoCommandMenuItem = new ToolStripMenuItem(command.ToString());
       undoToolStripMenuItem.DropDownItems.Add(undoCommandMenuItem);
@@ -127,10 +129,6 @@ namespace OrderProcessing
       ICommand command = new RemoveOrderCommand(order);
       RunCommand(command);
       ShowDataInGrid(false, "");
-    }
-
-    void ShowDataInGrid(Array arr)
-    {
     }
 
     void ShowDataInGrid(bool filtered, string id)
@@ -151,7 +149,7 @@ namespace OrderProcessing
           }
           else
           {
-            var orders = query.GetAllOrders(serviceClient);
+            var orders = _query.GetAllOrders(_serviceClient);
             toDisplay = orders;
           }
           break;
@@ -165,7 +163,7 @@ namespace OrderProcessing
           }
           else
           {
-            var customers = query.GetAllCustomers(serviceClient);
+            var customers = _query.GetAllCustomers(_serviceClient);
             toDisplay = customers;
           }
           break;
@@ -179,7 +177,7 @@ namespace OrderProcessing
           }
           else
           {
-            var employees = query.GetAllEmployees(serviceClient);
+            var employees = _query.GetAllEmployees(_serviceClient);
             toDisplay = employees;
           }
           break;
@@ -193,7 +191,7 @@ namespace OrderProcessing
           }
           else
           {
-            var products = query.GetAllProducts(serviceClient);
+            var products = _query.GetAllProducts(_serviceClient);
             toDisplay = products;
           }
           break;
@@ -228,7 +226,7 @@ namespace OrderProcessing
         return false;
 
       ICommand command = _commandStack.Pop();
-      serviceClient.CommandClient.Undo();
+      _serviceClient.CommandClient.Undo();
       ShowDataInGrid(false, "");
       return true;
     }
@@ -242,6 +240,22 @@ namespace OrderProcessing
     private void button_Connect_Click(object sender, EventArgs e)
     {
       ConnectToServer();
+    }
+
+    private void OrderProcessingDemo_FormClosing(object sender, FormClosingEventArgs e)
+    {
+      try
+      {
+        _serviceClient.SubscriptionClient.UnSubscribe();
+      }
+      catch (Exception ex)
+      {
+      }
+    }
+
+    private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      ShowDataInGrid(false, "");
     }
 
 

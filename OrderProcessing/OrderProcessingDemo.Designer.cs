@@ -28,10 +28,10 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Orders");
-      System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Customers");
-      System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Employees");
-      System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Products");
+      System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Orders");
+      System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Customers");
+      System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Employees");
+      System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Products");
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
       this.splitContainer2 = new System.Windows.Forms.SplitContainer();
       this.button_Connect = new System.Windows.Forms.Button();
@@ -159,6 +159,7 @@
       this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
       this.reloadToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
       this.reloadToolStripMenuItem.Text = "Reload";
+      this.reloadToolStripMenuItem.Click += new System.EventHandler(this.reloadToolStripMenuItem_Click);
       // 
       // updateToolStripMenuItem
       // 
@@ -219,19 +220,19 @@
       this.treeView_Entities.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.treeView_Entities.Location = new System.Drawing.Point(3, 3);
       this.treeView_Entities.Name = "treeView_Entities";
-      treeNode5.Name = "Node_Orders";
-      treeNode5.Text = "Orders";
-      treeNode6.Name = "Node_Customers";
-      treeNode6.Text = "Customers";
-      treeNode7.Name = "Node_Employees";
-      treeNode7.Text = "Employees";
-      treeNode8.Name = "Node_Products";
-      treeNode8.Text = "Products";
+      treeNode1.Name = "Node_Orders";
+      treeNode1.Text = "Orders";
+      treeNode2.Name = "Node_Customers";
+      treeNode2.Text = "Customers";
+      treeNode3.Name = "Node_Employees";
+      treeNode3.Text = "Employees";
+      treeNode4.Name = "Node_Products";
+      treeNode4.Text = "Products";
       this.treeView_Entities.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6,
-            treeNode7,
-            treeNode8});
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4});
       this.treeView_Entities.ShowLines = false;
       this.treeView_Entities.Size = new System.Drawing.Size(202, 369);
       this.treeView_Entities.TabIndex = 0;
@@ -354,6 +355,7 @@
       this.Controls.Add(this.splitContainer1);
       this.Name = "OrderProcessingDemo";
       this.Text = "Order Processing Demo";
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OrderProcessingDemo_FormClosing);
       this.splitContainer1.Panel1.ResumeLayout(false);
       this.splitContainer1.Panel2.ResumeLayout(false);
       this.splitContainer1.ResumeLayout(false);

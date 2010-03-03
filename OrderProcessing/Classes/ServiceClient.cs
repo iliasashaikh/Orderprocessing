@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ServiceModel;
 
 namespace OrderProcessing.Classes
 {
@@ -45,6 +46,23 @@ namespace OrderProcessing.Classes
       get{return _prodQueryClient;}
       set { _prodQueryClient = value; }
     }
+
+    SubscriptionServiceReference.SubscriptionServiceClient _subscriptionClient;
+
+    public SubscriptionServiceReference.SubscriptionServiceClient SubscriptionClient
+    {
+      get { return _subscriptionClient; }
+      set { _subscriptionClient = value; }
+    }
+
+    NotificationHandler _handler;
+
+    public NotificationHandler ServiceNotificationHandler
+    {
+      get { return _handler; }
+      set { _handler = value; }
+    }
+
     public ServiceClient Initialise()
     {
       try
@@ -70,6 +88,13 @@ namespace OrderProcessing.Classes
         _prodQueryClient = new OrderProcessing.ProductQueryServiceReference.ProductQueryServiceClient();
         Common.Util.SetContextId(_prodQueryClient.InnerChannel, contextId);
         _prodQueryClient.Open();
+
+        _handler = new NotificationHandler();
+        InstanceContext cntx = new InstanceContext(_handler);
+
+        _subscriptionClient = new OrderProcessing.SubscriptionServiceReference.SubscriptionServiceClient(cntx);
+        SubscriptionClient.Open();
+        SubscriptionClient.Subscribe();
 
       }
       catch (Exception ex)

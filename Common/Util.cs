@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace Common
 {
@@ -40,6 +42,14 @@ namespace Common
     {
       string contextId = Guid.NewGuid().ToString();
       Common.Util.SetContextId(innerChannel, contextId);
+    }
+
+    public static void LogMessageToEventLog(string message)
+    {
+      string source = Assembly.GetExecutingAssembly().FullName;
+      if (!EventLog.SourceExists(source))
+        EventLog.CreateEventSource(source,"Application");
+      EventLog.WriteEntry(source, message);
     }
   }
 }

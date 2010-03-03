@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="2670JCzDZsrFjQHDoXFR/CyKAbc=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="5N1+9eZA8T7cGn7pMHHiDMI7v7I=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="commandServiceEndPoint">
       <properties>
@@ -118,7 +118,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="commandServiceEndPoint" contract="CommanndServiceReference.ICommandService" bindingType="netTcpBinding" address="net.tcp://localhost:8732/OrderService/CommandService" bindingConfiguration="commandServiceEndPoint">
+    <endpoint name="commandServiceEndPoint1" contract="CommanndServiceReference.ICommandService" bindingType="netTcpBinding" address="net.tcp://localhost:8732/OrderService/CommandService" bindingConfiguration="commandServiceEndPoint">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>net.tcp://localhost:8732/OrderService/CommandService</serializedValue>
@@ -193,7 +193,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>commandServiceEndPoint</serializedValue>
+          <serializedValue>commandServiceEndPoint1</serializedValue>
         </property>
       </properties>
     </endpoint>

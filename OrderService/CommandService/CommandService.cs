@@ -7,9 +7,11 @@ using System.Text;
 using System.Threading;
 using OrderProcessingDomain.Command;
 
+using OrderService.SubscriptionService;
+
 namespace OrderService
 {
-  // NOTE: If you change the class name "CommandService" here, you must also update the reference to "CommandService" in App.config.
+  [ServiceBehavior(ConcurrencyMode=ConcurrencyMode.Single)]
   public class CommandService : ICommandService
   {
     #region ICommandService Members
@@ -20,6 +22,7 @@ namespace OrderService
     {
       Stack<ICommand> commandStack = GetCommandStack();
       command.Execute();
+      SubscriptionService.SubscriptionService.NotifyAll(command.ToString());
       commandStack.Push(command);
       return command;
     }
@@ -31,6 +34,7 @@ namespace OrderService
       {
         ICommand command = commandStack.Pop();
         command.Undo();
+        SubscriptionService.SubscriptionService.NotifyAll(String.Format("Reverted - {0}", command.ToString()));
         return command;
       }
       return null;

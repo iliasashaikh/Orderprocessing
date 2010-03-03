@@ -183,6 +183,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\SubscriptionServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
@@ -220,6 +225,7 @@
     <WCFMetadataStorage Include="Service References\OrderQueryServiceReference\" />
     <WCFMetadataStorage Include="Service References\ProductQueryServiceReference\" />
     <WCFMetadataStorage Include="Service References\ServiceReference1\" />
+    <WCFMetadataStorage Include="Service References\SubscriptionServiceReference\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
@@ -316,6 +322,21 @@
   <ItemGroup>
     <None Include="Properties\DataSources\OrderProcessingDomain.Product.datasource" />
     <None Include="Service References\ProductQueryServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\SubscriptionServiceReference\service.wsdl" />
+    <None Include="Service References\SubscriptionServiceReference\service.xsd" />
+    <None Include="Service References\SubscriptionServiceReference\service1.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SubscriptionServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SubscriptionServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SubscriptionServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

@@ -9,6 +9,7 @@ using System.Runtime.Serialization;
 
 using FluentNHibernate.Mapping;
 using NHibernate;
+using System.Linq.Expressions;
 
 namespace OrderProcessingDomain
 {
@@ -76,6 +77,7 @@ namespace OrderProcessingDomain
 
   public class OrderMap : ClassMap<Order>
   {
+
     public OrderMap()
     {
       Table("Orders");
@@ -95,6 +97,36 @@ namespace OrderProcessingDomain
       Map(x => x.Shipvia);
       References(x => x.Customer).Column("CustomerId").Cascade.SaveUpdate().Not.LazyLoad();
       References(x => x.Employee).Column("EmployeeId").Cascade.SaveUpdate().Not.LazyLoad();
+
+      DynamicComponent(x => x.CustomFields, (Action<DynamicComponentPart<IDictionary>>)MapDynamicColumns);
+      //DynamicComponent(x => x.CustomFields, MapDynamicComponents());
+    }
+
+    private static void MapDynamicColumns(DynamicComponentPart<System.Collections.IDictionary> m)
+    {
+      //m.Map(x => x["OrderDate"]);
+      m.Map("OrderDate");
+      //m.Map(x => Convert.ChangeType(x["OrderDate"], Type.GetType("System.DateTime")));
+
+    }
+
+    string s = @"<CustomFields>
+                  <Class name=""Orders"" table = ""Orders"">
+                    <Columms>
+                      <Column name=""""OrderDate"""" type=""System.DateTime"" value=""0""/>
+                      <Column name=""""OrderDate"""" type=""System.DateTime"" value=""0""/>
+                    </Columns>    
+                  </Class>
+                </CustomFields>
+      ";
+
+    //Action<DynamicComponentPart<IDictionary>> MapDynamicComponents()
+    //{
+    //  return new Action<DynamicComponentPart<IDictionary>>(Act);
+    //}
+
+    void Act(DynamicComponentPart<IDictionary> dict)
+    {
     }
   }
 

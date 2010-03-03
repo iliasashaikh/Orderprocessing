@@ -169,11 +169,11 @@
     <Compile Include="Repositories\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Order.hbm.xml" />
-    <EmbeddedResource Include="Customer.hbm.xml">
+    <EmbeddedResource Include="Domain\Order.hbm.xml" />
+    <EmbeddedResource Include="Domain\Customer.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Employee.hbm.xml" />
+    <EmbeddedResource Include="Domain\Employee.hbm.xml" />
     <Content Include="hibernate.cfg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -163,6 +163,8 @@
     <Compile Include="QueryService\QueryServiceBase.cs" />
     <Compile Include="Service1.cs" />
     <Compile Include="Status.cs" />
+    <Compile Include="SubscriptionService\ISubscriptionService.cs" />
+    <Compile Include="SubscriptionService\SubscriptionService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App3.config" />

@@ -11,9 +11,47 @@ using System.ServiceModel;
 
 namespace OrderProcessing.Tests
 {
+  public class NotificationHandler : SubscriptionServiceReference.ISubscriptionServiceCallback
+  {
+    #region ISubscriptionServiceCallback Members
+
+    public void Notify(string message)
+    {
+      NotifyClient(message);
+    }
+
+    string NotifyClient(string message)
+    {
+      return message;
+    }
+
+    public IAsyncResult BeginNotify(string message, AsyncCallback callback, object asyncState)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void EndNotify(IAsyncResult result)
+    {
+      throw new NotImplementedException();
+    }
+
+    #endregion
+  }
+
+
   [TestFixture]
   public class CommandServiceTest
   {
+    [Test]
+    [Category("WCFTest")]
+    public void Subscribe()
+    {
+      NotificationHandler handler = new NotificationHandler();
+      InstanceContext cntx = new InstanceContext(handler);
+      SubscriptionServiceReference.SubscriptionServiceClient proxy = new OrderProcessing.Tests.SubscriptionServiceReference.SubscriptionServiceClient(cntx);
+      proxy.Subscribe();
+    }
+
     [Test]
     public void TestAddOrder()
     {
@@ -54,10 +92,46 @@ namespace OrderProcessing.Tests
       Repositiory.Close(Common.Util.GetContextId());
     }
 
+
+    [Test]
+    [Category("WCFTest")]
+    public void TestDeleteOrderAndUndoUsingWCFAsync()
+    {
+      NotificationHandler handler = new NotificationHandler();
+      InstanceContext cntx = new InstanceContext(handler);
+      SubscriptionServiceReference.SubscriptionServiceClient proxy = new OrderProcessing.Tests.SubscriptionServiceReference.SubscriptionServiceClient(cntx);
+      proxy.Subscribe();
+
+      string contextId = Guid.NewGuid().ToString();
+      CommanndServiceReference.CommandServiceClient commandClient = new OrderProcessing.Tests.CommanndServiceReference.CommandServiceClient();
+      OrderQueryServiceReference.OrderQueryServiceClient service = new OrderProcessing.Tests.OrderQueryServiceReference.OrderQueryServiceClient();
+
+      //Common.Util.SetContextId(commandClient.InnerChannel, contextId);
+      AssignContextId(commandClient.InnerChannel, contextId);
+      AssignContextId(service.InnerChannel, contextId);
+      //Common.Util.SetContextId(service.InnerChannel, contextId);
+
+      long numOrders = service.Count();
+      var allOrders = service.All();
+      Order order = allOrders.ElementAt(new Random().Next(0, (int)numOrders - 1));
+      RemoveOrderCommand remCommand = new RemoveOrderCommand(order);
+      //commandClient.BeginExecuteCommand(remCommand, ar => {}, null);
+      commandClient.ExecuteCommand(remCommand);
+      commandClient.UndoCommand(remCommand);
+      long numOrdersAfter = service.Count();
+      Assert.That(numOrdersAfter, Is.EqualTo(numOrders));
+    }
+
+
     [Test]
     [Category("WCFTest")]
     public void TestDeleteOrderAndUndoUsingWCF()
     {
+      NotificationHandler handler = new NotificationHandler();
+      InstanceContext cntx = new InstanceContext(handler);
+      SubscriptionServiceReference.SubscriptionServiceClient proxy = new OrderProcessing.Tests.SubscriptionServiceReference.SubscriptionServiceClient(cntx);
+      proxy.Subscribe();
+
       string contextId = Guid.NewGuid().ToString();
       CommanndServiceReference.CommandServiceClient commandClient = new OrderProcessing.Tests.CommanndServiceReference.CommandServiceClient();
       OrderQueryServiceReference.OrderQueryServiceClient service = new OrderProcessing.Tests.OrderQueryServiceReference.OrderQueryServiceClient();
