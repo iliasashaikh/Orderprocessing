@@ -20,7 +20,7 @@ namespace OrderService
   
     public void AddOrder(Order order)
     {
-      Repository<Order>.Save(order, Thread.CurrentContext.ContextID);
+      Repository<Order>.Save(order, Common.Util.GetContextId());
       new Thread(()=> NotifySubscribers("Add", order)).Start();
     }
 
@@ -29,22 +29,22 @@ namespace OrderService
       try
       {
         IOC.RegisterComponents();
-        Order localOrder = Repository<Order>.Get(order.OrderId, Thread.CurrentContext.ContextID);
+        Order localOrder = Repository<Order>.Get(order.OrderId, Common.Util.GetContextId());
         if (localOrder == null)
         {
-          localOrder = Repository<Order>.Where(x => x.OrderId == order.OrderId,Thread.CurrentContext.ContextID).FirstOrDefault();
+          localOrder = Repository<Order>.Where(x => x.OrderId == order.OrderId,Common.Util.GetContextId()).FirstOrDefault();
         }
 
         if (localOrder != null)
         {
-          var orderDetails = Repository<OrderDetail>.Where(x => x.ParentOrder.OrderId == order.OrderId, Thread.CurrentContext.ContextID);
+          var orderDetails = Repository<OrderDetail>.Where(x => x.ParentOrder.OrderId == order.OrderId, Common.Util.GetContextId());
           foreach (OrderDetail det in orderDetails)
           {
-            Repository<OrderDetail>.Remove(det, Thread.CurrentContext.ContextID);
+            Repository<OrderDetail>.Remove(det, Common.Util.GetContextId());
           }
         }
 
-        Repository<Order>.Remove(localOrder, Thread.CurrentContext.ContextID);
+        Repository<Order>.Remove(localOrder, Common.Util.GetContextId());
 
         new Thread(()=> NotifySubscribers("Delete", order)).Start();
       }
@@ -64,7 +64,7 @@ namespace OrderService
         xx++;
 
         IOC.RegisterComponents();
-        return Repository<Order>.All(Thread.CurrentContext.ContextID);
+        return Repository<Order>.All(Common.Util.GetContextId());
       }
       catch (Exception ex)
       {
@@ -78,7 +78,7 @@ namespace OrderService
     public long GetOrderCount()
     {
       IOC.RegisterComponents();
-      return Repository<Order>.Count(Thread.CurrentContext.ContextID);
+      return Repository<Order>.Count(Common.Util.GetContextId());
     }
 
     #region IOrders Members
@@ -161,7 +161,7 @@ namespace OrderService
     public IEnumerable<Customer> GetAllCustomers()
     {
       IOC.RegisterComponents();
-      return Repository<Customer>.All(Thread.CurrentContext.ContextID);
+      return Repository<Customer>.All(Common.Util.GetContextId());
     }
 
     #endregion

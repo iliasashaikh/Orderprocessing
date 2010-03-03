@@ -18,19 +18,19 @@ namespace OrderService.QueryService
     public IEnumerable<T> All()
     {
       IOC.RegisterComponents();
-      return Repository<T>.All(Utils.GetContextId()).Reverse();
+      return Repository<T>.All(Common.Util.GetContextId()).Reverse();
     }
 
     public T First()
     {
       IOC.RegisterComponents();
-      return Repository<T>.First(Utils.GetContextId());
+      return Repository<T>.First(Common.Util.GetContextId());
     }
 
     public Int64 Count()
     {
       IOC.RegisterComponents();
-      return Repository<T>.Count(Utils.GetContextId());
+      return Repository<T>.Count(Common.Util.GetContextId());
     }
 
 
@@ -38,14 +38,14 @@ namespace OrderService.QueryService
     {
       ExpressionSerialization.ExpressionSerializer serializer = new ExpressionSerializer();
       Expression<Func<T,bool>> exp = serializer.Deserialize<Func<T, bool>>(serializedExpression);
-      return Repository<T>.Where(exp,Utils.GetContextId()).First();
+      return Repository<T>.Where(exp,Common.Util.GetContextId()).First();
     }
 
     public IEnumerable<T> WhereAll(System.Xml.Linq.XElement serializedExpression)
     {
       ExpressionSerialization.ExpressionSerializer serializer = new ExpressionSerializer();
       Expression<Func<T, bool>> exp = serializer.Deserialize<Func<T, bool>>(serializedExpression);
-      return Repository<T>.Where(exp, Utils.GetContextId());
+      return Repository<T>.Where(exp, Common.Util.GetContextId());
     }
   }
 }

@@ -24,27 +24,27 @@ namespace OrderProcessingDomain.Command
     public void Execute()
     {
       IOC.RegisterComponents();
-      Repository<Order>.Save(_order, Thread.CurrentContext.ContextID);
+      Repository<Order>.Save(_order, Common.Util.GetContextId());
     }
 
     public void Undo()
     {
-      Order localOrder = Repository<Order>.Get(_order.OrderId, Thread.CurrentContext.ContextID);
+      Order localOrder = Repository<Order>.Get(_order.OrderId, Common.Util.GetContextId());
       if (localOrder == null)
       {
-        localOrder = Repository<Order>.Where(x => x.OrderId == _order.OrderId, Thread.CurrentContext.ContextID).FirstOrDefault();
+        localOrder = Repository<Order>.Where(x => x.OrderId == _order.OrderId, Common.Util.GetContextId()).FirstOrDefault();
       }
 
       if (localOrder != null)
       {
-        var orderDetails = Repository<OrderDetail>.Where(x => x.ParentOrder.OrderId == _order.OrderId, Thread.CurrentContext.ContextID);
+        var orderDetails = Repository<OrderDetail>.Where(x => x.ParentOrder.OrderId == _order.OrderId, Common.Util.GetContextId());
         foreach (OrderDetail det in orderDetails)
         {
-          Repository<OrderDetail>.Remove(det, Thread.CurrentContext.ContextID);
+          Repository<OrderDetail>.Remove(det, Common.Util.GetContextId());
         }
       }
 
-      Repository<Order>.Remove(localOrder, Thread.CurrentContext.ContextID);
+      Repository<Order>.Remove(localOrder, Common.Util.GetContextId());
     }
 
     public void Redo()

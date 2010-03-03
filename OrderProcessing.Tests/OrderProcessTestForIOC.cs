@@ -15,6 +15,7 @@ using Spring.Context.Support;
 namespace OrderProcessing.Tests
 {
   [TestFixture]
+  [Ignore]
   public class OrderProcessTestForIOC
   {
 		#region Static fields (4)

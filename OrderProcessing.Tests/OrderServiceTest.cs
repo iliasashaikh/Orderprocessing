@@ -12,6 +12,7 @@ using ExpressionSerialization;
 namespace OrderProcessing.Tests
 {
   [TestFixture]
+  [Ignore]
   public class OrderServiceTest
   {
     [Test]

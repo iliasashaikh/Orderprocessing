@@ -50,7 +50,7 @@ namespace OrderService
 
     Stack<ICommand> GetCommandStack()
     {
-      string sessionId = Utils.GetContextId();
+      string sessionId = Common.Util.GetContextId();
 
       if (!_clientCommands.Keys.Contains(sessionId))
         _clientCommands.Add(sessionId, new Stack<ICommand>());

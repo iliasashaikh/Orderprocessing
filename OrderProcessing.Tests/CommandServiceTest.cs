@@ -7,6 +7,8 @@ using NUnit.Framework;
 using OrderProcessingDomain;
 using OrderProcessingDomain.Command;
 using OrderService;
+using System.ServiceModel;
+
 namespace OrderProcessing.Tests
 {
   [TestFixture]
@@ -32,6 +34,8 @@ namespace OrderProcessing.Tests
       ICommand command = service.Undo();
       Order deletedOrder = command.CommandParams[0] as Order;
       Assert.That(order3.OrderId,Is.EqualTo(deletedOrder.OrderId));
+
+      Repositiory.Close(Common.Util.GetContextId());
     }
 
     [Test]
@@ -47,14 +51,22 @@ namespace OrderProcessing.Tests
       commandService.UndoCommand(remCommand);
       long numOrdersAfter = service.GetOrderCount();
       Assert.That(numOrdersAfter, Is.EqualTo(numOrders));
+      Repositiory.Close(Common.Util.GetContextId());
     }
 
     [Test]
     [Category("WCFTest")]
     public void TestDeleteOrderAndUndoUsingWCF()
     {
+      string contextId = Guid.NewGuid().ToString();
       CommanndServiceReference.CommandServiceClient commandClient = new OrderProcessing.Tests.CommanndServiceReference.CommandServiceClient();
       OrderQueryServiceReference.OrderQueryServiceClient service = new OrderProcessing.Tests.OrderQueryServiceReference.OrderQueryServiceClient();
+      
+      //Common.Util.SetContextId(commandClient.InnerChannel, contextId);
+      AssignContextId(commandClient.InnerChannel,contextId);
+      AssignContextId(service.InnerChannel, contextId);
+      //Common.Util.SetContextId(service.InnerChannel, contextId);
+
       long numOrders = service.Count();
       var allOrders = service.All();
       Order order = allOrders.ElementAt(new Random().Next(0, (int)numOrders - 1));
@@ -81,6 +93,7 @@ namespace OrderProcessing.Tests
 
       long countAfter = service.Count();
       Assert.That(count, Is.EqualTo(countAfter));
+      Repositiory.Close(Common.Util.GetContextId());
     }
 
 
@@ -88,13 +101,15 @@ namespace OrderProcessing.Tests
     [Category("WCFTest")]
     public void TestDeleteCustomerAndUndoUsingWCF()
     {
+      string contextId = Guid.NewGuid().ToString();
       CommanndServiceReference.CommandServiceClient cmdClient = new OrderProcessing.Tests.CommanndServiceReference.CommandServiceClient();
-
       CustomerQueryServiceReference.CustomerQueryServiceClient custQueryClient = new OrderProcessing.Tests.CustomerQueryServiceReference.CustomerQueryServiceClient();
-
+      AssignContextId(custQueryClient.InnerChannel,contextId);
+      AssignContextId(cmdClient.InnerChannel,contextId);
       var customers = custQueryClient.All();
       long count = custQueryClient.Count();
-      Customer customer = customers.Where(x => x.CustomerId == "YLHWC").First();
+      Customer customer = customers.ElementAt(new Random().Next(0, (int)count - 1));
+      //Customer customer = customers.Where(x => x.CustomerId == "YLHWC").First();
 
       RemoveCustomerCommand command = new RemoveCustomerCommand(customer);
       cmdClient.ExecuteCommand(command);
@@ -118,7 +133,7 @@ namespace OrderProcessing.Tests
       AddOrderCommand addCommand3 = new AddOrderCommand(order3);
 
       CommanndServiceReference.CommandServiceClient service = new OrderProcessing.Tests.CommanndServiceReference.CommandServiceClient();
-
+      AssignContextId(service.InnerChannel);
       addCommand1 = (AddOrderCommand)service.ExecuteCommand(addCommand1);
       addCommand2 = (AddOrderCommand)service.ExecuteCommand(addCommand2);
       addCommand3 = (AddOrderCommand)service.ExecuteCommand(addCommand3);
@@ -128,5 +143,15 @@ namespace OrderProcessing.Tests
       Assert.That(((Order)addCommand3.CommandParams[0]).OrderId, Is.EqualTo(deletedOrder.OrderId));
     }
 
+    void AssignContextId(IClientChannel innerChannel)
+    {
+      string contextId = Guid.NewGuid().ToString();
+      Common.Util.SetContextId(innerChannel,contextId);
+    }
+
+    void AssignContextId(IClientChannel innerChannel, string contextId)
+    {
+      Common.Util.SetContextId(innerChannel, contextId);
+    }
   }
 }

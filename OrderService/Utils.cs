@@ -12,10 +12,13 @@ namespace OrderService
   {
     public static string GetContextId()
     {
-      if (OperationContext.Current == null)
-        return Thread.CurrentContext.ContextID.ToString();
-      else
-        return OperationContext.Current.SessionId;
+      //if (OperationContext.Current == null)
+      //  return Thread.CurrentContext.ContextID.ToString();
+      //else
+      //  return OperationContext.Current.SessionId;
+
+      return Thread.CurrentContext.ContextID.ToString();
+
     }
   }
 }

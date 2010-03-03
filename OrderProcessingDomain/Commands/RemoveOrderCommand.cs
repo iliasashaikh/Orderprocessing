@@ -29,23 +29,23 @@ namespace OrderProcessingDomain.Command
     public void Execute()
     {
       IOC.RegisterComponents();
-      Order localOrder = Repository<Order>.Get(_order.OrderId, Utils.GetContextId());
+      Order localOrder = Repository<Order>.Get(_order.OrderId, Common.Util.GetContextId());
       
       if (localOrder == null)
       {
-        localOrder = Repository<Order>.Where(x => x.OrderId == _order.OrderId, Utils.GetContextId()).FirstOrDefault();
+        localOrder = Repository<Order>.Where(x => x.OrderId == _order.OrderId, Common.Util.GetContextId()).FirstOrDefault();
       }
 
       if (localOrder != null)
       {
-        var _orderDetails = Repository<OrderDetail>.Where(x => x.ParentOrder.OrderId == _order.OrderId, Utils.GetContextId());
+        var _orderDetails = Repository<OrderDetail>.Where(x => x.ParentOrder.OrderId == _order.OrderId, Common.Util.GetContextId());
         _orderDetailsList = _orderDetails.ToList();
         foreach (OrderDetail det in _orderDetails)
         {
-          Repository<OrderDetail>.Remove(det, Utils.GetContextId());
+          Repository<OrderDetail>.Remove(det, Common.Util.GetContextId());
         }
       }
-      Repository<Order>.Remove(localOrder, Utils.GetContextId());
+      Repository<Order>.Remove(localOrder, Common.Util.GetContextId());
     }
 
     public void Undo()
@@ -55,19 +55,19 @@ namespace OrderProcessingDomain.Command
       Employee persistentEmployee = null;
 
       if (_order.Customer != null)
-        persistentCustomer = Repository<Customer>.Get(_order.Customer.CustomerId, Utils.GetContextId());
+        persistentCustomer = Repository<Customer>.Get(_order.Customer.CustomerId, Common.Util.GetContextId());
 
       if (_order.Employee != null)
-        persistentEmployee = Repository<Employee>.Get(_order.Employee.EmployeeId, Utils.GetContextId());
+        persistentEmployee = Repository<Employee>.Get(_order.Employee.EmployeeId, Common.Util.GetContextId());
 
       _order.Employee = persistentEmployee;
       _order.Customer = persistentCustomer;
 
-      Repository<Order>.Save(_order, Utils.GetContextId());
+      Repository<Order>.Save(_order, Common.Util.GetContextId());
       foreach (OrderDetail det in _orderDetailsList)
       {
         det.ParentOrder = _order;
-        Repository<OrderDetail>.Save(det, Utils.GetContextId());
+        Repository<OrderDetail>.Save(det, Common.Util.GetContextId());
       }
     }
 

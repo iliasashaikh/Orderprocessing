@@ -219,7 +219,7 @@ namespace OrderProcessing
     private void undoToolStripMenuItem_Click(object sender, EventArgs e)
     {
       if (UndoCommand())
-        undoToolStripMenuItem.DropDownItems.RemoveAt(0);
+        undoToolStripMenuItem.DropDownItems.RemoveAt(undoToolStripMenuItem.DropDownItems.Count-1);
     }
 
     private bool UndoCommand()

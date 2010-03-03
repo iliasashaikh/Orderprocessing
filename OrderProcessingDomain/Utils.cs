@@ -15,7 +15,10 @@ namespace OrderProcessingDomain
       //if (OperationContext.Current == null)
       //  return Thread.CurrentContext.ContextID.ToString();
       //else
-        return OperationContext.Current.SessionId;
+      //  return OperationContext.Current.SessionId;
+
+      return Thread.CurrentContext.ContextID.ToString();
+
     }
   }
 }

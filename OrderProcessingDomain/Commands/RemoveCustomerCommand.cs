@@ -23,8 +23,8 @@ namespace OrderProcessingDomain.Command
     public void Execute()
     {
       IOC.RegisterComponents();
-      Customer localCustomer = Repository<Customer>.Get(_customer.CustomerId ,Utils.GetContextId());
-      Repository<Customer>.Remove(localCustomer, Utils.GetContextId());
+      Customer localCustomer = Repository<Customer>.Get(_customer.CustomerId ,Common.Util.GetContextId());
+      Repository<Customer>.Remove(localCustomer, Common.Util.GetContextId());
     }
 
     public void Undo()
@@ -32,7 +32,7 @@ namespace OrderProcessingDomain.Command
       IOC.RegisterComponents();
       var localOrders = _customer.Orders;
       _customer.Orders = null;
-      Repository<Customer>.Save(_customer, Utils.GetContextId());
+      Repository<Customer>.Save(_customer, Common.Util.GetContextId());
     }
 
     public void Redo()

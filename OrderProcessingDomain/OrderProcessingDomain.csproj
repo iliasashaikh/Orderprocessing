@@ -167,7 +167,6 @@
     <Compile Include="Repositories\NHRepository.cs" />
     <Compile Include="Repositories\ObjectRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
-    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Order.hbm.xml" />
@@ -186,6 +185,12 @@
     <None Include="App.config">
     </None>
     <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{A442D7E5-E999-4BD1-A78C-51FC4D09C629}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

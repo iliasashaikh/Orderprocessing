@@ -88,4 +88,20 @@ namespace OrderProcessingDomain
       throw new NotImplementedException();
     }
   }
+
+  public class Repositiory
+  {
+    public static void Open(object owner)
+    {
+      IDataAccessContext dac = DACManager.GetCurrentSession(owner);
+      dac.OpenSession();
+    }
+
+    public static void Close(object owner)
+    {
+      IDataAccessContext dac = DACManager.GetCurrentSession(owner);
+      dac.CloseSession();
+    }
+  }
+
 }

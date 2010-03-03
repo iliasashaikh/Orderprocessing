@@ -19,7 +19,7 @@ namespace OrderProcessingDomain
       try
       {
         IOC.RegisterComponents();
-        return Repository<Order>.All(Thread.CurrentContext.ContextID);
+        return Repository<Order>.All(Common.Util.GetContextId());
       }
       catch (Exception ex)
       {

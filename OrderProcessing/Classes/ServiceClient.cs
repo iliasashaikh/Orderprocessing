@@ -49,19 +49,26 @@ namespace OrderProcessing.Classes
     {
       try
       {
+        string contextId = Guid.NewGuid().ToString();
+
         _custQueryClient = new OrderProcessing.CustomerQueryServiceReference.CustomerQueryServiceClient();
+        Common.Util.SetContextId(_custQueryClient.InnerChannel, contextId);
         _custQueryClient.Open();
 
         _orderQueryClient = new OrderProcessing.OrderQueryServiceReference.OrderQueryServiceClient();
+        Common.Util.SetContextId(_orderQueryClient.InnerChannel, contextId);
         _orderQueryClient.Open();
 
         _empQueryClient = new OrderProcessing.EmployeeQueryServiceReference.EmployeeQueryServiceClient();
+        Common.Util.SetContextId(_empQueryClient.InnerChannel, contextId);
         _empQueryClient.Open();
 
         _cmdClient = new OrderProcessing.CommandServiceReference.CommandServiceClient();
+        Common.Util.SetContextId(_cmdClient.InnerChannel, contextId);
         _cmdClient.Open();
 
         _prodQueryClient = new OrderProcessing.ProductQueryServiceReference.ProductQueryServiceClient();
+        Common.Util.SetContextId(_prodQueryClient.InnerChannel, contextId);
         _prodQueryClient.Open();
 
       }
