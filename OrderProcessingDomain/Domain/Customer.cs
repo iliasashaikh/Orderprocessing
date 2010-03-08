@@ -5,11 +5,12 @@ using System.Text;
 using System.Runtime.Serialization;
 using NHibernate;
 using FluentNHibernate.Mapping;
+using System.Collections;
 
 namespace OrderProcessingDomain
 {
   [DataContract]
-  public class Customer
+  public class Customer : EntityBase
   {
     [DataMember]
     public virtual string CustomerId { get; set; }
@@ -61,7 +62,6 @@ namespace OrderProcessingDomain
     {
       return CustomerId;
     }
-
   }
 
   public class CustomerMap : ClassMap<Customer>
@@ -80,8 +80,8 @@ namespace OrderProcessingDomain
       Map(x => x.Phone);
       Map(x => x.PostalCode);
       Map(x => x.Region);
-
       HasMany(x => x.Orders).KeyColumn("CustomerId").Cascade.SaveUpdate();
+      DynamicComponent(x => x.CustomFields, (Action<DynamicComponentPart<IDictionary>>) Common.Util.MapDynamicColumns);
     }
   }
 }

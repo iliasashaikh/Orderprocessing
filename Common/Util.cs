@@ -7,6 +7,12 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Reflection;
 using System.Diagnostics;
+using System.Linq.Expressions;
+using System.Collections;
+using System.Xml.Linq;
+using System.Xml;
+using System.IO;
+using FluentNHibernate.Mapping;
 
 namespace Common
 {
@@ -51,5 +57,55 @@ namespace Common
         EventLog.CreateEventSource(source,"Application");
       EventLog.WriteEntry(source, message);
     }
+
+    public static Expression<Func<IDictionary, object>> CreateExpression(string dictionaryName, string fieldName, Type fieldType)
+    {
+      if (String.IsNullOrEmpty(dictionaryName))
+        throw new ArgumentException("dictionaryName is null or empty.", "dictionaryName");
+      if (String.IsNullOrEmpty(fieldName))
+        throw new ArgumentException("fieldName is null or empty.", "fieldName");
+      if (fieldType == null)
+        throw new ArgumentNullException("fieldType", "fieldType is null.");
+
+      Expression paramName = Expression.Constant(fieldName, Type.GetType("System.String"));
+      ParameterExpression dictName = Expression.Parameter(Type.GetType("System.Collections.IDictionary"), dictionaryName);
+      Expression methodCall = Expression.Call(dictName, Type.GetType("System.Collections.IDictionary").GetMethod("get_Item"), new Expression[] { paramName });
+      Expression unaryConvert = Expression.MakeUnary(ExpressionType.Convert, methodCall, fieldType);
+      Expression convertAgain = Expression.MakeUnary(ExpressionType.Convert, unaryConvert, Type.GetType("System.Object"));
+      Expression<Func<IDictionary, object>> convert = Expression.Lambda<Func<IDictionary, object>>(convertAgain, new ParameterExpression[] { dictName });
+
+      return convert;
+    }
+
+    public static void MapDynamicColumns(DynamicComponentPart<System.Collections.IDictionary> m)
+    {
+      string customColFile = @"C:\MyDev\OrderProcessing\OrderProcessingDomain\Domain\CustomColumns.xml";
+      if (!File.Exists(customColFile)) 
+        return;
+
+      FieldInfo fi = m.GetType().GetField("entity", BindingFlags.Instance | BindingFlags.NonPublic);
+      
+      object o = fi.GetValue(m);
+      string tableName = o.ToString();
+
+      XElement xe = XElement.Load(customColFile);
+      var classes = xe.Descendants("class").Where(x=>x.Attribute("table").Value == tableName);
+
+      foreach (XElement xeClass in classes)
+      {
+        foreach (XElement xeColumns in xeClass.Elements("columns"))
+        {
+          foreach (XElement xeColumn in xeColumns.Elements("column"))
+          {
+            string colName = xeColumn.Attribute("name").Value;
+            string typeName = xeColumn.Attribute("type").Value;
+
+            m.Map(CreateExpression("x", colName, Type.GetType(typeName)));
+          }
+        }
+      }
+ 
+    }
+
   }
 }

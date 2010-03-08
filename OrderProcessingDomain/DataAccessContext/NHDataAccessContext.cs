@@ -80,6 +80,16 @@ namespace OrderProcessingDomain
       _session.CancelQuery();
     }
 
+
+    #region IDataAccessContext Members
+
+
+    public string GetTableName(System.Type t)
+    {
+      return _cfg.GetClassMapping(t).Table.Name;
+    }
+
+    #endregion
   }
   
 }

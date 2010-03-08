@@ -150,6 +150,16 @@ namespace OrderProcessingDomain
     }
 
     #endregion
+
+    #region IRepository<T> Members
+
+
+    public void AddCustomColumn(string fieldName, OrderProcessingDomain.Repositories.CustomColumnType type)
+    {
+      throw new NotImplementedException();
+    }
+
+    #endregion
   }
 
 }

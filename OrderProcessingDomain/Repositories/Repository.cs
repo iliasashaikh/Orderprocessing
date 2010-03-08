@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using OrderProcessingDomain.Repositories;
 
 namespace OrderProcessingDomain
 {
@@ -81,6 +82,13 @@ namespace OrderProcessingDomain
       return repo.Get<T>(key);
     }
 
+    public static void AddCustomColumn(string fieldName, CustomColumnType type, object owner)
+    {
+      IDataAccessContext dac = DACManager.GetCurrentSession(owner);
+      IRepository<T> repo = GetRepositoryFromContainer();
+      repo.AddCustomColumn(fieldName, type);
+    }
+
     #endregion
 
     public static T First(object owner)
@@ -102,6 +110,14 @@ namespace OrderProcessingDomain
       IDataAccessContext dac = DACManager.GetCurrentSession(owner);
       dac.CloseSession();
     }
-  }
 
-}
+    public static Type GetGenericType(Type t)
+    {
+      Type genericType = typeof(Repository<>);
+      Type[] types = {t};
+      return genericType.MakeGenericType(t);
+    }
+  }
+ }
+
+

@@ -8,6 +8,7 @@ using OrderProcessingDomain;
 using OrderProcessingDomain.Command;
 using OrderService;
 using System.ServiceModel;
+using NHibernate;
 
 namespace OrderProcessing.Tests
 {
@@ -50,6 +51,13 @@ namespace OrderProcessing.Tests
       InstanceContext cntx = new InstanceContext(handler);
       SubscriptionServiceReference.SubscriptionServiceClient proxy = new OrderProcessing.Tests.SubscriptionServiceReference.SubscriptionServiceClient(cntx);
       proxy.Subscribe();
+    }
+
+    [Test]
+    public void TestCreateColumnInCustomerTable()
+    {
+      AddColumnCommand colCommand = new AddColumnCommand(typeof(Customer), "CustomColumn3", OrderProcessingDomain.Repositories.CustomColumnType.DateTime);
+      colCommand.Execute();
     }
 
     [Test]

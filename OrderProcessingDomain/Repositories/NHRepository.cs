@@ -5,6 +5,7 @@ using System.Text;
 using NHibernate;
 using NHibernate.Linq;
 using System.Linq.Expressions;
+using OrderProcessingDomain.Repositories;
 
 namespace OrderProcessingDomain
 {
@@ -117,6 +118,47 @@ namespace OrderProcessingDomain
 
     #endregion
 
-    
+    public void AddCustomColumn(string fieldName, CustomColumnType type)
+    {
+      _dac.OpenSession();
+      Type t = typeof(Repository<T>).GetGenericArguments()[0];
+      string tableName = _dac.GetTableName(t);
+      string query = CreateQuery(tableName, fieldName, type);
+      ISQLQuery sqlQuery = _dac.Session.CreateSQLQuery(query);
+      sqlQuery.ExecuteUpdate();
+    }
+
+    string CreateQuery(string tableName, string fieldName, CustomColumnType type)
+    {
+
+      string sqlType = GetSQLType(type);
+      string query = String.Format(@"If Not Exists
+                                    (
+                                      Select * from INFORMATION_SCHEMA.COLUMNS
+                                      where TABLE_NAME = '{0}' and COLUMN_NAME = '{1}'
+                                    )
+                                      ALTER TABLE {0} ADD {1} {2} NULL;", tableName, fieldName, sqlType);
+      return query;
+    }
+
+    private string GetSQLType(CustomColumnType type)
+    {
+      string sqlType = "varchar(255)";
+      switch (type)
+      {
+        case CustomColumnType.DateTime:
+          sqlType = "datetime";
+          break;
+        case CustomColumnType.Integer:
+          sqlType = "int";
+          break;
+        case CustomColumnType.Numeric:
+          sqlType = "numeric(28, 8)";
+          break;
+      }
+      return sqlType;
+    }
+
+
   }
 }

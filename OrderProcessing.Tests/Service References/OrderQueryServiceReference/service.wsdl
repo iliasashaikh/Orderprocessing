@@ -3,6 +3,8 @@
   <wsp:Policy wsu:Id="OrderQueryServiceEndPoint_policy">
     <wsp:ExactlyOne>
       <wsp:All>
+        <IncludeContext ProtectionLevel="Sign" xmlns="http://schemas.microsoft.com/ws/2006/05/context">
+        </IncludeContext>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
         </msb:BinaryEncoding>
         <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -59,6 +61,18 @@
   <wsdl:message name="IOrderQueryService_First_OutputMessage">
     <wsdl:part name="parameters" element="tns:FirstResponse" />
   </wsdl:message>
+  <wsdl:message name="IOrderQueryService_Where_InputMessage">
+    <wsdl:part name="parameters" element="tns:Where" />
+  </wsdl:message>
+  <wsdl:message name="IOrderQueryService_Where_OutputMessage">
+    <wsdl:part name="parameters" element="tns:WhereResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOrderQueryService_WhereAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:WhereAll" />
+  </wsdl:message>
+  <wsdl:message name="IOrderQueryService_WhereAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:WhereAllResponse" />
+  </wsdl:message>
   <wsdl:portType name="IOrderQueryService">
     <wsdl:operation name="All">
       <wsdl:input wsaw:Action="http://tempuri.org/IQueryServiceBaseOf_Order/All" message="tns:IOrderQueryService_All_InputMessage" />
@@ -71,6 +85,14 @@
     <wsdl:operation name="First">
       <wsdl:input wsaw:Action="http://tempuri.org/IQueryServiceBaseOf_Order/First" message="tns:IOrderQueryService_First_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IQueryServiceBaseOf_Order/FirstResponse" message="tns:IOrderQueryService_First_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Where">
+      <wsdl:input wsaw:Action="http://tempuri.org/IQueryServiceBaseOf_Order/Where" message="tns:IOrderQueryService_Where_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IQueryServiceBaseOf_Order/WhereResponse" message="tns:IOrderQueryService_Where_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="WhereAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IQueryServiceBaseOf_Order/WhereAll" message="tns:IOrderQueryService_WhereAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IQueryServiceBaseOf_Order/WhereAllResponse" message="tns:IOrderQueryService_WhereAll_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="OrderQueryServiceEndPoint" type="tns:IOrderQueryService">
@@ -97,6 +119,24 @@
     </wsdl:operation>
     <wsdl:operation name="First">
       <soap12:operation soapAction="http://tempuri.org/IQueryServiceBaseOf_Order/First" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Where">
+      <soap12:operation soapAction="http://tempuri.org/IQueryServiceBaseOf_Order/Where" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WhereAll">
+      <soap12:operation soapAction="http://tempuri.org/IQueryServiceBaseOf_Order/WhereAll" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

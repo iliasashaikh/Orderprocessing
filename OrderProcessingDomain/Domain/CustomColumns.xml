@@ -1,0 +1,15 @@
+﻿<custom-fields>
+  <class name="OrderProcessingDomain.Order" table="OrderProcessingDomain.Order">
+    <columns>
+      <column name="OrderDate" type="System.DateTime"/>
+	  <column name="CustomField1" type="System.String"/>
+	  <column name="CustomField2" type="System.Int32"/>
+    </columns>
+  </class>
+  <class name="OrderProcessingDomain.Customer" table="OrderProcessingDomain.Customer">
+    <columns>
+      <column name="CustomColumn1" type="System.String"/>
+      <column name="CustomColumn2" type="System.String"/>
+    </columns>
+  </class>
+</custom-fields>

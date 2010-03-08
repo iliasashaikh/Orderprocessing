@@ -8,38 +8,52 @@
   </xs:complexType>
   <xs:element name="ArrayOfOrder" nillable="true" type="tns:ArrayOfOrder" />
   <xs:complexType name="Order">
-    <xs:sequence>
-      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CustomFields" nillable="true" type="q1:ArrayOfKeyValueOfanyTypeanyType" />
-      <xs:element minOccurs="0" name="Customer" nillable="true" type="tns:Customer" />
-      <xs:element minOccurs="0" name="Employee" nillable="true" type="tns:Employee" />
-      <xs:element minOccurs="0" name="Freight" type="xs:decimal" />
-      <xs:element minOccurs="0" name="OrderId" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="RequiredDate" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="ShipAddress" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ShipCity" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ShipCountry" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ShipName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ShipPostalCode" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ShipRegion" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ShippedDate" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Shipvia" nillable="true" type="xs:int" />
-    </xs:sequence>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EntityBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Customer" nillable="true" type="tns:Customer" />
+          <xs:element minOccurs="0" name="Employee" nillable="true" type="tns:Employee" />
+          <xs:element minOccurs="0" name="Freight" type="xs:decimal" />
+          <xs:element minOccurs="0" name="OrderId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="RequiredDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ShipAddress" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ShipCity" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ShipCountry" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ShipName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ShipPostalCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ShipRegion" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ShippedDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Shipvia" nillable="true" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name="Order" nillable="true" type="tns:Order" />
-  <xs:complexType name="Customer">
+  <xs:complexType name="EntityBase">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ContactName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ContactTitle" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Country" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CustomerId" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Fax" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PostalCode" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Region" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CustomColumnString" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CustomFields" nillable="true" type="q1:ArrayOfKeyValueOfanyTypeanyType" />
     </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EntityBase" nillable="true" type="tns:EntityBase" />
+  <xs:complexType name="Customer">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EntityBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ContactName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ContactTitle" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Country" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CustomerId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Fax" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PostalCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Region" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name="Customer" nillable="true" type="tns:Customer" />
   <xs:complexType name="Employee">

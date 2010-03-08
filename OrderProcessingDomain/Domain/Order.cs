@@ -10,12 +10,13 @@ using System.Runtime.Serialization;
 using FluentNHibernate.Mapping;
 using NHibernate;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace OrderProcessingDomain
 {
   [DataContract]
   [ServiceKnownType(typeof(Customer))]
-  public class Order
+  public class Order : EntityBase
   {
     [DataMember]
     public virtual int? OrderId{get;set;}
@@ -58,8 +59,29 @@ namespace OrderProcessingDomain
     [DataMember]
     public virtual string ShipCountry { get; set; }
 
-    [DataMember]
-    public virtual Hashtable CustomFields { get; set; }
+    //[DataMember]
+    //public virtual Hashtable CustomFields { get; set; }
+
+    //string _dynamicColumnString = "";
+    //[DataMember]
+    //public virtual string CustomColumnString
+    //{
+    //  get
+    //  {
+    //    StringBuilder builder = new StringBuilder();
+
+    //    foreach (DictionaryEntry entry in CustomFields)
+    //    {
+    //      builder.AppendFormat(@"{0}:{1};", entry.Key, entry.Value);
+    //    }
+    //    _dynamicColumnString = builder.ToString();
+    //    return _dynamicColumnString;
+    //  }
+    //  set 
+    //  {
+    //    _dynamicColumnString = value;
+    //  }
+    //}
 
     public override bool Equals(object obj)
     {
@@ -73,6 +95,24 @@ namespace OrderProcessingDomain
 
     public virtual IList<OrderDetail> Details { get; set; }
 
+  }
+
+  [DataContract]
+  public class DynamicColumn
+  {
+    [DataMember]
+    public virtual Hashtable Fields { get; set; }
+
+    public override string ToString()
+    {
+      StringBuilder builder = new StringBuilder();
+
+      foreach (DictionaryEntry entry in Fields)
+      {
+        builder.AppendFormat(@"{0}:{1};",entry.Key,entry.Value);
+      }
+      return builder.ToString();
+    }
   }
 
   public class OrderMap : ClassMap<Order>
@@ -98,31 +138,50 @@ namespace OrderProcessingDomain
       References(x => x.Customer).Column("CustomerId").Cascade.SaveUpdate().Not.LazyLoad();
       References(x => x.Employee).Column("EmployeeId").Cascade.SaveUpdate().Not.LazyLoad();
 
-      DynamicComponent(x => x.CustomFields, (Action<DynamicComponentPart<IDictionary>>)MapDynamicColumns);
-      //DynamicComponent(x => x.CustomFields, MapDynamicComponents());
+      DynamicComponent(x => x.CustomFields, (Action<DynamicComponentPart<IDictionary>>)Common.Util.MapDynamicColumns);
     }
 
-    private static void MapDynamicColumns(DynamicComponentPart<System.Collections.IDictionary> m)
+    private void MapDynamicColumns(DynamicComponentPart<System.Collections.IDictionary> m)
     {
-      //m.Map(x => x["OrderDate"]);
-      m.Map("OrderDate");
-      //m.Map(x => Convert.ChangeType(x["OrderDate"], Type.GetType("System.DateTime")));
-
+      //foreach(col in columns)
+      //{
+      //  m.Map(Common.Util.CreateExpression("x",colname,coltype));
+      //}
+      string s = m.EntityType.FullName;
+      FieldInfo fi = m.GetType().GetField("entity", BindingFlags.Instance | BindingFlags.NonPublic);
+      object o = fi.GetValue(m);
+      string className = o.GetType().Name;
+      m.Map(Common.Util.CreateExpression("x", "OrderDate", Type.GetType("System.DateTime")));
+      m.Map(Common.Util.CreateExpression("x", "CustomField1", Type.GetType("System.String")));
+      m.Map(Common.Util.CreateExpression("x", "CustomField2", Type.GetType("System.Int32")));
     }
 
     string s = @"<CustomFields>
-                  <Class name=""Orders"" table = ""Orders"">
+                  <Class name=""Orders"" table=""Orders"">
                     <Columms>
-                      <Column name=""""OrderDate"""" type=""System.DateTime"" value=""0""/>
-                      <Column name=""""OrderDate"""" type=""System.DateTime"" value=""0""/>
+                      <Column name=""OrderDate"" type=""System.DateTime""/>
                     </Columns>    
                   </Class>
                 </CustomFields>
       ";
 
-    //Action<DynamicComponentPart<IDictionary>> MapDynamicComponents()
+    //Expression<Func<IDictionary, object>> CreateExpression(string dictionaryName, string fieldName, Type fieldType)
     //{
-    //  return new Action<DynamicComponentPart<IDictionary>>(Act);
+    //  if (String.IsNullOrEmpty(dictionaryName))
+    //    throw new ArgumentException("dictionaryName is null or empty.", "dictionaryName");
+    //  if (String.IsNullOrEmpty(fieldName))
+    //    throw new ArgumentException("fieldName is null or empty.", "fieldName");
+    //  if (fieldType == null)
+    //    throw new ArgumentNullException("fieldType", "fieldType is null.");
+
+    //  Expression paramName = Expression.Constant("OrderDate", Type.GetType("System.String"));
+    //  ParameterExpression dictName = Expression.Parameter(Type.GetType("System.Collections.IDictionary"), "x");
+    //  Expression methodCall = Expression.Call(dictName, Type.GetType("System.Collections.IDictionary").GetMethod("get_Item"), new Expression[] { paramName });
+    //  Expression unaryConvert = Expression.MakeUnary(ExpressionType.Convert, methodCall, Type.GetType("System.DateTime"));
+    //  Expression convertAgain = Expression.MakeUnary(ExpressionType.Convert, unaryConvert, Type.GetType("System.Object"));
+    //  Expression<Func<IDictionary, object>> convert = Expression.Lambda<Func<IDictionary, object>>(convertAgain, new ParameterExpression[] { dictName });
+
+    //  return convert;
     //}
 
     void Act(DynamicComponentPart<IDictionary> dict)

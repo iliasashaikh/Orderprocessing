@@ -7,6 +7,7 @@ using NHibernate.Linq;
 using OrderProcessingDomain;
 using System.Collections.Generic;
 using System.Collections;
+using OrderProcessingDomain.Repositories;
 
 public interface IRepository<T> where T : class
 {
@@ -19,4 +20,5 @@ public interface IRepository<T> where T : class
   void RemoveWhere(Func<T, bool> exp);
   Int64 Count();
   T Get<T>(object key);
+  void AddCustomColumn(string fieldName, CustomColumnType type);
 }

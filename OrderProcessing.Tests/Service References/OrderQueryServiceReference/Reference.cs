@@ -23,6 +23,12 @@ namespace OrderProcessing.Tests.OrderQueryServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IQueryServiceBaseOf_Order/First", ReplyAction="http://tempuri.org/IQueryServiceBaseOf_Order/FirstResponse")]
         OrderProcessingDomain.Order First();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IQueryServiceBaseOf_Order/Where", ReplyAction="http://tempuri.org/IQueryServiceBaseOf_Order/WhereResponse")]
+        OrderProcessingDomain.Order Where(System.Xml.Linq.XElement serializedExpression);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IQueryServiceBaseOf_Order/WhereAll", ReplyAction="http://tempuri.org/IQueryServiceBaseOf_Order/WhereAllResponse")]
+        OrderProcessingDomain.Order[] WhereAll(System.Xml.Linq.XElement serializedExpression);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -62,6 +68,14 @@ namespace OrderProcessing.Tests.OrderQueryServiceReference {
         
         public OrderProcessingDomain.Order First() {
             return base.Channel.First();
+        }
+        
+        public OrderProcessingDomain.Order Where(System.Xml.Linq.XElement serializedExpression) {
+            return base.Channel.Where(serializedExpression);
+        }
+        
+        public OrderProcessingDomain.Order[] WhereAll(System.Xml.Linq.XElement serializedExpression) {
+            return base.Channel.WhereAll(serializedExpression);
         }
     }
 }

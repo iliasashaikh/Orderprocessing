@@ -20,5 +20,6 @@ namespace OrderProcessingDomain
     void Rollback();
     void CloseSession();
     void CancelQuery();
+    string GetTableName(Type t);
   }
 }

@@ -71,6 +71,16 @@ namespace OrderProcessingDomain
     }
 
     #endregion
+
+    #region IDataAccessContext Members
+
+
+    public string GetTableName(Type t)
+    {
+      throw new NotImplementedException();
+    }
+
+    #endregion
   }
 
 }

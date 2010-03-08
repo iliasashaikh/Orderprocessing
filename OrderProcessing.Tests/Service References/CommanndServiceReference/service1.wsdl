@@ -3,6 +3,8 @@
   <wsp:Policy wsu:Id="commandServiceEndPoint_policy">
     <wsp:ExactlyOne>
       <wsp:All>
+        <IncludeContext ProtectionLevel="Sign" xmlns="http://schemas.microsoft.com/ws/2006/05/context">
+        </IncludeContext>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
         </msb:BinaryEncoding>
         <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
